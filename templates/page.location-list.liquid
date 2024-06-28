@@ -1,4 +1,4 @@
-<div id="container" onload="initMap()">
+<div id="container">
     <div id="store-list"></div>
     <div id="map"></div>
 </div>
@@ -24,8 +24,8 @@
         let infowindow;
         let markers = [];
 
-        function initMap() {
-            const initialLocation = new google.maps.LatLng(37.7749, -122.4194); // Default location (San Francisco)
+      document.addEventListener("DOMContentLoaded", () => {
+        const initialLocation = new google.maps.LatLng(37.7749, -122.4194); // Default location (San Francisco)
 
             map = new google.maps.Map(document.getElementById('map'), {
                 center: initialLocation,
@@ -34,7 +34,7 @@
 
             infowindow = new google.maps.InfoWindow();
             searchNearby(initialLocation);
-        }
+      });
 
         function searchNearby(location) {
             const request = {
