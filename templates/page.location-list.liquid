@@ -75,7 +75,7 @@ let markers = [];
 document.addEventListener("DOMContentLoaded", () => {
     const mapOptions = {
         center: { lat: -20.917574, lng: 142.702789 }, // Default location set to Queensland, Australia
-        zoom: 8,
+        zoom: 5,
     };
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
     infowindow = new google.maps.InfoWindow();
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function loadDefaultStores() {
     const defaultLocation = { lat: -20.917574, lng: 142.702789 }; // Queensland, Australia
     map.setCenter(defaultLocation);
-    map.setZoom(12);
+    map.setZoom(5);
 
     const nearbySearchRequest = {
         location: defaultLocation,
@@ -155,7 +155,7 @@ function searchStores(location) {
             const location = place.geometry.location;
 
             map.setCenter(location);
-            map.setZoom(12);
+            map.setZoom(5);
 
             const nearbySearchRequest = {
                 location: location,
@@ -181,7 +181,7 @@ function useCurrentLocation() {
             };
 
             map.setCenter(userLocation);
-            map.setZoom(12);
+            map.setZoom(5);
 
             const nearbySearchRequest = {
                 location: userLocation,
