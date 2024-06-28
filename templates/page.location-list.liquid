@@ -7,3 +7,59 @@
     </div>
     <div id="map"></div>
 </div>
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+}
+
+.sidebar {
+    width: 30%;
+    padding: 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow-y: auto;
+}
+
+#map {
+    width: 70%;
+    height: 100%;
+}
+
+#location-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#search-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#search-button:hover {
+    background-color: #0056b3;
+}
+
+#store-list {
+    list-style: none;
+    padding: 0;
+}
+
+#store-list li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+</style>
