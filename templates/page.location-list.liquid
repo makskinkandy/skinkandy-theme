@@ -3,6 +3,7 @@
         <h1>Store Locator</h1>
         <input type="text" id="location-input" placeholder="Enter a location">
         <button id="search-button">Search</button>
+        <button id="current-location-button">Use Current Location</button>
         <ul id="store-list"></ul>
     </div>
     <div id="map"></div>
@@ -30,7 +31,7 @@
 
 #map {
     width: 70%;
-    height: 100%;
+    height: 100vh;
 }
 
 #location-input {
@@ -69,10 +70,11 @@ let map;
 let service;
 let infowindow;
 let autocomplete;
+let markers = [];
 
 document.addEventListener("DOMContentLoaded", () => {
     const mapOptions = {
-        center: { lat: -34.397, lng: 150.644 },
+        center: { lat: -20.917574, lng: 142.702789 }, // Default location set to Queensland, Australia
         zoom: 8,
     };
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -89,7 +91,32 @@ document.addEventListener("DOMContentLoaded", () => {
         const location = document.getElementById("location-input").value;
         searchStores(location);
     });
+
+    // Add listener to the current location button
+    document.getElementById("current-location-button").addEventListener("click", useCurrentLocation);
+
+    // Load specific stores by default
+    loadDefaultStores();
 });
+
+function loadDefaultStores() {
+    const defaultLocation = { lat: -20.917574, lng: 142.702789 }; // Queensland, Australia
+    map.setCenter(defaultLocation);
+    map.setZoom(12);
+
+    const nearbySearchRequest = {
+        location: defaultLocation,
+        radius: 5000,
+        keyword: "Walmart", // Display only stores with this keyword
+    };
+
+    service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
+        if (nearbyStatus === google.maps.places.PlacesServiceStatus.OK && nearbyResults) {
+            displayStores(nearbyResults);
+        }
+    });
+}
 
 function onPlaceChanged() {
     const place = autocomplete.getPlace();
@@ -102,10 +129,9 @@ function onPlaceChanged() {
         const nearbySearchRequest = {
             location: location,
             radius: 5000,
-            type: ["store"],
+            keyword: "Walmart", // Display only stores with this keyword
         };
 
-        service = new google.maps.places.PlacesService(map);
         service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
             if (nearbyStatus === google.maps.places.PlacesServiceStatus.OK && nearbyResults) {
                 displayStores(nearbyResults);
@@ -134,7 +160,7 @@ function searchStores(location) {
             const nearbySearchRequest = {
                 location: location,
                 radius: 5000,
-                type: ["store"],
+                keyword: "Walmart", // Display only stores with this keyword
             };
 
             service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
@@ -146,24 +172,68 @@ function searchStores(location) {
     });
 }
 
+function useCurrentLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const userLocation = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            map.setCenter(userLocation);
+            map.setZoom(12);
+
+            const nearbySearchRequest = {
+                location: userLocation,
+                radius: 5000,
+                keyword: "Walmart", // Display only stores with this keyword
+            };
+
+            service = new google.maps.places.PlacesService(map);
+            service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
+                if (nearbyStatus === google.maps.places.PlacesServiceStatus.OK && nearbyResults) {
+                    displayStores(nearbyResults);
+                }
+            });
+        }, () => {
+            alert("Error: The Geolocation service failed.");
+        });
+    } else {
+        alert("Error: Your browser doesn't support geolocation.");
+    }
+}
+
 function displayStores(stores) {
     const storeList = document.getElementById("store-list");
     storeList.innerHTML = "";
+    clearMarkers();
 
-    stores.forEach(store => {
+    stores.forEach((store, index) => {
         const li = document.createElement("li");
         li.textContent = store.name;
+        li.addEventListener("click", () => {
+            map.setCenter(store.geometry.location);
+            map.setZoom(15);
+            infowindow.setContent(store.name);
+            infowindow.open(map, markers[index]);
+        });
         storeList.appendChild(li);
 
         const marker = new google.maps.Marker({
             map: map,
             position: store.geometry.location,
         });
+        markers.push(marker);
 
         marker.addListener("click", () => {
             infowindow.setContent(store.name);
             infowindow.open(map, marker);
         });
     });
+}
+
+function clearMarkers() {
+    markers.forEach(marker => marker.setMap(null));
+    markers = [];
 }
 </script>
