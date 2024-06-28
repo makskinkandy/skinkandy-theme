@@ -1,1 +1,34 @@
-{"sections":{"pagefly-home":{"type":"pagefly-home","settings":{}},"16421294785f5b1f2d":{"type":"locations-section","settings":{"class":"","bg_color":"#e8e8e8","heading":"STORES NEAR YOU","menu":"locations","link":"shopify:\/\/pages\/store-locations","linktext":"Find a store","linkclass":"btn--secondary"}}},"order":["pagefly-home","16421294785f5b1f2d"]}
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "pagefly-home": {
+      "type": "pagefly-home",
+      "settings": {
+      }
+    },
+    "16421294785f5b1f2d": {
+      "type": "locations-section",
+      "settings": {
+        "class": "",
+        "bg_color": "#e8e8e8",
+        "heading": "STORES NEAR YOU",
+        "menu": "locations",
+        "link": "shopify:\/\/pages\/store-locations",
+        "linktext": "Find a store",
+        "linkclass": "btn--secondary"
+      }
+    }
+  },
+  "order": [
+    "pagefly-home",
+    "16421294785f5b1f2d"
+  ]
+}
