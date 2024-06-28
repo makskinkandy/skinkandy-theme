@@ -75,7 +75,7 @@ let markers = [];
 document.addEventListener("DOMContentLoaded", () => {
     const mapOptions = {
         center: { lat: -20.917574, lng: 142.702789 }, // Default location set to Queensland, Australia
-        zoom: 5,
+        zoom: 8,
         mapId: "SkinKandy_Map"
     };
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -103,18 +103,18 @@ document.addEventListener("DOMContentLoaded", () => {
 function loadDefaultStores() {
     const defaultLocation = { lat: -20.917574, lng: 142.702789 }; // Queensland, Australia
     map.setCenter(defaultLocation);
-    map.setZoom(5);
+    map.setZoom(12);
 
     const nearbySearchRequest = {
         location: defaultLocation,
         radius: 5000,
-        keyword: "SkinKandy", // Display only stores with this keyword
+        keyword: "Walmart", // Display only stores with this keyword
     };
 
     service = new google.maps.places.PlacesService(map);
     service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
         if (nearbyStatus === google.maps.places.PlacesServiceStatus.OK && nearbyResults) {
-            displayStores(nearbyResults);
+            displayStores(nearbyResults.filter(store => store.name.toLowerCase() === "walmart"));
         }
     });
 }
@@ -130,12 +130,12 @@ function onPlaceChanged() {
         const nearbySearchRequest = {
             location: location,
             radius: 5000,
-            keyword: "SkinKandy", // Display only stores with this keyword
+            keyword: "Walmart", // Display only stores with this keyword
         };
 
         service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
             if (nearbyStatus === google.maps.places.PlacesServiceStatus.OK && nearbyResults) {
-                displayStores(nearbyResults);
+                displayStores(nearbyResults.filter(store => store.name.toLowerCase() === "walmart"));
             }
         });
     } else {
@@ -156,17 +156,17 @@ function searchStores(location) {
             const location = place.geometry.location;
 
             map.setCenter(location);
-            map.setZoom(5);
+            map.setZoom(12);
 
             const nearbySearchRequest = {
                 location: location,
                 radius: 5000,
-                keyword: "SkinKandy", // Display only stores with this keyword
+                keyword: "Walmart", // Display only stores with this keyword
             };
 
             service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
                 if (nearbyStatus === google.maps.places.PlacesServiceStatus.OK && nearbyResults) {
-                    displayStores(nearbyResults);
+                    displayStores(nearbyResults.filter(store => store.name.toLowerCase() === "walmart"));
                 }
             });
         }
@@ -182,18 +182,18 @@ function useCurrentLocation() {
             };
 
             map.setCenter(userLocation);
-            map.setZoom(5);
+            map.setZoom(12);
 
             const nearbySearchRequest = {
                 location: userLocation,
                 radius: 5000,
-                keyword: "SkinKandy", // Display only stores with this keyword
+                keyword: "Walmart", // Display only stores with this keyword
             };
 
             service = new google.maps.places.PlacesService(map);
             service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
                 if (nearbyStatus === google.maps.places.PlacesServiceStatus.OK && nearbyResults) {
-                    displayStores(nearbyResults);
+                    displayStores(nearbyResults.filter(store => store.name.toLowerCase() === "walmart"));
                 }
             });
         }, () => {
@@ -220,7 +220,7 @@ function displayStores(stores) {
         });
         storeList.appendChild(li);
 
-        const marker = new google.maps.marker.AdvancedMarkerElement({
+        constmarker = new google.maps.marker.AdvancedMarkerElement({
             map: map,
             position: store.geometry.location,
         });
