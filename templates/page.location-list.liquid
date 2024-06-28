@@ -20,6 +20,12 @@
             width: 70%;
             height: 100vh;
         }
+        .closed {
+            color: red;
+        }
+        .open {
+            color: green;
+        }
     </style>
     <script>
         let map;
@@ -91,7 +97,7 @@
             markers.push(marker);
 
             google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent(place.name);
+                infowindow.setContent(place.name + '<br>' + getOpenStatus(place));
                 infowindow.open(map, marker);
             });
         }
@@ -99,14 +105,42 @@
         function addToList(place, index) {
             const storeList = document.getElementById('store-list');
             const listItem = document.createElement('div');
-            listItem.innerHTML = `${index + 1}. ${place.name}`;
+            listItem.innerHTML = `${index + 1}. ${place.name}<br>${getOpenStatus(place)}`;
             listItem.style.cursor = 'pointer';
             listItem.addEventListener('click', () => {
                 map.setCenter(place.geometry.location);
-                infowindow.setContent(place.name);
+                infowindow.setContent(place.name + '<br>' + getOpenStatus(place));
                 infowindow.open(map, markers[index]);
             });
             storeList.appendChild(listItem);
+        }
+
+        function getOpenStatus(place) {
+            if (!place.opening_hours || !place.opening_hours.weekday_text) {
+                return 'Opening hours not available';
+            }
+
+            const now = new Date();
+            const dayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            const todayHours = place.opening_hours.weekday_text[dayOfWeek];
+            
+            if (!todayHours) {
+                return 'Opening hours not available for today';
+            }
+
+            const [day, hours] = todayHours.split(': ');
+            const [openTime, closeTime] = hours.split(' – '); // Adjust this based on your expected time format
+
+            const open = new Date();
+            open.setHours(parseInt(openTime.split(':')[0]), parseInt(openTime.split(':')[1]), 0);
+            const close = new Date();
+            close.setHours(parseInt(closeTime.split(':')[0]), parseInt(closeTime.split(':')[1]), 0);
+
+            if (now >= open && now <= close) {
+                return `<span class="open">Open until ${closeTime}</span>`;
+            } else {
+                return `<span class="closed">Closed</span>`;
+            }
         }
 
         function clearMarkers() {
