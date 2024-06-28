@@ -1,0 +1,8 @@
+{%- if block.settings.logo -%}
+  {%- assign footer_logo_size = block.settings.desktop_logo_height | prepend: 'x' -%}
+  <div class="footer__logo">
+    <a href="{{ routes.root_url }}" style="height: {{ block.settings.desktop_logo_height }}px;">
+      <img src="{{ block.settings.logo | img_url: footer_logo_size, scale: 2 }}" alt="{{ block.settings.logo.alt | default: shop.name }}" style="width: {{ block.settings.desktop_logo_height }}px; height: {{ block.settings.desktop_logo_height }}px; object-fit: contain;">
+    </a>
+  </div>
+{%- endif -%}

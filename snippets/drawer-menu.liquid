@@ -1,0 +1,355 @@
+{%- assign animation_row = 1 -%}
+{%- assign drawer_position = 'right' -%}
+{% if logo_alignment == 'center' %}
+  {%- assign drawer_position = 'left' -%}
+{% endif %}
+
+<div id="NavDrawer" class="drawer drawer--{{ drawer_position }}">
+  <div class="drawer__contents">
+    <div class="drawer__fixed-header">
+      <div class="drawer__header appear-animation appear-delay-{{ animation_row }}">
+        
+        <button type="button" class="drawer__close-button js-drawer-close">
+          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"/></svg>
+        </button>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'logo' -%}
+            <a
+              href="{{ routes.root_url }}">
+            <img
+              src="{{ block.settings.logo | img_url: header_logo_size_mobile, scale: 2 }}"
+              srcset="{{ block.settings.logo | img_url: header_logo_size_mobile }} 1x, {{ block.settings.logo | img_url: header_logo_size_mobile, scale: 2 }} 2x"
+              alt="{{ block.settings.logo.alt | default: shop.name }}">
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+    <div class="drawer__scrollable">
+      <ul class="mobile-nav{% if settings.type_navigation_style == 'heading' %} mobile-nav--heading-style{% endif %}" role="navigation" aria-label="Primary">
+        {% comment %} find a store {% endcomment %}
+        {% if find_link != blank %}
+          <li>
+            <a class="btn btn--small link-icon" href="{{ find_link | escape }}" >
+              <div class="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
+                  <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
+                </svg>
+                <span>
+                  {{ find_label }}
+                </span>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="8.848" height="15.652" viewBox="0 0 8.848 15.652">
+                <path id="Path_2580" data-name="Path 2580" d="M3.162,7.827,8.505,2.009a1.182,1.182,0,0,0,0-1.664,1.157,1.157,0,0,0-1.648,0L.342,6.993a1.186,1.186,0,0,0,0,1.665l6.515,6.648a1.157,1.157,0,0,0,1.648,0,1.182,1.182,0,0,0,0-1.664Z" transform="translate(8.848 15.652) rotate(180)"/>
+              </svg>
+            </a>
+          </li>
+        {%- endif -%}
+        
+        {% comment %} button {% endcomment %}
+        {% if book_now_link != blank %}
+          <li>
+            <a href="{{ book_now_link | escape }}" class="book-now-btn btn btn--small link-icon">
+              <div class="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                  <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                  <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                <span>
+                  {{ book_now_label }}
+                </span>
+              </div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="8.848" height="15.652" viewBox="0 0 8.848 15.652">
+                <path id="Path_2580" data-name="Path 2580" d="M3.162,7.827,8.505,2.009a1.182,1.182,0,0,0,0-1.664,1.157,1.157,0,0,0-1.648,0L.342,6.993a1.186,1.186,0,0,0,0,1.665l6.515,6.648a1.157,1.157,0,0,0,1.648,0,1.182,1.182,0,0,0,0-1.664Z" transform="translate(8.848 15.652) rotate(180)"/>
+              </svg>
+            </a>
+          </li>
+        {%- endif -%}
+       
+        {%- for link in main_menu.links -%}
+           
+          {%- assign animation_row = animation_row | plus: 1 -%}
+          {%- assign child_list_handle = link.url | handleize | append: forloop.index -%}
+          {%- assign has_dropdown = false -%}
+          {%- if link.links != blank -%}
+            {%- assign has_dropdown = true -%}
+          {%- endif -%}
+
+          {% assign childlink_title_dc = link.title | downcase %}
+
+          <li class="mobile-nav__item appear-delay-{{ animation_row }}">
+            {%- if has_dropdown -%}
+              <div class="mobile-nav__has-sublist">
+                {%- if link.url == '#' or link.url == "/en-nz#"  -%}
+                  <button type="button"
+                    aria-controls="Linklist-{{ child_list_handle }}"
+                    class="mobile-nav__link--button mobile-nav__link--top-level collapsible-trigger collapsible--auto-height">
+                    <span class="mobile-nav__faux-link"{% if link.active %} data-active="true"{% endif %}>
+                      {{ link.title }}
+                    </span>
+                    <div class="mobile-nav__toggle">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8.848" height="15.652" viewBox="0 0 8.848 15.652">
+                        <path id="Path_2580" data-name="Path 2580" d="M3.162,7.827,8.505,2.009a1.182,1.182,0,0,0,0-1.664,1.157,1.157,0,0,0-1.648,0L.342,6.993a1.186,1.186,0,0,0,0,1.665l6.515,6.648a1.157,1.157,0,0,0,1.648,0,1.182,1.182,0,0,0,0-1.664Z" transform="translate(8.848 15.652) rotate(180)"/>
+                      </svg>
+                    </div>
+                  </button>
+                {%- else -%}
+                  <a href="{{ link.url }}"
+                    class="mobile-nav__link mobile-nav__link--top-level"
+                    id="Label-{{ child_list_handle }}"
+                    {% if link.active %}data-active="true"{% endif %}>
+                    {{ link.title }}
+                  </a>
+                  <div class="mobile-nav__toggle">
+                    <button type="button"
+                      aria-controls="Linklist-{{ child_list_handle }}"
+                      aria-labelledby="Label-{{ child_list_handle }}"
+                      class="collapsible-trigger collapsible--auto-height">
+                      {%- render 'collapsible-icons' -%}
+                    </button>
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- else -%}
+              <a href="{{ link.url }}" class="mobile-nav__link mobile-nav__link--top-level"{% if link.active %} data-active="true"{% endif %}>{{ link.title }}</a>
+            {%- endif -%}
+
+            {%- if has_dropdown -%}
+              <div id="Linklist-{{ child_list_handle }}"
+                class="mobile-nav__sublist collapsible-content collapsible-content--all"
+                {% if link.active or link.child_active %}style="height: auto;"{% endif %}>
+                <div class="collapsible-content__inner">
+                  <button class="btn btn--small link-icon">
+                    <div>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8.848" height="15.652" viewBox="0 0 8.848 15.652">
+                        <path id="Path_2579" data-name="Path 2579" d="M10.82,13.226l5.343-5.818a1.182,1.182,0,0,0,0-1.664,1.157,1.157,0,0,0-1.648,0L8,12.392a1.186,1.186,0,0,0,0,1.665l6.515,6.648a1.157,1.157,0,0,0,1.648,0,1.182,1.182,0,0,0,0-1.664Z" transform="translate(-7.658 -5.399)"/>
+                      </svg>
+                      <span>back to main navigation</span>
+                    </div>
+                  </button>
+                  {% if childlink_title_dc == 'shop by body part' %}
+                    <ul class="mobile-nav__sublist mobile-has-thumbnail">
+                      {%- for childlink in link.links -%}
+
+                        {% assign childlink_url = childlink.url | replace: '/collections/', '' | replace: '/en-nz', '' %}
+                        {% assign childlink_thumb_img_url = 'Free-To-Be-Logo.png' | file_img_url: '100x100', crop: 'center' %}
+                        {% if collections[childlink_url].image != blank %}
+                            {% assign childlink_thumb_img_url = collections[childlink_url].image | img_url: '100x100', crop: 'center' %}
+                        {% endif %}
+                        {%- assign has_sub_dropdown = false -%}
+                        {%- assign grand_child_list_handle = childlink.url | handleize | append: forloop.index -%}
+                        {%- if childlink.links != blank -%}
+                          {%- assign has_sub_dropdown = true -%}
+                        {%- endif -%}
+
+                        <li class="mobile-nav__item">
+                          <div class="mobile-nav__child-item">
+                              <div class="has-thumbnail">
+                                <a href="{{ childlink.url }}" class="">
+                                    <img src="{{ childlink_thumb_img_url }}" /> 
+                                    <span>
+                                      {{ childlink.title | escape }}
+                                    </span>
+                                </a>
+                            </div>
+                          </div>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {% else %}
+                    <ul class="mobile-nav__sublist">
+                      {%- for childlink in link.links -%}
+                        {%- assign has_sub_dropdown = false -%}
+                        {%- assign grand_child_list_handle = childlink.url | handleize | append: forloop.index -%}
+                        {%- if childlink.links != blank -%}
+                          {%- assign has_sub_dropdown = true -%}
+                        {%- endif -%}
+
+                        <li>
+                          <a href="{{ childlink.url }}"
+                            class="mobile-nav__link"
+                            id="Sublabel-{{ grand_child_list_handle }}"
+                            {% if childlink.active %}data-active="true"{% endif %}>
+                            {{ childlink.title | escape }}
+                          </a>
+                        </li>
+
+                        {%- for grandchildlink in childlink.links -%}
+                          <li>
+                            <a href="{{ grandchildlink.url }}" class="mobile-nav__link">
+                              {{ grandchildlink.title }}
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      {%- endfor -%}
+                    </ul>
+                  {% endif %}
+                </div>
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+        {% comment %}
+          {%- if section.settings.store_locator != blank or section.settings.book_now_link != blank -%}
+            <li class="mobile-nav__item mobile-nav__item--secondary">
+              <div class="css-grid grid-cols-2">
+                {%- if section.settings.store_locator != blank -%}
+                  {%- assign animation_row = animation_row | plus: 1 -%}
+                  <div class="appear-animation appear-delay-{{ animation_row }}">
+                    <a href="{{ section.settings.store_locator | escape }}" class="btn btn--full">
+                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-map-marker" viewBox="0 0 15.949 22.314" width="15.949" height="22.314"><path d="M3.149 3a6.565 6.565 0 0 1 4.9-2 6.83 6.83 0 0 1 6.9 6.9 8.522 8.522 0 0 1-.7 3.3 23.129 23.129 0 0 1-1.8 3.5c-.7 1.1-1.1 1.806-2 3.1s-1.2 1.7-1.7 2.3l-.8.8c-.2-.2-.4-.5-.8-.9a22.067 22.067 0 0 1-1.7-2.2c-.8-1.1-1.5-2.1-2.1-3.1a26.939 26.939 0 0 1-1.7-3.4 8.846 8.846 0 0 1-.645-3.4A6.625 6.625 0 0 1 3.149 3Zm3.2 6.7a2.664 2.664 0 1 0-.7-1.8 2.41 2.41 0 0 0 .7 1.8Z" fill="none" stroke="#fff" stroke-width="2"/></svg>
+                      Find us
+                    </a>
+                  </div>
+                {%- endif -%}
+                
+                {%- if section.settings.book_now_link != blank -%}
+                  {%- assign animation_row = animation_row | plus: 1 -%}
+                  <div class="appear-animation appear-delay-{{ animation_row }}">
+                    <a href="{{ section.settings.book_now_link | escape }}" class="btn btn--full">Book now</a>
+                  </div>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endif -%}
+
+          {%- if section.settings.mobile_ad_image != blank or section.settings.mobile_ad_link != blank -%}
+            {%- assign animation_row = animation_row | plus: 1 -%}
+            <li class="mobile-menu-ad appear-animation appear-delay-{{ animation_row }}">
+              <a href="{{ section.settings.mobile_ad_link | escape }}" class="media-fit-contain">
+                <img src="{{ section.settings.mobile_ad_image | img_url: '600x' }}" alt="{{ section.settings.mobile_ad_image.alt | escape }}">
+                {%- if section.settings.mobile_ad_text != blank -%}
+                  <span class="text">{{ section.settings.mobile_ad_text | escape }}</span>
+                {%- endif -%}
+              </a>
+            </li>
+          {%- endif -%}
+
+          {%- if section.settings.kandy_klub_link != blank -%}
+            {%- assign animation_row = animation_row | plus: 1 -%}
+            <li class="mobile-nav__item appear-animation appear-delay-{{ animation_row }}">
+              <a href="{{ section.settings.kandy_klub_link | escape }}" class="mobile-nav__link mobile-nav__link--top-level mobile-nav__link--icon">
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-gift" viewBox="0 0 22.446 21.151" width="22.446" height="21.151"><path d="M1.732 12.57C.417 12.229.004 11.693.003 10.389c0-.96-.009-1.92 0-2.88a1.726 1.726 0 0 1 1.828-1.853c.98-.019 1.961 0 2.941-.006.2 0 .393-.018.605-.028-.98-2.6-.609-4.244 1.137-5.185 1.663-.9 3.363-.409 4.707 1.39A3.473 3.473 0 0 1 16.156.588c1.587 1.048 1.878 2.638.868 5.063.923 0 1.813.043 2.7-.009 2.043-.12 2.832.5 2.708 2.711-.039.692-.005 1.389-.006 2.083a1.867 1.867 0 0 1-1.729 2.123v6.586a1.789 1.789 0 0 1-2 2H3.746a1.79 1.79 0 0 1-2.012-1.982v-5.944Zm8.621 6.846v-6.888H3.467v6.888Zm8.619-6.9c-.208-.012-.367-.03-.527-.03-1.939 0-3.879.018-5.818-.014-.517-.008-.6.184-.6.638.02 1.919.008 3.838.01 5.757 0 .177.024.354.037.542h6.9ZM1.743 10.74c.046.038.061.062.077.062 2.752.013 5.5.028 8.256.024a.414.414 0 0 0 .3-.27c.022-1.055.014-2.11.014-3.187H1.744Zm10.336.049h8.586V7.371h-8.627v3.042a3.726 3.726 0 0 0 .038.381Zm-1.891-5.095.234-.217c-.242-.933-.427-1.885-.744-2.792a1.6 1.6 0 0 0-1.729-.977 1.762 1.762 0 0 0-1.486 1.493 1.544 1.544 0 0 0 .983 1.773c.889.315 1.83.489 2.742.725Zm1.813-.216.246.223c.935-.245 1.893-.43 2.8-.754a1.536 1.536 0 0 0 .919-1.754 1.755 1.755 0 0 0-1.49-1.483 1.6 1.6 0 0 0-1.7.928c-.329.925-.524 1.894-.774 2.845Z"/></svg>
+                <span class="icon__text">{{ 'layout.gift.label' | t }}</span>
+              </a>
+            </li>
+          {%- endif -%}
+
+          {%- if section.settings.wishlist_link != blank -%}
+            {%- assign animation_row = animation_row | plus: 1 -%}
+            <li class="mobile-nav__item appear-animation appear-delay-{{ animation_row }} wishlist-icon">
+              <a href="{{ section.settings.wishlist_link | escape }}" class="mobile-nav__link mobile-nav__link--top-level mobile-nav__link--icon">
+                {%- render 'icons' | icon: 'heart' -%}
+                <span class="icon__text">{{ 'layout.wishlist.label' | t }}</span>
+              </a>
+            </li>
+          {%- endif -%}
+        {% endcomment %}
+      </ul>
+    </div>
+
+    <div class="drawer__footer">
+      {%- assign animation_row = animation_row | plus: 1 -%}
+        {% if about_label != blank %}
+          <ul class="mobile-nav mobile-nav--heading-style">
+            <li class="mobile-nav__item appear-delay-{{ animation_row }}">
+              {% if about_nav != blank %}
+                <div class="mobile-nav__has-sublist">
+                  <button type="button"
+                    aria-controls="Linklist-{{ child_list_handle }}"
+                    class="mobile-nav__link--button mobile-nav__link--top-level collapsible-trigger collapsible--auto-height">
+                    <span class="mobile-nav__faux-link">
+                      {{ about_label }}
+                    </span>
+                    <div class="mobile-nav__toggle">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="8.848" height="15.652" viewBox="0 0 8.848 15.652">
+                        <path id="Path_2580" data-name="Path 2580" d="M3.162,7.827,8.505,2.009a1.182,1.182,0,0,0,0-1.664,1.157,1.157,0,0,0-1.648,0L.342,6.993a1.186,1.186,0,0,0,0,1.665l6.515,6.648a1.157,1.157,0,0,0,1.648,0,1.182,1.182,0,0,0,0-1.664Z" transform="translate(8.848 15.652) rotate(180)"/>
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+
+                <div id="Linklist-{{ child_list_handle }}"
+                  class="mobile-nav__sublist collapsible-content collapsible-content--all"
+                  {% if link.active or link.child_active %}style="height: auto;"{% endif %}>
+                  <div class="collapsible-content__inner">
+                    <button class="btn btn--small link-icon">
+                      <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="8.848" height="15.652" viewBox="0 0 8.848 15.652">
+                          <path id="Path_2579" data-name="Path 2579" d="M10.82,13.226l5.343-5.818a1.182,1.182,0,0,0,0-1.664,1.157,1.157,0,0,0-1.648,0L8,12.392a1.186,1.186,0,0,0,0,1.665l6.515,6.648a1.157,1.157,0,0,0,1.648,0,1.182,1.182,0,0,0,0-1.664Z" transform="translate(-7.658 -5.399)"/>
+                        </svg>
+                        <span>back to main navigation</span>
+                      </div>
+                    </button>
+                      <ul class="mobile-nav__sublist">
+                        {%- for childlink in linklists[about_nav].links -%}
+                          {%- assign has_sub_dropdown = false -%}
+                          {%- assign grand_child_list_handle = childlink.url | handleize | append: forloop.index -%}
+                          {%- if childlink.links != blank -%}
+                            {%- assign has_sub_dropdown = true -%}
+                          {%- endif -%}
+
+                          <li class="mobile-nav__item">
+                            <div class="mobile-nav__child-item">
+                              {%- if childlink.url == '#' and has_sub_dropdown -%}
+                                <button type="button"
+                                aria-controls="Sublinklist-{{ child_list_handle }}-{{ grand_child_list_handle }}"
+                                class="mobile-nav__link--button collapsible-trigger">
+                                  <span class="mobile-nav__faux-link">{{ childlink.title | escape }}</span>
+                                  {%- render 'collapsible-icons-alt' -%}
+                                </button>
+                              {%- else -%}
+                                <a href="{{ childlink.url }}"
+                                  class="mobile-nav__link"
+                                  id="Sublabel-{{ grand_child_list_handle }}">
+                                  {{ childlink.title | escape }}
+                                </a>
+                              {%- endif -%}
+                              {%- if childlink.url != '#' and has_sub_dropdown -%}
+                                <button type="button"
+                                  aria-controls="Sublinklist-{{ child_list_handle }}-{{ grand_child_list_handle }}"
+                                  aria-labelledby="Sublabel-{{ grand_child_list_handle }}"
+                                  class="collapsible-trigger{% if childlink.active or childlink.child_active %} is-open{% endif %}">
+                                  {%- render 'collapsible-icons-alt' -%}
+                                </button>
+                              {%- endif -%}
+                            </div>
+
+                            {%- if has_sub_dropdown -%}
+                              <div
+                                id="Sublinklist-{{ child_list_handle }}-{{ grand_child_list_handle }}"
+                                aria-labelledby="Sublabel-{{ grand_child_list_handle }}"
+                                class="mobile-nav__sublist collapsible-content collapsible-content--all"
+                                {% if childlink.active or childlink.child_active %}style="height: auto;"{% endif %}>
+                                <div class="collapsible-content__inner">
+                                  <ul class="mobile-nav__grandchildlist">
+                                    {%- for grandchildlink in childlink.links -%}
+                                      <li class="mobile-nav__item">
+                                        <a href="{{ grandchildlink.url }}" class="mobile-nav__link">
+                                          {{ grandchildlink.title }}
+                                        </a>
+                                      </li>
+                                    {%- endfor -%}
+                                  </ul>
+                                </div>
+                              </div>
+                            {%- endif -%}
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                  </div>
+                </div>
+              {%- else -%}
+                <a href="{{ about_link}}" class="mobile-nav__link mobile-nav__link--top-level">{{ about_label }}</a>
+              {% endif %}
+            </li>
+          </ul>
+        {% endif %}
+      {% comment %}
+        <div class="appear-animation appear-delay-{{ animation_row }}">
+          {%- render 'social-links', class: 'flex-grid--justify-end' -%}
+        </div>
+      {% endcomment %}
+    </div>
+  </div>
+</div>

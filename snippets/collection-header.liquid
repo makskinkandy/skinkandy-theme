@@ -1,0 +1,21 @@
+<div class="collection-header-wrapper banner-section page-content">
+  <div class="page-width">
+    <header class="section-header">
+      <h1 class="section-content__heading h1" style="color: {{ block.settings.title_color }}">{{ collection.title | escape }}</h1>
+
+      {%- if collection.description != blank -%}
+        <div class="section-content__text rte">
+          {%- assign words = collection.description | strip_html | split: ' ' -%}
+          {%- assign word_limit = 16 -%}
+          {%- if words.size <= word_limit -%}
+            {{ words | join: ' ' }}
+          {%- else -%}
+            {{ words | slice: 0, word_limit | join: ' ' }}<span class="dots">...</span><span class="more hide"> {{ words | slice: word_limit, 999 | join: ' ' }}</span>
+
+            <button type="button" class="read-more js-read-more">Read more</button>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </header>
+  </div>
+</div>

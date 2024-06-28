@@ -1,0 +1,200 @@
+<footer class="site-footer" data-section-id="{{ section.id }}" data-section-type="footer-section">
+  <div class="footer-top page-width">
+    <div class="grid text-center">
+      {%- for block in section.blocks -%}
+        <div class="grid__item footer__item footer__item--{{ block.id }}" data-type="{{ block.type }}" {{ block.shopify_attributes }}>
+          {%- liquid
+            case block.type
+              when 'logo_social'
+                render 'footer-logo', block: block
+              when 'custom'
+                render 'footer-custom-text', block: block
+              when 'newsletter'
+                render 'footer-newsletter', block: block
+              when 'menu'
+                render 'footer-menu', block: block
+              when 'social_links'
+                render 'social-links', class: block.settings.class
+            endcase
+          -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <div class="footer-bottom text-center">
+    {%- if section.settings.show_payment_icons -%}
+      <div class="footer-payment-icons" style="background-color: black; color: white;">
+        {%- unless shop.enabled_payment_types == empty -%}
+          <div class="page-width">
+            <ul class="inline-list payment-icons footer__section">
+              {%- for type in shop.enabled_payment_types -%}
+                <li class="icon--payment">
+                  {{ type | payment_type_svg_tag }}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endunless -%}
+      </div>
+    {%- endif -%}
+
+
+    {%
+      ###############################
+      # Country Updater
+      # Move Digital Added 13/03/2024
+      ###############################
+    %}
+    <script>
+      function call_change_country_(country){
+        $('.locale-selectors__selector option[value="'+country+'"]').prop('selected', true)  
+        $(".locale-selectors__content form").submit()
+      }
+      let alt_display_settings = {
+        /* DON'T EDIT ABOVE THIS LINE */
+        /* BEGIN GLOBAL CHANGES */
+        "global" : [
+          {
+                'do':               'hide_element',
+                'what':             'nz-banner',
+          },
+          
+        ],
+        /* END GLOBAL CHANGES */
+        /* BEGIN NEW ZEALAND */
+        "en-nz" : [
+            {
+                'do':               'show_element',
+                'what':             'nz-banner',
+            },
+            {
+                'do':               'hide_element',
+                'what':             'hide-nz',
+            }
+        ],
+        /* END NEW ZEALAND */
+        /* DONT EDIT BELOW THIS LINE */
+      };
+    </script>
+    <script src="https://cdn.skinkandyonline.com.au/js/country-updater.js" async></script>
+    {% #End Country Updater %}
+    <div class="page-width footer-copyright">
+      <p>Copyright {{ 'now' | date: '%Y' }} &copy; {{ shop.name }}. All Rights Reserved.{% if section.settings.privacy_link != blank %} <a href="{{ section.settings.privacy_link | escape}}">Privacy policy</a>{% endif%}</p>
+    </div>
+  </div>
+
+  <style type='text/css'>
+       .embeddedServiceHelpButton .helpButton .uiButton {
+             background-color: #EA0190;
+             font-family: "Arial", sans-serif;
+       }
+       .embeddedServiceHelpButton .helpButton .uiButton:focus {
+             outline: 1px solid #EA0190;
+       }
+</style>
+
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "max_blocks": 12,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Show payment icons",
+        "default": false
+      },
+      {
+        "type": "url",
+        "id": "privacy_link",
+        "label": "Privacy policy link"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo_social",
+        "name": "Logo",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo image"
+          },
+          {
+            "type": "range",
+            "id": "desktop_logo_height",
+            "label": "Logo height",
+            "default": 50,
+            "min": 20,
+            "max": 120,
+            "unit": "px"
+          }
+        ]
+      },
+      {
+        "type": "menu",
+        "name": "Menu",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_footer_title",
+            "label": "Show heading"
+          },
+          {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Choose a menu",
+            "default": "footer"
+          }
+        ]
+      },
+      {
+        "type": "newsletter",
+        "name": "Newsletter and social",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_footer_title",
+            "label": "Show heading",
+            "default": true
+          },
+          {
+            "type": "paragraph",
+            "content": "Any customers who sign up will have an account created for them in Shopify. [View customers](/admin/customers)."
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Sign up and save"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "info": "Optional",
+            "default": "<p>Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.</p>"
+          }
+        ]
+      },
+      {
+        "type": "social_links",
+        "name": "Social links",
+        "limit": 1, 
+        "settings": [
+          {
+            "type": "text",
+            "id": "class",
+            "label": "Optional class"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
