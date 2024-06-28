@@ -39,7 +39,7 @@
 
             map = new google.maps.Map(document.getElementById('map'), {
                 center: initialLocation,
-                zoom: 12,
+                zoom: 10,
                 mapId: "DEMO_MAP_ID"
             });
 
@@ -109,7 +109,7 @@
             listItem.style.cursor = 'pointer';
             listItem.addEventListener('click', () => {
                 map.setCenter(place.geometry.location);
-                map.setZoom(15);
+                map.setZoom(18);
                 infowindow.setContent(place.name + '<br>' + getOpenStatus(place));
                 infowindow.open(map, markers[index]);
             });
