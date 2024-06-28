@@ -107,7 +107,7 @@ function loadDefaultStores() {
     const nearbySearchRequest = {
         location: defaultLocation,
         radius: 5000,
-        keyword: "Walmart", // Display only stores with this keyword
+        keyword: "SkinKandy", // Display only stores with this keyword
     };
 
     service = new google.maps.places.PlacesService(map);
@@ -129,7 +129,7 @@ function onPlaceChanged() {
         const nearbySearchRequest = {
             location: location,
             radius: 5000,
-            keyword: "Walmart", // Display only stores with this keyword
+            keyword: "SkinKandy", // Display only stores with this keyword
         };
 
         service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
@@ -160,7 +160,7 @@ function searchStores(location) {
             const nearbySearchRequest = {
                 location: location,
                 radius: 5000,
-                keyword: "Walmart", // Display only stores with this keyword
+                keyword: "SkinKandy", // Display only stores with this keyword
             };
 
             service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
@@ -186,7 +186,7 @@ function useCurrentLocation() {
             const nearbySearchRequest = {
                 location: userLocation,
                 radius: 5000,
-                keyword: "Walmart", // Display only stores with this keyword
+                keyword: "SkinKandy", // Display only stores with this keyword
             };
 
             service = new google.maps.places.PlacesService(map);
