@@ -60,7 +60,16 @@
                 searchNearby(place.geometry.location);
             });
 
-            searchNearby(allStore);
+            searchAll7ElevenStores();
+        }
+
+        function searchAll7ElevenStores() {
+            const request = {
+                query: '7-Eleven'
+            };
+
+            service = new google.maps.places.PlacesService(map);
+            service.textSearch(request, handleSearchResults);
         }
 
         function searchNearby(location) {
