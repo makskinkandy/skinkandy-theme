@@ -22,6 +22,7 @@
         let service;
         let infowindow;
         let markers = [];
+        let autocomplete;
 
         function initMap() {
             const initialLocation = new google.maps.LatLng(37.7749, -122.4194); // Default location (San Francisco)
@@ -29,10 +30,25 @@
             map = new google.maps.Map(document.getElementById('map'), {
                 center: initialLocation,
                 zoom: 13,
-                mapId: "SkinKandy_Map"
+                mapId: "DEMO_MAP_ID"
             });
 
             infowindow = new google.maps.InfoWindow();
+            autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
+
+            autocomplete.bindTo('bounds', map);
+
+            autocomplete.addListener('place_changed', function() {
+                const place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    window.alert("No details available for input: '" + place.name + "'");
+                    return;
+                }
+
+                map.setCenter(place.geometry.location);
+                searchNearby(place.geometry.location);
+            });
+
             searchNearby(initialLocation);
         }
 
