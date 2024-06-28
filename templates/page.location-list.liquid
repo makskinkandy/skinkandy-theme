@@ -17,15 +17,14 @@
             height: 100vh;
         }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD67z0I_Lwb6YM9Gt7xOEcxth0JYRi0SrI&libraries=places,marker" defer></script>
     <script>
         let map;
         let service;
         let infowindow;
         let markers = [];
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const initialLocation = new google.maps.LatLng(37.7749, -122.4194); // Default location (San Francisco)
+        function initMap() {
+            const initialLocation = new google.maps.LatLng(37.7749, -122.4194); // Default location (San Francisco)
 
             map = new google.maps.Map(document.getElementById('map'), {
                 center: initialLocation,
@@ -34,7 +33,7 @@
 
             infowindow = new google.maps.InfoWindow();
             searchNearby(initialLocation);
-      });
+        }
 
         function searchNearby(location) {
             const request = {
@@ -108,3 +107,4 @@
             }
         }
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD67z0I_Lwb6YM9Gt7xOEcxth0JYRi0SrI&libraries=places,marker&callback=initMap" defer></script>
