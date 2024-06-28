@@ -1,240 +1,110 @@
-<div class="container">
-    <div class="sidebar">
-        <h1>Store Locator</h1>
-        <input type="text" id="location-input" placeholder="Enter a location">
-        <button id="search-button">Search</button>
-        <button id="current-location-button">Use Current Location</button>
-        <ul id="store-list"></ul>
-    </div>
+<div id="container" onload="initMap()">
+    <div id="store-list"></div>
     <div id="map"></div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD67z0I_Lwb6YM9Gt7xOEcxth0JYRi0SrI&libraries=places,marker" defer></script>
+<button onclick="useCurrentLocation()">Use Current Location</button>
 <style>
-  body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
-
-.container {
-    display: flex;
-    height: 100%;
-}
-
-.sidebar {
-    width: 30%;
-    padding: 20px;
-    background-color: #f8f9fa;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    overflow-y: auto;
-}
-
-#map {
-    width: 70%;
-    height: 100vh;
-}
-
-#location-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-#search-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-#search-button:hover {
-    background-color: #0056b3;
-}
-
-#store-list {
-    list-style: none;
-    padding: 0;
-}
-
-#store-list li {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #e9ecef;
-    border-radius: 5px;
-}
-</style>
-<script>
-let map;
-let service;
-let infowindow;
-let autocomplete;
-let markers = [];
-
-document.addEventListener("DOMContentLoaded", () => {
-    const mapOptions = {
-        center: { lat: -20.917574, lng: 142.702789 }, // Default location set to Queensland, Australia
-        zoom: 5,
-        mapId: "SkinKandy_Map"
-    };
-    map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    infowindow = new google.maps.InfoWindow();
-
-    // Initialize the autocomplete functionality
-    const input = document.getElementById("location-input");
-    autocomplete = new google.maps.places.Autocomplete(input);
-
-    // Add listener to the autocomplete to handle place selection
-    autocomplete.addListener('place_changed', onPlaceChanged);
-
-    document.getElementById("search-button").addEventListener("click", () => {
-        const location = document.getElementById("location-input").value;
-        searchStores(location);
-    });
-
-    // Add listener to the current location button
-    document.getElementById("current-location-button").addEventListener("click", useCurrentLocation);
-
-    // Load specific stores by default
-    loadDefaultStores();
-});
-
-function loadDefaultStores() {
-    const defaultLocation = { lat: -20.917574, lng: 142.702789 }; // Queensland, Australia
-    map.setCenter(defaultLocation);
-    map.setZoom(5);
-
-    const nearbySearchRequest = {
-        location: defaultLocation,
-        radius: 5000,
-        keyword: "SkinKandy", // Display only stores with this keyword
-    };
-
-    service = new google.maps.places.PlacesService(map);
-    service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
-        if (nearbyStatus === google.maps.places.PlacesServiceStatus.OK && nearbyResults) {
-            displayStores(nearbyResults.filter(store => store.name.toLowerCase() === "SkinKandy"));
+        #container {
+            display: flex;
         }
-    });
-}
+        #store-list {
+            width: 30%;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        #map {
+            width: 70%;
+            height: 100vh;
+        }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD67z0I_Lwb6YM9Gt7xOEcxth0JYRi0SrI&libraries=places,marker" defer></script>
+    <script>
+        let map;
+        let service;
+        let infowindow;
+        let markers = [];
 
-function onPlaceChanged() {
-    const place = autocomplete.getPlace();
-    if (place.geometry) {
-        const location = place.geometry.location;
+        function initMap() {
+            const initialLocation = new google.maps.LatLng(37.7749, -122.4194); // Default location (San Francisco)
 
-        map.setCenter(location);
-        map.setZoom(5);
-
-        const nearbySearchRequest = {
-            location: location,
-            radius: 5000,
-            keyword: "SkinKandy", // Display only stores with this keyword
-        };
-
-        service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
-            if (nearbyStatus === google.maps.places.PlacesServiceStatus.OK && nearbyResults) {
-                displayStores(nearbyResults.filter(store => store.name.toLowerCase() === "SkinKandy"));
-            }
-        });
-    } else {
-        alert("Please select a location from the suggestions.");
-    }
-}
-
-function searchStores(location) {
-    const request = {
-        query: location,
-        fields: ["name", "geometry"],
-    };
-
-    service = new google.maps.places.PlacesService(map);
-    service.findPlaceFromQuery(request, (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK && results) {
-            const place = results[0];
-            const location = place.geometry.location;
-
-            map.setCenter(location);
-            map.setZoom(5);
-
-            const nearbySearchRequest = {
-                location: location,
-                radius: 5000,
-                keyword: "SkinKandy", // Display only stores with this keyword
-            };
-
-            service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
-                if (nearbyStatus === google.maps.places.PlacesServiceStatus.OK && nearbyResults) {
-                    displayStores(nearbyResults.filter(store => store.name.toLowerCase() === "SkinKandy"));
-                }
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: initialLocation,
+                zoom: 13
             });
+
+            infowindow = new google.maps.InfoWindow();
+            searchNearby(initialLocation);
         }
-    });
-}
 
-function useCurrentLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-            const userLocation = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-
-            map.setCenter(userLocation);
-            map.setZoom(5);
-
-            const nearbySearchRequest = {
-                location: userLocation,
-                radius: 5000,
-                keyword: "SkinKandy", // Display only stores with this keyword
+        function searchNearby(location) {
+            const request = {
+                location: location,
+                radius: '5000',
+                keyword: '7-Eleven'
             };
 
             service = new google.maps.places.PlacesService(map);
-            service.nearbySearch(nearbySearchRequest, (nearbyResults, nearbyStatus) => {
-                if (nearbyStatus === google.maps.places.PlacesServiceStatus.OK && nearbyResults) {
-                    displayStores(nearbyResults.filter(store => store.name.toLowerCase() === "SkinKandy"));
+            service.nearbySearch(request, handleSearchResults);
+        }
+
+        function handleSearchResults(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                const storeList = document.getElementById('store-list');
+                storeList.innerHTML = '';
+
+                clearMarkers();
+
+                for (let i = 0; i < results.length; i++) {
+                    createMarker(results[i], i);
+                    addToList(results[i], i);
                 }
+            }
+        }
+
+        function createMarker(place, index) {
+            const marker = new google.maps.marker.AdvancedMarkerView({
+                map: map,
+                position: place.geometry.location,
+                title: place.name
             });
-        }, () => {
-            alert("Error: The Geolocation service failed.");
-        });
-    } else {
-        alert("Error: Your browser doesn't support geolocation.");
-    }
-}
 
-function displayStores(stores) {
-    const storeList = document.getElementById("store-list");
-    storeList.innerHTML = "";
-    clearMarkers();
+            markers.push(marker);
 
-    stores.forEach((store, index) => {
-        const li = document.createElement("li");
-        li.textContent = store.name;
-        li.addEventListener("click", () => {
-            map.setCenter(store.geometry.location);
-            map.setZoom(15);
-            infowindow.setContent(store.name);
-            infowindow.open(map, markers[index]);
-        });
-        storeList.appendChild(li);
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(place.name);
+                infowindow.open(map, marker);
+            });
+        }
 
-        constmarker = new google.maps.marker.AdvancedMarkerElement({
-            map: map,
-            position: store.geometry.location,
-        });
-        markers.push(marker);
+        function addToList(place, index) {
+            const storeList = document.getElementById('store-list');
+            const listItem = document.createElement('div');
+            listItem.innerHTML = `${index + 1}. ${place.name}`;
+            listItem.style.cursor = 'pointer';
+            listItem.addEventListener('click', () => {
+                map.setCenter(place.geometry.location);
+                infowindow.setContent(place.name);
+                infowindow.open(map, markers[index]);
+            });
+            storeList.appendChild(listItem);
+        }
 
-        marker.addListener("click", () => {
-            infowindow.setContent(store.name);
-            infowindow.open(map, marker);
-        });
-    });
-}
+        function clearMarkers() {
+            for (let i = 0; i < markers.length; i++) {
+                markers[i].setMap(null);
+            }
+            markers = [];
+        }
 
-function clearMarkers() {
-    markers.forEach(marker => marker.setMap(null));
-    markers = [];
-}
-</script>
+        function useCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    map.setCenter(userLocation);
+                    searchNearby(userLocation);
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+    </script>
