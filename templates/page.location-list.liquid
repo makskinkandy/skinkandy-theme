@@ -60,16 +60,18 @@
                 searchNearby(place.geometry.location);
             });
 
-            searchAllStores();
+            searchInitialNearby(allStore);
         }
 
-        function searchAllStores() {
+        function searchInitialNearby(location) {
             const request = {
-                query: 'SkinKandy'
+                location: location,
+                radius: '50000',
+                name: 'SkinKandy'
             };
 
             service = new google.maps.places.PlacesService(map);
-            service.textSearch(request, handleSearchResults);
+            service.nearbySearch(request, handleSearchResults);
         }
 
         function searchNearby(location) {
