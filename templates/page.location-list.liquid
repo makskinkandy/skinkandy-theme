@@ -139,26 +139,10 @@
         }
 
         function getOpenStatus(place) {
-            console.log(place);
-            if (!place.opening_hours || !place.opening_hours.weekday_text) {
-                return 'Opening hours not available';
-            }
-
-            const now = new Date();
-            const dayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
-            const todayHours = place.opening_hours.weekday_text[dayOfWeek];
-            
-            if (!todayHours) {
-                return 'Opening hours not available for today';
-            }
-
-            const [day, hours] = todayHours.split(': ');
-            const [openTime, closeTime] = hours.split(' – '); // Adjust this based on your expected time format
-
-            const open = new Date();
-            open.setHours(parseInt(openTime.split(':')[0]), parseInt(openTime.split(':')[1]), 0);
-            const close = new Date();
-            close.setHours(parseInt(closeTime.split(':')[0]), parseInt(closeTime.split(':')[1]), 0);
+            let request = {
+              placeId: place.place_id,
+              fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
+            };
 
             if (now >= open && now <= close) {
                 return `<span class="open">Open until ${closeTime}</span>`;
