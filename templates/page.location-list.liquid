@@ -147,12 +147,6 @@
             let serviceDetails = service.getDetails(request, callback);
 
             console.log(serviceDetails)
-
-            if (now >= open && now <= close) {
-                return `<span class="open">Open until ${closeTime}</span>`;
-            } else {
-                return `<span class="closed">Closed</span>`;
-            }
         }
 
       function callback(place, status) {
