@@ -144,6 +144,10 @@
               fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
             };
 
+            let serviceDetails = service.getDetails(request, callback);
+
+            console.log(serviceDetails)
+
             if (now >= open && now <= close) {
                 return `<span class="open">Open until ${closeTime}</span>`;
             } else {
