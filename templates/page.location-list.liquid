@@ -97,11 +97,11 @@
 
               for (let i = 0; i < results.length; i++) {
                 console.log(results[i].name.indexOf("Skinkandy"))
-                  if (results[i].name.indexOf("Skinkandy") == -1) {
-                    return;
+                  if (results[i].name.indexOf("Skinkandy") !== -1) {
+                    createMarker(results[i], i);
+                    addToList(results[i], i);
                   }
-                  createMarker(results[i], i);
-                  addToList(results[i], i);
+                  
               }
           }
       }
