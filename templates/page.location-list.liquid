@@ -109,7 +109,7 @@
         }
 
         function createMarker(place) {
-            const marker = new google.maps.marker.AdvancedMarkerView({
+            const marker = new google.maps.marker.AdvancedMarkerElement({
                 map: map,
                 position: place.geometry.location,
                 title: place.name
