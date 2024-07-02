@@ -112,7 +112,8 @@
             const marker = new google.maps.marker.AdvancedMarkerElement({
                 map: map,
                 position: place.geometry.location,
-                title: place.name
+                title: place.name,
+                mapID: 'Skinkandy Map'
             });
 
             markers.push(marker);
