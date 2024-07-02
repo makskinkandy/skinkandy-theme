@@ -69,7 +69,6 @@
             const request = {
                 query: 'Skinkandy',
                 bounds: map.getBounds(),
-                type: ['store'] // Ensure we only get store results
             };
 
             service = new google.maps.places.PlacesService(map);
@@ -93,9 +92,8 @@
                     nextPageToken = pagination.nextPageToken;
                     setTimeout(() => {
                         service.textSearch({
-                            query: 'Skinkandy',
+                            keyname: 'Skinkandy',
                             bounds: map.getBounds(),
-                            type: ['store'],
                             pageToken: nextPageToken
                         }, handleSearchResults);
                     }, 2000); // Delay to avoid hitting the API request limit
