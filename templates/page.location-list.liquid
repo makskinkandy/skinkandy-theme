@@ -92,7 +92,7 @@
                     nextPageToken = pagination.nextPageToken;
                     setTimeout(() => {
                         service.textSearch({
-                            keyname: 'Skinkandy',
+                            query: 'Skinkandy',
                             bounds: map.getBounds(),
                             pageToken: nextPageToken
                         }, handleSearchResults);
