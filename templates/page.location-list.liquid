@@ -38,7 +38,8 @@
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 2, // Initial zoom level to show worldwide view
-                center: { lat: -27.4698, lng: 153.0251 } // Initial center is not important as we will adjust it based on search results
+                center: { lat: -27.4698, lng: 153.0251 } // Initial center is not important as we will adjust it based on search results,
+                mapId: 'Skinkandy_Map'
             });
 
             infowindow = new google.maps.InfoWindow();
@@ -112,8 +113,7 @@
             const marker = new google.maps.marker.AdvancedMarkerElement({
                 map: map,
                 position: place.geometry.location,
-                title: place.name,
-                mapId: 'Skinkandy_Map'
+                title: place.name
             });
 
             markers.push(marker);
