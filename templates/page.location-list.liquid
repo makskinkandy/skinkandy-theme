@@ -96,7 +96,7 @@
               clearMarkers();
 
               for (let i = 0; i < results.length; i++) {
-                  if ((results[i].name.indexOf("SkinKandy") == -1) && (results[i].name.indexOf("Skinkandy") == -1)) {
+                  if (results[i].name.indexOf("SkinKandy") === -1) {
                     return;
                   }
                   createMarker(results[i], i);
