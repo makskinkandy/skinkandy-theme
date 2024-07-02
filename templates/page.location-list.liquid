@@ -29,156 +29,129 @@
     </style>
     <script>
       let map;
-        let service;
-        let infowindow;
-        let markers = [];
-        let autocomplete;
-        let nextPageToken = null;
+      let service;
+      let infowindow;
+      let markers = [];
+      let autocomplete;
 
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 2, // Initial zoom level to show worldwide view
-                center: { lat: -27.4698, lng: 153.0251 }, // Initial center is not important as we will adjust it based on search results,
-                mapId: 'Skinkandy_Map'
-            });
+      function initMap() {
+          const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
+          const allStore = new google.maps.LatLng(0, 0);
+        
+          map = new google.maps.Map(document.getElementById('map'), {
+              center: initialLocation,
+              zoom: 5,
+              mapId: "DEMO_MAP_ID"
+          });
 
-            infowindow = new google.maps.InfoWindow();
-            autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
+          infowindow = new google.maps.InfoWindow();
+          autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
 
-            autocomplete.bindTo('bounds', map);
+          autocomplete.bindTo('bounds', map);
 
-            autocomplete.addListener('place_changed', function() {
-                const place = autocomplete.getPlace();
-                if (!place.geometry) {
-                    window.alert("No details available for input: '" + place.name + "'");
-                    return;
-                }
+          autocomplete.addListener('place_changed', function() {
+              const place = autocomplete.getPlace();
+              if (!place.geometry) {
+                  window.alert("No details available for input: '" + place.name + "'");
+                  return;
+              }
 
-                map.setCenter(place.geometry.location);
-                searchNearby(place.geometry.location);
-            });
+              map.setCenter(place.geometry.location);
+              searchNearby(place.geometry.location);
+          });
 
-            map.addListener('bounds_changed', function() {
-                searchNearby(map.getBounds().getCenter());
-            });
+          searchAllStores();
+      }
 
-            searchAll7ElevenStores();
+      function searchAllStores() {
+          const request = {
+              query: 'SkinKandy',
+              pagetoken: 2
+          };
+
+          service = new google.maps.places.PlacesService(map);
+          service.textSearch(request, handleSearchResults);
+      }
+
+      
+
+      function searchNearby(location) {
+          const request = {
+              location: location,
+              radius: '5000',
+              name: 'SkinKandy',
+              bounds: map.getBounds()
+          };
+
+          service = new google.maps.places.PlacesService(map);
+          service.nearbySearch(request, handleSearchResults);
+      }
+
+      function handleSearchResults(results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+              const storeList = document.getElementById('store-list');
+              storeList.innerHTML = '';
+
+              clearMarkers();
+
+              for (let i = 0; i < results.length; i++) {
+                  createMarker(results[i], i);
+                  addToList(results[i], i);
+              }
+          }
+      }
+
+      function createMarker(place, index) {
+          const marker = new google.maps.marker.AdvancedMarkerElement({
+              map: map,
+              position: place.geometry.location,
+              title: place.name
+          });
+
+          markers.push(marker);
+
+          google.maps.event.addListener(marker, 'click', function() {
+              infowindow.setContent(place.name + '<br>' + getOpenStatus(place));
+              infowindow.open(map, marker);
+          });
+      }
+
+      function addToList(place, index) {
+          const storeList = document.getElementById('store-list');
+          const listItem = document.createElement('div');
+          listItem.innerHTML = `${index + 1}. ${place.name}<br>${getOpenStatus(place)}`;
+          listItem.style.cursor = 'pointer';
+          listItem.addEventListener('click', () => {
+              map.setCenter(place.geometry.location);
+              map.setZoom(18);
+              infowindow.setContent(place.name + '<br>' + getOpenStatus(place));
+              infowindow.open(map, markers[index]);
+          });
+          storeList.appendChild(listItem);
+      }
+
+      function getOpenStatus(place) {
+          let request = {
+            placeId: place.place_id,
+            fields: ['name', 'opening_hours']
+          };
+          service = new google.maps.places.PlacesService(map);
+          let serviceResult = service.getDetails(request, callback);
+
+          console.log(serviceResult)
+      }
+
+      function callback(place, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          return place;
         }
-
-        function searchAll7ElevenStores() {
-            const request = {
-                query: 'Skinkandy',
-                bounds: map.getBounds(),
-            };
-
-            service = new google.maps.places.PlacesService(map);
-            service.textSearch(request, handleSearchResults);
-        }
-
-        function handleSearchResults(results, status, pagination) {
-            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                const storeList = document.getElementById('store-list');
-                storeList.innerHTML = '';
-
-                clearMarkers();
-
-                for (let i = 0; i < results.length; i++) {
-                    createMarker(results[i]);
-                    addToList(results[i], i);
-                }
-
-                // If there are more results, get the next page
-                if (pagination.hasNextPage) {
-                    nextPageToken = pagination.nextPageToken;
-                    setTimeout(() => {
-                        service.textSearch({
-                            query: 'Skinkandy',
-                            bounds: map.getBounds(),
-                            pageToken: nextPageToken
-                        }, handleSearchResults);
-                    }, 2000); // Delay to avoid hitting the API request limit
-                } else {
-                    nextPageToken = null; // Reset the token if there are no more pages
-                }
-            } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-                alert('No stores found in this area.');
-            } else {
-                alert('Error fetching nearby stores: ' + status);
-            }
-        }
-
-        function createMarker(place) {
-            const marker = new google.maps.marker.AdvancedMarkerElement({
-                map: map,
-                position: place.geometry.location,
-                title: place.name
-            });
-
-            markers.push(marker);
-
-            google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent(place.name + '<br>' + getOpenStatus(place));
-                infowindow.open(map, marker);
-            });
-        }
-
-        function addToList(place, index) {
-            const storeList = document.getElementById('store-list');
-            const listItem = document.createElement('div');
-            listItem.innerHTML = `${index + 1}. ${place.name}<br>${getOpenStatus(place)}`;
-            listItem.style.cursor = 'pointer';
-            listItem.addEventListener('click', () => {
-                map.setCenter(place.geometry.location);
-                infowindow.setContent(place.name + '<br>' + getOpenStatus(place));
-                infowindow.open(map, markers[index]);
-            });
-            storeList.appendChild(listItem);
-        }
-
-        function getOpenStatus(place) {
-            if (!place.opening_hours || !place.opening_hours.weekday_text) {
-                return 'Opening hours not available';
-            }
-
-            const now = new Date();
-            const dayOfWeek = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
-            const todayHours = place.opening_hours.weekday_text[dayOfWeek];
-            
-            if (!todayHours) {
-                return 'Opening hours not available for today';
-            }
-
-            const [day, hours] = todayHours.split(': ');
-            const [openTime, closeTime] = hours.split(' – '); // Adjust this based on your expected time format
-
-            const open = new Date();
-            open.setHours(parseInt(openTime.split(':')[0]), parseInt(openTime.split(':')[1]), 0);
-            const close = new Date();
-            close.setHours(parseInt(closeTime.split(':')[0]), parseInt(closeTime.split(':')[1]), 0);
-
-            if (now >= open && now <= close) {
-                return `<span class="open">Open until ${closeTime}</span>`;
-            } else {
-                return `<span class="closed">Closed</span>`;
-            }
-        }
+      }
 
         function clearMarkers() {
             for (let i = 0; i < markers.length; i++) {
                 markers[i].setMap(null);
             }
             markers = [];
-        }
-
-        function searchNearby(location) {
-            const request = {
-                query: '7-Eleven',
-                bounds: map.getBounds(),
-                type: ['store']
-            };
-
-            service = new google.maps.places.PlacesService(map);
-            service.textSearch(request, handleSearchResults);
         }
 
         function useCurrentLocation() {
