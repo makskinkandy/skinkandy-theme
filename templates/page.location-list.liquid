@@ -136,39 +136,27 @@
       }
 
       function getOpenStatus(place) {
-          let request = {
-            placeId: place.place_id,
-            fields: ['name', 'opening_hours']
-          };
-          service = new google.maps.places.PlacesService(map);
-          let serviceResult = service.getDetails(request, callback);
-
-          console.log(serviceResult)
+        return !place.opening_hours ? "Close" : "Open"
       }
 
-      function callback(place, status) {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-          return place;
-        }
+
+      function clearMarkers() {
+          for (let i = 0; i < markers.length; i++) {
+              markers[i].setMap(null);
+          }
+          markers = [];
       }
 
-        function clearMarkers() {
-            for (let i = 0; i < markers.length; i++) {
-                markers[i].setMap(null);
-            }
-            markers = [];
-        }
-
-        function useCurrentLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                    map.setCenter(userLocation);
-                    searchNearby(userLocation);
-                });
-            } else {
-                alert('Geolocation is not supported by this browser.');
-            }
-        }
+      function useCurrentLocation() {
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition((position) => {
+                  const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                  map.setCenter(userLocation);
+                  searchNearby(userLocation);
+              });
+          } else {
+              alert('Geolocation is not supported by this browser.');
+          }
+      }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD67z0I_Lwb6YM9Gt7xOEcxth0JYRi0SrI&loading=async&libraries=places,marker&callback=initMap" defer></script>
