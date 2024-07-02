@@ -143,10 +143,8 @@
               placeId: place.place_id,
               fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
             };
-
-            let serviceDetails = service.getDetails(request, callback);
-
-            console.log(serviceDetails)
+            service = new google.maps.places.PlacesService(map);
+            service.getDetails(request, callback);
         }
 
       function callback(place, status) {
