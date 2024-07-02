@@ -63,6 +63,10 @@
           searchAllStores();
       }
 
+      map.addListener('bounds_changed', function() {
+          searchNearby(map.getBounds().getCenter());
+      });
+
       function searchAllStores() {
           const request = {
               query: 'SkinKandy',
