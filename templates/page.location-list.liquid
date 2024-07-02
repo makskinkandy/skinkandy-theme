@@ -124,7 +124,7 @@
           listItem.style.cursor = 'pointer';
           listItem.addEventListener('click', () => {
               map.setCenter(place.geometry.location);
-              map.setZoom(13);
+              map.setZoom(10);
               infowindow.setContent(place.name + '<br>' + getOpenStatus(place));
               infowindow.open(map, markers[index]);
           });
