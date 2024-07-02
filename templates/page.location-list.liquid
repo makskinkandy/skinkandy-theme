@@ -96,7 +96,9 @@
               clearMarkers();
 
               for (let i = 0; i < results.length; i++) {
-                  console.log(results[i])
+                  if (!results[i].name.indexOf("Skinkandy")) {
+                    return;
+                  }
                   createMarker(results[i], i);
                   addToList(results[i], i);
               }
