@@ -96,11 +96,11 @@
               clearMarkers();
 
               for (let i = 0; i < results.length; i++) {
-                console.log(results[i].name)
-                  if (results[i].name.indexOf("SkinKandy") !== -1) {
-                    createMarker(results[i], i);
-                    addToList(results[i], i);
+                  if ((results[i].name.indexOf("SkinKandy") === -1) || (results[i].name.indexOf("Skinkandy") === -1)) {
+                    return;
                   }
+                  createMarker(results[i], i);
+                  addToList(results[i], i);
                   
               }
           }
