@@ -40,7 +40,7 @@
         
           map = new google.maps.Map(document.getElementById('map'), {
               center: initialLocation,
-              zoom: 5,
+              zoom: 8,
               mapId: "DEMO_MAP_ID"
           });
 
@@ -71,7 +71,7 @@
 
       function searchAllStores() {
           const request = {
-              query: 'SkinKandy'
+              name: 'SkinKandy'
           };
 
           service = new google.maps.places.PlacesService(map);
