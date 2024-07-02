@@ -145,6 +145,8 @@
             };
             service = new google.maps.places.PlacesService(map);
             let serviceResult = service.getDetails(request, callback);
+
+            console.log(serviceResult)
         }
 
       function callback(place, status) {
