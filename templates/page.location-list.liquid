@@ -96,11 +96,11 @@
               clearMarkers();
 
               for (let i = 0; i < results.length; i++) {
-                  if (results[i].name.indexOf("SkinKandy") === -1) {
-                    return;
+
+                  if (results[i].name.indexOf("SkinKandy") !== -1) {
+                    createMarker(results[i], i);
+                    addToList(results[i], i);
                   }
-                  createMarker(results[i], i);
-                  addToList(results[i], i);
                   
               }
           }
