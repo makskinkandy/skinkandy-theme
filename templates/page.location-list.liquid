@@ -141,7 +141,7 @@
         function getOpenStatus(place) {
             let request = {
               placeId: place.place_id,
-              fields: ['name', 'rating', 'formatted_phone_number', 'geometry']
+              fields: ['name', 'opening_hours']
             };
             service = new google.maps.places.PlacesService(map);
             service.getDetails(request, callback);
