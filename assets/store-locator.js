@@ -457,20 +457,12 @@ function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        let myLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        const request = {
-            location: myLocation,
-            radius: '50000',
-            name: 'SkinKandy',
-            bounds: map.getBounds()
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
         };
-      
-        service = new google.maps.places.PlacesService(map);
-        service.nearbySearch(request, handleSearchResults);
-      
-        map.setCenter(myLocation);
-        console.log(myLocation)
-        map.setZoom(8);
+        map.setCenter(pos);
+        
       },
       (error) => {
           console.error('Error occurred. Error code: ' + error.code);
