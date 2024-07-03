@@ -7,8 +7,6 @@ let autocomplete;
 function initMap() {
   const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
 
-  console.log(initialLocation);
-  
   const mapStyle = new google.maps.StyledMapType (
     [
       {
@@ -453,8 +451,10 @@ function useCurrentLocation() {
         console.log("Google Maps LatLng position:", pos);
 
         if (pos) {
+          map.setCenter(pos);
+
           const request = {
-            location: new google.maps.LatLng(37.09024, -95.712891),
+            location: pos,
             radius: '50000',
             name: 'SkinKandy'
           };
