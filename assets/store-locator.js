@@ -427,7 +427,7 @@ function addToList(place, index) {
     map.setZoom(15);
     infowindow.setContent(createMapContent(place));
     infowindow.open(map, markers[index]);
-    window.location.hash = 'map';
+    document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
   });
   storeList.appendChild(listItem);
 }
