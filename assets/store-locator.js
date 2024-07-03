@@ -460,7 +460,7 @@ function clearMarkers() {
 function useCurrentLocation() {
   if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-          const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
           map.setCenter(userLocation);
           searchNearby(userLocation);
       });
