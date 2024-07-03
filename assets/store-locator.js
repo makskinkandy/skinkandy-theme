@@ -420,9 +420,13 @@ function createMarker(place, index) {
   markers.push(marker);
 
   google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name + '<br>' + getOpenStatus(place));
+      infowindow.setContent(createMapContent(place));
       infowindow.open(map, marker);
   });
+}
+
+function createMapContent(place) {
+  return `<h6>${place.name}</h6> ${getOpenStatus(place)}`;
 }
 
 function addToList(place, index) {
@@ -430,7 +434,7 @@ function addToList(place, index) {
   const listItem = document.createElement('div');
   console.log(place)
   
-  listItem.innerHTML = `<h6>${place.name}</h6>${getOpenStatus(place)}`;
+  listItem.innerHTML = createMapContent(place);
   listItem.classList.add("list-item");
   listItem.addEventListener('click', () => {
       map.setCenter(place.geometry.location);
