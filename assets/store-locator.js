@@ -390,8 +390,9 @@ function searchNearby(location) {
 }
 
 function searchNearbyMyLocation(lat,lng) {
+  let myLocation = new google.maps.LatLng(lat, lng);
   const request = {
-      location: new google.maps.LatLng(lat, lng),
+      location: ,
       radius: '50000',
       name: 'SkinKandy',
       bounds: map.getBounds()
@@ -399,6 +400,8 @@ function searchNearbyMyLocation(lat,lng) {
 
   service = new google.maps.places.PlacesService(map);
   service.nearbySearch(request, handleSearchResults);
+
+  map.setCenter(myLocation);
 }
 
 function handleSearchResults(results, status) {
@@ -469,10 +472,7 @@ function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        let myLocation = new google.maps.LatLng(parseFloat(position.coords.latitude), parseFloat(position.coords.longitude));
-        map.setZoom(8);
-        map.setCenter(myLocation);
-        searchNearby(myLocation);
+        searchNearbyMyLocation(position.coords.latitude, position.coords.longitude);
       },
       (error) => {
           console.error('Error occurred. Error code: ' + error.code);
