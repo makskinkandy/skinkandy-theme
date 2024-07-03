@@ -67,8 +67,8 @@
       function searchAllStores(initialLocation) {
           const service = new google.maps.places.PlacesService(map);
           let getNextPage;
-          service.nearbySearch(
-          { location: initialLocation, radius: 50000, name: "SkinKandy" },
+          service.textSearch(
+          { location: initialLocation, query: "SkinKandy" },
           (results, status, pagination) => {
             if (status !== "OK" || !results) return;
       
