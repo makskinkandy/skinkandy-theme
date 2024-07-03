@@ -1,7 +1,7 @@
  #container {
   display: flex;
 }
-#store-list {
+#content {
   padding-left: 80px;
   width: 100%;
   overflow-y: auto;
