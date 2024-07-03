@@ -460,6 +460,7 @@ function useCurrentLocation() {
       const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       map.setCenter(userLocation);
       searchNearby(userLocation);
+      alert("TEST");
     });
   } else {
     alert('Geolocation is not supported by this browser.');
