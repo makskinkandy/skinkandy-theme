@@ -389,6 +389,18 @@ function searchNearby(location) {
   service.nearbySearch(request, handleSearchResults);
 }
 
+function searchNearbyMyLocation(lat,lng) {
+  const request = {
+      location: new google.maps.LatLng(lat, lng),
+      radius: '50000',
+      name: 'SkinKandy',
+      bounds: map.getBounds()
+  };
+
+  service = new google.maps.places.PlacesService(map);
+  service.nearbySearch(request, handleSearchResults);
+}
+
 function handleSearchResults(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
       const storeList = document.getElementById('store-list');
