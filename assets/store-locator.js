@@ -6,6 +6,9 @@ let autocomplete;
 
 function initMap() {
   const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
+
+  console.log(initialLocation);
+  
   const mapStyle = new google.maps.StyledMapType (
     [
       {
