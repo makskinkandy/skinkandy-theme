@@ -462,7 +462,6 @@ function useCurrentLocation() {
   }
 }
 
-window.onload = function name() {
-  alert("TEST")
-  useCurrentLocation();
-}
+document.addEventListener('DOMContentLoaded', () => {
+    useCurrentLocation();
+});
