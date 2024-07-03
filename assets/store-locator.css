@@ -112,7 +112,15 @@ h6 {
   #store-list {
     height: 508px;
   }
+}
+
+@media screen and (max-width:767px) {
   #container {
     display: block
+  }
+  .content {
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 100%;
   }
 }
