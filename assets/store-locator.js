@@ -465,3 +465,24 @@ function useCurrentLocation() {
       alert('Geolocation is not supported by this browser.');
   }
 }
+
+function getDirections(lat, lng) {
+  if (!userLocation) {
+    alert('Please use current location to get directions.');
+    return;
+  }
+  
+  const request = {
+    origin: userLocation,
+    destination: { lat: lat, lng: lng },
+    travelMode: 'DRIVING'
+  };
+  
+  directionsService.route(request, function(result, status) {
+    if (status == 'OK') {
+        directionsRenderer.setDirections(result);
+    } else {
+        alert('Directions request failed due to ' + status);
+    }
+  });
+}
