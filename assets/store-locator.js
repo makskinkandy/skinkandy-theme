@@ -453,8 +453,6 @@ function useCurrentLocation() {
         console.log("Google Maps LatLng position:", pos);
 
         if (pos) {
-          map.setCenter(pos);
-
           const request = {
             location: pos,
             radius: '50000',
