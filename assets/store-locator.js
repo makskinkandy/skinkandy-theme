@@ -362,17 +362,16 @@ function initMap() {
       searchNearby(place.geometry.location);
   });
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      },
-      (error) => {
-        console.error("Geolocation error:", error);
-        handleLocationError(true, infowindow, map.getCenter());
-      }
-    );
-  }
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    },
+    (error) => {
+      console.error("Geolocation error:", error);
+      handleLocationError(true, infowindow, map.getCenter());
+    }
+  );
+  
   searchNearby(initialLocation);
 
 }
