@@ -456,10 +456,7 @@ function useCurrentLocation() {
             radius: '50000',
             name: 'SkinKandy'
           };
-
-
           const service = new google.maps.places.PlacesService(map);
-          console.log(service)
           service.nearbySearch(request, handleSearchResults);
         } else {
           console.error("Position is null");
