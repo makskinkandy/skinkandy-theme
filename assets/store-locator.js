@@ -362,6 +362,12 @@ function initMap() {
       searchNearby(place.geometry.location);
   });
 
+  if (navigator.geolocation) {
+    useCurrentLocation();
+  } else {
+    alert('Geolocation is not supported by this browser.');
+  }
+  
   searchNearby(initialLocation);
 }
 
@@ -442,23 +448,19 @@ function clearMarkers() {
 }
 
 function useCurrentLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        let pos = new google.maps.LatLng(37.09024, -95.712891);
-      
-        if (pos) {
-          searchNearby(pos)
-        } else {
-          console.error("Position is null");
-        }
-      },
-      (error) => {
-        console.error("Geolocation error:", error);
-        handleLocationError(true, infowindow, map.getCenter());
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      let pos = new google.maps.LatLng(37.09024, -95.712891);
+    
+      if (pos) {
+        searchNearby(pos)
+      } else {
+        console.error("Position is null");
       }
-    );
-  } else {
-    alert('Geolocation is not supported by this browser.');
-  }
+    },
+    (error) => {
+      console.error("Geolocation error:", error);
+      handleLocationError(true, infowindow, map.getCenter());
+    }
+  );
 }
