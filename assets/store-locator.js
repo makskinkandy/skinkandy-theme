@@ -358,13 +358,10 @@ function initMap() {
       }
 
       map.setCenter(place.geometry.location);
-      searchNearby(place.geometry.location);
+      
   });
 
-
-
-
-  searchAllStores();
+  searchNearby(initialLocation);
 }
 
 
