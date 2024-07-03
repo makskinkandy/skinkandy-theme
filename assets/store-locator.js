@@ -364,19 +364,6 @@ function initMap() {
   searchNearby(initialLocation);
 }
 
-
-
-function searchAllStores() {
-  const request = {
-    query: 'SkinKandy'
-  };
-
-  service = new google.maps.places.PlacesService(map);
-  service.textSearch(request, handleSearchResults);
-}
-
-
-
 function searchNearby(location) {
   const request = {
       location: location,
