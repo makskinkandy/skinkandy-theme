@@ -341,8 +341,8 @@ function initMap() {
       mapId: "DEMO_MAP_ID"
   });
 
-map.mapTypes.set("styled_map", mapStyle);
-map.setMapTypeId("styled_map");
+  map.mapTypes.set("styled_map", mapStyle);
+  map.setMapTypeId("styled_map");
 
   infowindow = new google.maps.InfoWindow();
   autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
