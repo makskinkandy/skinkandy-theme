@@ -449,8 +449,8 @@ function useCurrentLocation() {
 
         const request = {
           location: pos,
-          radius: '500',
-          type: ['store'],
+          radius: '50000',
+          name: 'SkinKandy'
         };
 
         service = new google.maps.places.PlacesService(map);
