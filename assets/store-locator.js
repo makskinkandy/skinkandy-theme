@@ -459,13 +459,13 @@ function clearMarkers() {
 
 function useCurrentLocation() {
   if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-          userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          map.setCenter(userLocation);
-          searchNearby(userLocation);
-      });
+    navigator.geolocation.getCurrentPosition((position) => {
+      userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      map.setCenter(userLocation);
+      searchNearby(userLocation);
+    });
   } else {
-      alert('Geolocation is not supported by this browser.');
+    alert('Geolocation is not supported by this browser.');
   }
 }
 
