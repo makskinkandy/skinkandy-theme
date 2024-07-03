@@ -17,8 +17,8 @@
             overflow-y: auto;
         }
         #map {
-            width: 100%;
-            height: 110vh;
+            width: 70%;
+            height: 100vh;
         }
         .closed {
             color: red;
@@ -33,10 +33,11 @@
       let infowindow;
       let markers = [];
       let autocomplete;
-      
+
       function initMap() {
-        const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
-        const allStore = new google.maps.LatLng(0, 0);
+          const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
+          const allStore = new google.maps.LatLng(0, 0);
+        
           map = new google.maps.Map(document.getElementById('map'), {
               center: initialLocation,
               zoom: 10,
@@ -59,28 +60,21 @@
               searchNearby(place.geometry.location);
           });
 
-          searchAllStores(initialLocation);
+          searchAllStores();
       }
 
 
 
-      function searchAllStores(initialLocation) {
-          const service = new google.maps.places.PlacesService(map);
-          let getNextPage;
-          service.textSearch(
-          { location: initialLocation, query: "SkinKandy" },
-          (results, status, pagination) => {
-            if (status !== "OK" || !results) return;
-              addPlaces(results, map);
-              if (pagination && pagination.hasNextPage) {
-                getNextPage = () => {
-                  // Note: nextPage will call the same handler function as the initial call
-                  pagination.nextPage();
-                };
-              }
-          },
-        );
+      function searchAllStores() {
+          const request = {
+              query: 'SkinKandy'
+          };
+
+          service = new google.maps.places.PlacesService(map);
+          service.textSearch(request, handleSearchResults);
       }
+
+      
 
       function searchNearby(location) {
           const request = {
@@ -94,37 +88,22 @@
           service.nearbySearch(request, handleSearchResults);
       }
 
-      function addPlaces(places, map) {
-        const placesList = document.getElementById("store-list");
-      
-        for (const place of places) {
-          if (place.name.indexOf("SkinKandy") === -1) {
-            return;
+      function handleSearchResults(results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+              const storeList = document.getElementById('store-list');
+              storeList.innerHTML = '';
+
+              clearMarkers();
+
+              for (let i = 0; i < results.length; i++) {
+
+                  if (results[i].name.indexOf("SkinKandy") !== -1) {
+                    createMarker(results[i], i);
+                    addToList(results[i], i);
+                  }
+                  
+              }
           }
-          if (place.geometry && place.geometry.location) {
-            const image = {
-              url: place.icon
-            };
-      
-            new google.maps.Marker({
-              map,
-              title: place.name,
-              position: place.geometry.location,
-            });
-      
-          const listItem = document.createElement('div');
-          console.log(place)
-          listItem.innerHTML = `${place.name}<br>${getOpenStatus(place)}`;
-          listItem.style.cursor = 'pointer';
-          listItem.addEventListener('click', () => {
-              map.setCenter(place.geometry.location);
-              map.setZoom(10);
-              infowindow.setContent(place.name + '<br>' + getOpenStatus(place));
-              infowindow.open(map, markers[index]);
-          });
-          placesList.appendChild(listItem);
-          }
-        }
       }
 
       function createMarker(place, index) {
@@ -157,7 +136,7 @@
       }
 
       function getOpenStatus(place) {
-        return !place.openNow ? "<span class='close'>Close</span>" : "<span class='open'>Open</span>"
+        return !place.opening_hours ? "<span>Close</span>" : "Open"
       }
 
 
