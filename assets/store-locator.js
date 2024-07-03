@@ -457,7 +457,7 @@ function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        let myLocation = new google.maps.LatLng(lat, lng);
+        let myLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         const request = {
             location: myLocation,
             radius: '50000',
