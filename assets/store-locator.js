@@ -426,7 +426,7 @@ function createMarker(place, index) {
 }
 
 function createMapContent(place) {
-  return `<h6>${place.name}</h6> ${getOpenStatus(place)}`;
+  return `<h6>${place.name}</h6> <p>${place.formatted_address}</p> ${getOpenStatus(place)}`;
 }
 
 function addToList(place, index) {
