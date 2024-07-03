@@ -123,4 +123,7 @@ h6 {
     padding-right: 30px;
     width: 100%;
   }
+  #store-list {
+    margin-bottom: 15px;
+  }
 }
