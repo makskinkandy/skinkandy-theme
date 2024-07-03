@@ -428,6 +428,7 @@ function createMarker(place, index) {
 function addToList(place, index) {
   const storeList = document.getElementById('store-list');
   const listItem = document.createElement('div');
+  console.log(place)
   
   listItem.innerHTML = `<h6>${place.name}</h6>${getOpenStatus(place)}`;
   listItem.classList.add("list-item");
