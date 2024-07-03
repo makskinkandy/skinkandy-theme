@@ -368,7 +368,7 @@ function initMap() {
 function searchNearby(location) {
   const request = {
       location: location,
-      radius: '50000',
+      radius: '500',
       name: 'SkinKandy',
       bounds: map.getBounds()
   };
