@@ -363,6 +363,7 @@ function initMap() {
   });
 
   searchNearby(initialLocation);
+  useCurrentLocation();
 }
 
 function searchNearby(location) {
