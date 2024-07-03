@@ -423,6 +423,7 @@ function createMarker(place, index) {
 }
 
 function createMapContent(place) {
+  console.log(place)
   return `<h6>${place.name}</h6> <p>${place.formatted_address}</p> ${getOpenStatus(place)}`;
 }
 
