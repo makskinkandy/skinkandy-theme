@@ -5,8 +5,8 @@ let markers = [];
 let autocomplete;
 
 function initMap() {
-  let initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
-  
+  const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
+
   const mapStyle = new google.maps.StyledMapType (
     [
       {
@@ -361,25 +361,12 @@ function initMap() {
       map.setCenter(place.geometry.location);
       searchNearby(place.geometry.location);
   });
-
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    },
-    (error) => {
-      console.error("Geolocation error:", error);
-      handleLocationError(true, infowindow, map.getCenter());
-    }
-  );
-  
-  searchNearby(initialLocation);
-
 }
 
 function searchNearby(location) {
   const request = {
       location: location,
-      radius: '50000',
+      radius: '500',
       name: 'SkinKandy',
       bounds: map.getBounds()
   };
@@ -453,7 +440,8 @@ function clearMarkers() {
 }
 
 function useCurrentLocation() {
-  navigator.geolocation.getCurrentPosition(
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
       (position) => {
         let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       
@@ -469,4 +457,7 @@ function useCurrentLocation() {
         handleLocationError(true, infowindow, map.getCenter());
       }
     );
+  } else {
+    alert('Geolocation is not supported by this browser.');
+  }
 }
