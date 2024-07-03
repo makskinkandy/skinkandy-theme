@@ -459,8 +459,7 @@ function useCurrentLocation() {
     navigator.geolocation.getCurrentPosition((position) => {
       const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       console.log(userLocation)
-        map.setCenter(userLocation);
-        searchNearby(userLocation);
+      searchNearby(userLocation);
     });
   } else {
       alert('Geolocation is not supported by this browser.');
