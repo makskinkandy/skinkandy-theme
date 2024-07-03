@@ -5,8 +5,10 @@
   padding-left: 310px;
   padding-right: 30px;
   width: 80%;
+}
+#store-list {
   height: 800px;
-  overflow: hidden
+  overflow-y: auto;
 }
 #map {
   width: 100%;
@@ -26,6 +28,7 @@ h1 {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  margin-bottom: 35px;
 }
 
 .store-form input {
