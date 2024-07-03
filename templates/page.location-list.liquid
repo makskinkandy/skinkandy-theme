@@ -44,9 +44,6 @@
               mapId: "DEMO_MAP_ID"
           });
 
-        const service = new google.maps.places.PlacesService(map);
-        let getNextPage;
-
           infowindow = new google.maps.InfoWindow();
           autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
 
@@ -69,6 +66,8 @@
 
 
       function searchAllStores() {
+          const service = new google.maps.places.PlacesService(map);
+          let getNextPage;
           service.nearbySearch(
           { location: pyrmont, radius: 500, type: "store" },
           (results, status, pagination) => {
