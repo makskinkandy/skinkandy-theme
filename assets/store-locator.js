@@ -448,16 +448,7 @@ function useCurrentLocation() {
         let pos = new google.maps.LatLng(37.09024, -95.712891);
       
         if (pos) {
-
-          map.setCenter(pos);
-
-          const request = {
-            location: pos,
-            radius: '50000',
-            name: 'SkinKandy'
-          };
-          const service = new google.maps.places.PlacesService(map);
-          service.nearbySearch(request, handleSearchResults);
+          searchNearby(pos)
         } else {
           console.error("Position is null");
         }
