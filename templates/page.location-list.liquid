@@ -53,6 +53,7 @@
           autocomplete.bindTo('bounds', map);
 
           autocomplete.addListener('place_changed', function() {
+            alert("moved")
               const place = autocomplete.getPlace();
               if (!place.geometry) {
                   window.alert("No details available for input: '" + place.name + "'");
