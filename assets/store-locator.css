@@ -52,6 +52,7 @@ button {
   padding: 15px 0;
   margin-bottom: 15px;
   border-bottom: solid 1px #e1e1e1;
+  cursor: pointer;
 }
 h6 {
   margin-bottom: 5px;
