@@ -64,7 +64,7 @@
 
 
 
-      function searchAllStores() {
+      function searchAllStores(initialLocation) {
           const service = new google.maps.places.PlacesService(map);
           let getNextPage;
           service.nearbySearch(
