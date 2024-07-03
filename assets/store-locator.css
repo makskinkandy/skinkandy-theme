@@ -105,8 +105,8 @@ h6 {
 
 @media screen and (max-width: 1200px) {
   .content {
-    padding-left: 80px;
-    padding-right: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
     width: 50%;
   }
 }
