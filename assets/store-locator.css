@@ -64,11 +64,15 @@ h6 {
   margin-bottom: 5px;
   font-family: "Futura Medium 01", sans-serif;
 }
-.direction {
+.direction,
+.status {
   margin-top: 15px;
   display: block;
   text-decoration: underline;
   max-width: fit-content;
+}
+.status {
+  font-weight: 600;
 }
 
 #store-list {
