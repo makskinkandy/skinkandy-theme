@@ -358,7 +358,7 @@ function initMap() {
       }
 
       map.setCenter(place.geometry.location);
-      
+      searchNearby(place.geometry.location);
   });
 
   searchNearby(initialLocation);
