@@ -389,23 +389,6 @@ function searchNearby(location) {
   service.nearbySearch(request, handleSearchResults);
 }
 
-function searchNearbyMyLocation(lat,lng) {
-  let myLocation = new google.maps.LatLng(lat, lng);
-  const request = {
-      location: myLocation,
-      radius: '50000',
-      name: 'SkinKandy',
-      bounds: map.getBounds()
-  };
-
-  service = new google.maps.places.PlacesService(map);
-  service.nearbySearch(request, handleSearchResults);
-
-  map.setCenter(myLocation);
-  console.log(myLocation)
-  map.setZoom(8);
-}
-
 function handleSearchResults(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
       const storeList = document.getElementById('store-list');
@@ -474,7 +457,20 @@ function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        searchNearbyMyLocation(position.coords.latitude, position.coords.longitude);
+        let myLocation = new google.maps.LatLng(lat, lng);
+        const request = {
+            location: myLocation,
+            radius: '50000',
+            name: 'SkinKandy',
+            bounds: map.getBounds()
+        };
+      
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, handleSearchResults);
+      
+        map.setCenter(myLocation);
+        console.log(myLocation)
+        map.setZoom(8);
       },
       (error) => {
           console.error('Error occurred. Error code: ' + error.code);
