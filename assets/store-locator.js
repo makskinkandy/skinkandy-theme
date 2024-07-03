@@ -455,24 +455,24 @@ function clearMarkers() {
 }
 
 function useCurrentLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const userLocation = new google.maps.LatLng(parseFloat(position.coords.latitude), parseFloat(position.coords.longitude));
-                        console.log('User Location:', initialLocation);
-                        map.setCenter(userLocation);
-                        searchNearby(userLocation);
-                    },
-                    (error) => {
-                        console.error('Error occurred. Error code: ' + error.code);
-                        // error.code can be:
-                        //   0: unknown error
-                        //   1: permission denied
-                        //   2: position unavailable (error response from locaton provider)
-                        //   3: timed out
-                    }
-                );
-            } else {
-                alert('Geolocation is not supported by this browser.');
-            }
-        }
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+          (position) => {
+              const userLocation = new google.maps.LatLng(parseFloat(position.coords.latitude), parseFloat(position.coords.longitude));
+              console.log('User Location:', initialLocation);
+              map.setCenter(userLocation);
+              searchNearby(userLocation);
+          },
+          (error) => {
+              console.error('Error occurred. Error code: ' + error.code);
+              // error.code can be:
+              //   0: unknown error
+              //   1: permission denied
+              //   2: position unavailable (error response from locaton provider)
+              //   3: timed out
+          }
+      );
+  } else {
+      alert('Geolocation is not supported by this browser.');
+  }
+}
