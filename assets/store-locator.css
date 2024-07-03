@@ -109,4 +109,7 @@ h6 {
     padding-right: 40px;
     width: 50%;
   }
+  #store-list {
+    height: 508px;
+  }
 }
