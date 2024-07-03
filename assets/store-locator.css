@@ -24,3 +24,11 @@ h1 {
   width: 100%;
   margin: 0 auto;
 }
+
+.store-form input {
+  width: 100%;
+  padding: 11px 5px;
+  height: auto;
+  border: solid 1px #b3b0b7;
+  border-radius: 5px;
+}
