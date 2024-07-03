@@ -315,29 +315,29 @@ function initMap() {
         ]
       },
       {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "hue": "#007fff"
-            },
-            {
-                "saturation": "-100"
-            },
-            {
-                "lightness": "100"
-            },
-            {
-                "visibility": "simplified"
-            }
-        ]
+          "featureType": "water",
+          "elementType": "all",
+          "stylers": [
+              {
+                  "hue": "#007fff"
+              },
+              {
+                  "saturation": "-100"
+              },
+              {
+                  "lightness": "100"
+              },
+              {
+                  "visibility": "simplified"
+              }
+          ]
       }
   ]
   )
 
   map = new google.maps.Map(document.getElementById('map'), {
       center: initialLocation,
-      zoom: 10,
+      zoom: 8,
       mapId: "DEMO_MAP_ID"
   });
 
