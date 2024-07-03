@@ -446,7 +446,7 @@ function useCurrentLocation() {
       (position) => {
         console.log("Geolocation position:", position);
 
-        const pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        const pos = new google.maps.LatLng(37.09024, -95.712891);
         console.log("Google Maps LatLng position:", pos);
 
         if (pos) {
