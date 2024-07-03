@@ -36,3 +36,8 @@ h1 {
 .store-form input:focus {
   border: solid 1px #eb008c;
 }
+
+button {
+  display:block;
+  margin-left: auto;
+}
