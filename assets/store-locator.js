@@ -3,9 +3,10 @@ let service;
 let infowindow;
 let markers = [];
 let autocomplete;
-let initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
-function initMap() {
 
+function initMap() {
+  let initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
+  
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
