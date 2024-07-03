@@ -454,7 +454,7 @@ function useCurrentLocation() {
 
         if (pos) {
           const request = {
-            location: pos,
+            location: new google.maps.LatLng(37.09024, -95.712891),
             radius: '50000',
             name: 'SkinKandy'
           };
