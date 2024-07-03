@@ -371,7 +371,8 @@ map.setMapTypeId("styled_map");
 
 function searchAllStores() {
   const request = {
-      query: 'SkinKandy'
+    query: 'SkinKandy',
+    radius: '5000'
   };
 
   service = new google.maps.places.PlacesService(map);
@@ -383,7 +384,7 @@ function searchAllStores() {
 function searchNearby(location) {
   const request = {
       location: location,
-      radius: '50000',
+      radius: '5000',
       name: 'SkinKandy',
       bounds: map.getBounds()
   };
