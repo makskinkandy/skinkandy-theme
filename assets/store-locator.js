@@ -447,13 +447,10 @@ function useCurrentLocation() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      
-        if (pos) {
-          searchNearby(pos);
-          map.setCenter(pos);
-        } else {
-          console.error("Position is null");
-        }
+        
+        searchNearby(pos);
+        map.setCenter(pos);
+        
       },
       (error) => {
         console.error("Geolocation error:", error);
