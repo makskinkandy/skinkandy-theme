@@ -457,12 +457,11 @@ function clearMarkers() {
 function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
-      const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      map.setCenter(userLocation);
-      searchNearby(userLocation);
-      alert("TEST");
+        const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        map.setCenter(userLocation);
+        searchNearby(userLocation);
     });
   } else {
-    alert('Geolocation is not supported by this browser.');
+      alert('Geolocation is not supported by this browser.');
   }
 }
