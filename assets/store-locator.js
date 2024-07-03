@@ -429,7 +429,7 @@ function addToList(place, index) {
   const storeList = document.getElementById('store-list');
   const listItem = document.createElement('div');
   
-  listItem.innerHTML = `<h6>${place.name}</h6><br>${getOpenStatus(place)}`;
+  listItem.innerHTML = `<h6>${place.name}</h6>${getOpenStatus(place)}`;
   listItem.classList.add("list-item");
   listItem.addEventListener('click', () => {
       map.setCenter(place.geometry.location);
