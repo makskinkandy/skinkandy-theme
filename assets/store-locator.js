@@ -454,24 +454,33 @@ function clearMarkers() {
 }
 
 function useCurrentLocation() {
-  if (navigator.geolocation) {
+if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        console.log(pos)
+
         map.setCenter(pos);
-        
+
+        const request = {
+          location: pos,
+          radius: '500',
+          type: ['store'],
+        };
+
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, (results, status) => {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (let i = 0; i < results.length; i++) {
+              createMarker(results[i]);
+            }
+          }
+        });
       },
-      (error) => {
-          console.error('Error occurred. Error code: ' + error.code);
-          // error.code can be:
-          //   0: unknown error
-          //   1: permission denied
-          //   2: position unavailable (error response from locaton provider)
-          //   3: timed out
+      () => {
+        handleLocationError(true, infowindow, map.getCenter());
       }
     );
   } else {
