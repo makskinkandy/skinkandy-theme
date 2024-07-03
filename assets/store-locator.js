@@ -445,7 +445,7 @@ function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        let pos = new google.maps.LatLng(37.09024, -95.712891);
+        let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       
         if (pos) {
           searchNearby(pos)
