@@ -423,7 +423,7 @@ function createMarker(place, index) {
 }
 
 function createMapContent(place) {
-  return `<h6>${place.name}</h6> <p>${place.vicinity}</p> ${getOpenStatus(place)} <a href="#" onclick="getDirections(${place.geometry.location.lat()}, ${place.geometry.location.lng()})">Get Directions</a>`;
+  return `<h6>${place.name}</h6> <p>${place.vicinity}</p> ${getOpenStatus(place)} <a href="#" class="direction" onclick="getDirections(${place.geometry.location.lat()}, ${place.geometry.location.lng()})">Get Directions</a>`;
 }
 
 function addToList(place, index) {
