@@ -459,7 +459,7 @@ function useCurrentLocation() {
                 navigator.geolocation.getCurrentPosition(
                     (position) => {
                         const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                        console.log('User Location:', userLocation);
+                        console.log('User Location:', position.coords.latitude);
                         map.setCenter(userLocation);
                         searchNearby(userLocation);
                     },
