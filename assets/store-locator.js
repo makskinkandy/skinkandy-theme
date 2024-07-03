@@ -360,9 +360,11 @@ function initMap() {
       searchNearby(place.geometry.location);
   });
 
+  useCurrentLocation();
 }
 
 function searchNearby(location) {
+  alert("TEST")
   const request = {
       location: location,
       radius: '500',
