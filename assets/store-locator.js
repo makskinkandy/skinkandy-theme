@@ -368,7 +368,6 @@ function initMap() {
     alert('Geolocation is not supported by this browser.');
   }
   
-  searchNearby(initialLocation);
 }
 
 function searchNearby(location) {
