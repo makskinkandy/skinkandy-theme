@@ -361,9 +361,13 @@ function initMap() {
       map.setCenter(place.geometry.location);
       searchNearby(place.geometry.location);
   });
+
+  searchNearby(initialLocation)
 }
 
-function searchNearby(location) {
+functi
+  
+searchNearby(location){
   const request = {
       location: location,
       radius: '500',
