@@ -428,7 +428,7 @@ function createMarker(place, index) {
 function addToList(place, index) {
     const storeList = document.getElementById('store-list');
     const listItem = document.createElement('div');
-    listItem.innerHTML = `${index + 1}. ${place.name}<br>${getOpenStatus(place)}`;
+    listItem.innerHTML = `${place.name}<br>${getOpenStatus(place)}`;
     listItem.style.cursor = 'pointer';
     listItem.addEventListener('click', () => {
         map.setCenter(place.geometry.location);
