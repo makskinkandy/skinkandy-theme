@@ -457,9 +457,9 @@ function useCurrentLocation() {
             name: 'SkinKandy'
           };
 
-          console.log(request)
 
           const service = new google.maps.places.PlacesService(map);
+          console.log(service)
           service.nearbySearch(request, handleSearchResults);
         } else {
           console.error("Position is null");
