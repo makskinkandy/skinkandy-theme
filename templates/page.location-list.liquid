@@ -71,14 +71,13 @@
           { location: initialLocation, radius: 50000, query: "SkinKandy" },
           (results, status, pagination) => {
             if (status !== "OK" || !results) return;
-      
-            addPlaces(results, map);
-            if (pagination && pagination.hasNextPage) {
-              getNextPage = () => {
-                // Note: nextPage will call the same handler function as the initial call
-                pagination.nextPage();
-              };
-            }
+              addPlaces(results, map);
+              if (pagination && pagination.hasNextPage) {
+                getNextPage = () => {
+                  // Note: nextPage will call the same handler function as the initial call
+                  pagination.nextPage();
+                };
+              }
           },
         );
       }
