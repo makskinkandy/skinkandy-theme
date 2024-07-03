@@ -445,12 +445,10 @@ function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        console.log("Geolocation position:", position);
-
         let pos = new google.maps.LatLng(37.09024, -95.712891);
-        console.log("Google Maps LatLng position:", pos);
-
+      
         if (pos) {
+          console.log("Google Maps LatLng position:", pos);
           map.setCenter(pos);
 
           const request = {
