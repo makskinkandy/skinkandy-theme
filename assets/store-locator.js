@@ -439,7 +439,7 @@ function addToList(place, index) {
   listItem.addEventListener('click', () => {
       map.setCenter(place.geometry.location);
       map.setZoom(15);
-      infowindow.setContent(place.name + '<br>' + getOpenStatus(place));
+      infowindow.setContent(createMapContent(place));
       infowindow.open(map, markers[index]);
   });
   storeList.appendChild(listItem);
