@@ -100,22 +100,35 @@
           service.nearbySearch(request, handleSearchResults);
       }
 
-      function handleSearchResults(results, status) {
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-              const storeList = document.getElementById('store-list');
-              storeList.innerHTML = '';
-
-              clearMarkers();
-
-              for (let i = 0; i < results.length; i++) {
-
-                  if (results[i].name.indexOf("SkinKandy") !== -1) {
-                    createMarker(results[i], i);
-                    addToList(results[i], i);
-                  }
-                  
-              }
+      function addPlaces(places, map) {
+        const placesList = document.getElementById("places");
+      
+        for (const place of places) {
+          if (place.geometry && place.geometry.location) {
+            const image = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25),
+            };
+      
+            new google.maps.Marker({
+              map,
+              icon: image,
+              title: place.name,
+              position: place.geometry.location,
+            });
+      
+            const li = document.createElement("li");
+      
+            li.textContent = place.name;
+            placesList.appendChild(li);
+            li.addEventListener("click", () => {
+              map.setCenter(place.geometry.location);
+            });
           }
+        }
       }
 
       function createMarker(place, index) {
