@@ -44,6 +44,9 @@
               mapId: "DEMO_MAP_ID"
           });
 
+        const service = new google.maps.places.PlacesService(map);
+        let getNextPage;
+
           infowindow = new google.maps.InfoWindow();
           autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
 
@@ -66,12 +69,21 @@
 
 
       function searchAllStores() {
-          const request = {
-              query: 'SkinKandy'
-          };
-
-          service = new google.maps.places.PlacesService(map);
-          service.textSearch(request, handleSearchResults);
+          service.nearbySearch(
+          { location: pyrmont, radius: 500, type: "store" },
+          (results, status, pagination) => {
+            if (status !== "OK" || !results) return;
+      
+            addPlaces(results, map);
+            moreButton.disabled = !pagination || !pagination.hasNextPage;
+            if (pagination && pagination.hasNextPage) {
+              getNextPage = () => {
+                // Note: nextPage will call the same handler function as the initial call
+                pagination.nextPage();
+              };
+            }
+          },
+        );
       }
 
       
