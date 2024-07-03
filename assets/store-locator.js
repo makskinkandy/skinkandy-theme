@@ -461,6 +461,7 @@ function useCurrentLocation() {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
+        console.log(pos)
         map.setCenter(pos);
         
       },
