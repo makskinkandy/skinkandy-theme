@@ -5,8 +5,6 @@ let markers = [];
 let autocomplete;
 
 function initMap() {
-  const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
-
   const mapStyle = new google.maps.StyledMapType (
     [
       {
@@ -366,6 +364,7 @@ function initMap() {
 }
 
 function searchNearby(location) {
+  alert("TEST")
   const request = {
       location: location,
       radius: '500',
@@ -442,6 +441,7 @@ function clearMarkers() {
 }
 
 function useCurrentLocation() {
+  
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
