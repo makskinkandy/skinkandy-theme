@@ -68,7 +68,7 @@
           const service = new google.maps.places.PlacesService(map);
           let getNextPage;
           service.textSearch(
-          { location: initialLocation, radius: 50000, query: "SkinKandy" },
+          { location: initialLocation, query: "SkinKandy" },
           (results, status, pagination) => {
             if (status !== "OK" || !results) return;
               addPlaces(results, map);
@@ -81,8 +81,6 @@
           },
         );
       }
-
-      
 
       function searchNearby(location) {
           const request = {
@@ -105,11 +103,7 @@
           }
           if (place.geometry && place.geometry.location) {
             const image = {
-              url: place.icon,
-              size: new google.maps.Size(71, 71),
-              origin: new google.maps.Point(0, 0),
-              anchor: new google.maps.Point(17, 34),
-              scaledSize: new google.maps.Size(25, 25),
+              url: place.icon
             };
       
             new google.maps.Marker({
