@@ -451,12 +451,7 @@ function useCurrentLocation() {
         searchNearby(pos);
         map.setCenter(pos);
         
-      },
-      (error) => {
-        console.error("Geolocation error:", error);
-        handleLocationError(true, infowindow, map.getCenter());
-      }
-    );
+      });
   } else {
     alert('Geolocation is not supported by this browser.');
   }
