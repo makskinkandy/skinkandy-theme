@@ -68,7 +68,7 @@
           const service = new google.maps.places.PlacesService(map);
           let getNextPage;
           service.nearbySearch(
-          { location: initialLocation, radius: 500, type: "store" },
+          { location: initialLocation, radius: 500, query: "SkinKandy" },
           (results, status, pagination) => {
             if (status !== "OK" || !results) return;
       
