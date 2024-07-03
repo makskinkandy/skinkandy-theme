@@ -441,6 +441,7 @@ function clearMarkers() {
 }
 
 function useCurrentLocation() {
+  alert("TEST")
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
