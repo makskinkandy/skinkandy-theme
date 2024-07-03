@@ -70,28 +70,28 @@ h6 {
   text-decoration: underline;
 }
 
-store-list {
+#store-list {
   --sb-track-color: #757575;
   --sb-thumb-color: #eb008c;
   --sb-size: 5px;
 }
 
-store-list::-webkit-scrollbar {
+#store-list::-webkit-scrollbar {
   width: var(--sb-size);
 }
 
-store-list::-webkit-scrollbar-track {
+#store-list::-webkit-scrollbar-track {
   background: var(--sb-track-color);
   border-radius: 8px;
 }
 
-store-list::-webkit-scrollbar-thumb {
+#store-list::-webkit-scrollbar-thumb {
   background: var(--sb-thumb-color);
   border-radius: 8px;
 }
 
 @supports not selector(::-webkit-scrollbar) {
-  store-list {
+  #store-list {
       scrollbar-color: var(--sb-thumb-color)
                      var(--sb-track-color);
   }
