@@ -453,9 +453,7 @@ function clearMarkers() {
 }
 
 function useCurrentLocation() {
-  
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
+  navigator.geolocation.getCurrentPosition(
       (position) => {
         let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       
@@ -471,7 +469,4 @@ function useCurrentLocation() {
         handleLocationError(true, infowindow, map.getCenter());
       }
     );
-  } else {
-    alert('Geolocation is not supported by this browser.');
-  }
 }
