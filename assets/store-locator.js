@@ -457,9 +457,10 @@ function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-          const myLocation = new google.maps.LatLng(parseFloat(position.coords.latitude), parseFloat(position.coords.longitude));
-          map.setCenter(myLocation);
-          searchNearby(myLocation);
+        const myLocation = new google.maps.LatLng(parseFloat(position.coords.latitude), parseFloat(position.coords.longitude));
+        map.setZoom(8);
+        map.setCenter(myLocation);
+        searchNearby(myLocation);
       },
       (error) => {
           console.error('Error occurred. Error code: ' + error.code);
