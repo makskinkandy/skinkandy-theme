@@ -448,7 +448,8 @@ function useCurrentLocation() {
         let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       
         if (pos) {
-          searchNearby(pos)
+          searchNearby(pos);
+          map.setCenter(pos);
         } else {
           console.error("Position is null");
         }
