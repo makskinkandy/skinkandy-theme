@@ -337,7 +337,7 @@ function initMap() {
 
   map = new google.maps.Map(document.getElementById('map'), {
       center: initialLocation,
-      zoom: 9,
+      zoom: 8,
       mapId: "DEMO_MAP_ID"
   });
 
