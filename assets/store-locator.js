@@ -361,8 +361,6 @@ function initMap() {
       map.setCenter(place.geometry.location);
       searchNearby(place.geometry.location);
   });
-
-  useCurrentLocation();
 }
 
 function searchNearby(location) {
