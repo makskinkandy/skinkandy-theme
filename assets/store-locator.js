@@ -430,7 +430,7 @@ function addToList(place, index) {
   const listItem = document.createElement('div');
   
   listItem.innerHTML = `${place.name}<br>${getOpenStatus(place)}`;
-  listItem.classlist.add("list-item");
+  listItem.classList.add("list-item");
   listItem.addEventListener('click', () => {
       map.setCenter(place.geometry.location);
       map.setZoom(15);
