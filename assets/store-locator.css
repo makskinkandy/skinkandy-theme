@@ -66,8 +66,9 @@ h6 {
 }
 .direction {
   margin-top: 15px;
-  display: inline-block;
+  display: block;
   text-decoration: underline;
+  max-width: fit-content;
 }
 
 #store-list {
