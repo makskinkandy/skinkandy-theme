@@ -112,4 +112,7 @@ h6 {
   #store-list {
     height: 508px;
   }
+  #container {
+    display: block
+  }
 }
