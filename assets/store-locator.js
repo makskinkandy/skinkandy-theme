@@ -471,13 +471,7 @@ if (navigator.geolocation) {
         };
 
         service = new google.maps.places.PlacesService(map);
-        service.nearbySearch(request, (results, status) => {
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-            for (let i = 0; i < results.length; i++) {
-              createMarker(results[i]);
-            }
-          }
-        });
+        service.nearbySearch(request, handleSearchResults);
       },
       () => {
         handleLocationError(true, infowindow, map.getCenter());
