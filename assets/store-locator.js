@@ -402,6 +402,7 @@ function searchNearbyMyLocation(lat,lng) {
   service.nearbySearch(request, handleSearchResults);
 
   map.setCenter(myLocation);
+  console.log(myLocation)
   map.setZoom(8);
 }
 
