@@ -463,5 +463,6 @@ function useCurrentLocation() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    useCurrentLocation();
+  alert("TEST")
+  useCurrentLocation();
 });
