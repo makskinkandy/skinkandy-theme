@@ -380,7 +380,7 @@ function searchAllStores() {
 function searchNearby(location) {
   const request = {
       location: location,
-      radius: '500',
+      radius: '50000',
       name: 'SkinKandy',
       bounds: map.getBounds()
   };
