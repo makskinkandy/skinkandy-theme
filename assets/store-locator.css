@@ -65,6 +65,7 @@ h6 {
   font-family: "Futura Medium 01", sans-serif;
 }
 .direction {
+  margin-top: 15px;
   display: block;
   text-decoration: underline;
 }
