@@ -433,7 +433,7 @@ function addToList(place, index) {
   listItem.style.cursor = 'pointer';
   listItem.addEventListener('click', () => {
       map.setCenter(place.geometry.location);
-      map.setZoom(10);
+      map.setZoom(15);
       infowindow.setContent(place.name + '<br>' + getOpenStatus(place));
       infowindow.open(map, markers[index]);
   });
