@@ -444,21 +444,28 @@ function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
+        console.log("Geolocation position:", position);
+
         const pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        map.setCenter(pos);
+        console.log("Google Maps LatLng position:", pos);
 
-        console.log(pos);
+        if (pos) {
+          map.setCenter(pos);
 
-        const request = {
-          location: pos,
-          radius: '5000',
-          name: 'SkinKandy'
-        };
+          const request = {
+            location: pos,
+            radius: '5000',
+            name: 'SkinKandy'
+          };
 
-        service = new google.maps.places.PlacesService(map);
-        service.nearbySearch(request, handleSearchResults);
+          const service = new google.maps.places.PlacesService(map);
+          service.nearbySearch(request, handleSearchResults);
+        } else {
+          console.error("Position is null");
+        }
       },
-      () => {
+      (error) => {
+        console.error("Geolocation error:", error);
         handleLocationError(true, infowindow, map.getCenter());
       }
     );
