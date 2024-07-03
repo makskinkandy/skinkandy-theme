@@ -102,6 +102,9 @@
         const placesList = document.getElementById("store-list");
       
         for (const place of places) {
+          if (place.name.indexOf("SkinKandy") === -1) {
+            return;
+          }
           if (place.geometry && place.geometry.location) {
             const image = {
               url: place.icon,
@@ -118,7 +121,7 @@
             });
       
           const listItem = document.createElement('div');
-            console.log(place)
+          console.log(place)
           listItem.innerHTML = `${place.name}<br>${getOpenStatus(place)}`;
           listItem.style.cursor = 'pointer';
           listItem.addEventListener('click', () => {
