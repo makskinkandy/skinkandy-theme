@@ -3,6 +3,9 @@ let service;
 let infowindow;
 let markers = [];
 let autocomplete;
+let directionsService;
+let directionsRenderer;
+let userLocation;
 
 function initMap() {
   const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
