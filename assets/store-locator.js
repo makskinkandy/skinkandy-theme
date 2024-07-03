@@ -423,10 +423,11 @@ function addToList(place, index) {
   listItem.innerHTML = createMapContent(place);
   listItem.classList.add("list-item");
   listItem.addEventListener('click', () => {
-      map.setCenter(place.geometry.location);
-      map.setZoom(15);
-      infowindow.setContent(createMapContent(place));
-      infowindow.open(map, markers[index]);
+    map.setCenter(place.geometry.location);
+    map.setZoom(15);
+    infowindow.setContent(createMapContent(place));
+    infowindow.open(map, markers[index]);
+    window.location.hash = 'map';
   });
   storeList.appendChild(listItem);
 }
