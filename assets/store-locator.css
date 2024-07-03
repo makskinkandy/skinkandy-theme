@@ -102,3 +102,11 @@ h6 {
                      var(--sb-track-color);
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .content {
+    padding-left: 80px;
+    padding-right: 30px;
+    width: 50%;
+  }
+}
