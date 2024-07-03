@@ -439,7 +439,7 @@ function createMarker(place, index) {
 }
 
 function createMapContent(place) {
-  return `<h6>${place.name}</h6> <p>${place.vicinity}</p> ${getOpenStatus(place)} <a href="https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}" class="direction" target="_blank">Get Directions</a>`;
+  return `<h6>${place.name}</h6> <p>${place.vicinity}</p> <span class="status">${getOpenStatus(place)}</span> <a href="https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}" class="direction" target="_blank">Get Directions</a>`;
 }
 
 function addToList(place, index) {
