@@ -2,12 +2,12 @@
     display: flex;
 }
 #store-list {
-    width: 100%;
+    width: 30%;
     height: 100vh;
     overflow-y: auto;
 }
 #map {
-    width: 100%;
+    width: 70%;
     height: 100vh;
 }
 .closed {
