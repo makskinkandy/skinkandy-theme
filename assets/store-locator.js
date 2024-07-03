@@ -448,7 +448,7 @@ function useCurrentLocation() {
         let pos = new google.maps.LatLng(37.09024, -95.712891);
       
         if (pos) {
-          console.log("Google Maps LatLng position:", pos);
+
           map.setCenter(pos);
 
           const request = {
@@ -456,6 +456,8 @@ function useCurrentLocation() {
             radius: '50000',
             name: 'SkinKandy'
           };
+
+          console.log(request)
 
           const service = new google.maps.places.PlacesService(map);
           service.nearbySearch(request, handleSearchResults);
