@@ -3,9 +3,6 @@ let service;
 let infowindow;
 let markers = [];
 let autocomplete;
-let directionsService;
-let directionsRenderer;
-let userLocation;
 
 function initMap() {
   const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
@@ -460,32 +457,11 @@ function clearMarkers() {
 function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
-      userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      const userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       map.setCenter(userLocation);
       searchNearby(userLocation);
     });
   } else {
     alert('Geolocation is not supported by this browser.');
   }
-}
-
-function getDirections(lat, lng) {
-  if (!userLocation) {
-    alert('Please use current location to get directions.');
-    return;
-  }
-  
-  const request = {
-    origin: userLocation,
-    destination: { lat: lat, lng: lng },
-    travelMode: 'DRIVING'
-  };
-  
-  directionsService.route(request, function(result, status) {
-    if (status == 'OK') {
-        directionsRenderer.setDirections(result);
-    } else {
-        alert('Directions request failed due to ' + status);
-    }
-  });
 }
