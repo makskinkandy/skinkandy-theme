@@ -57,7 +57,7 @@ button {
 
 .list-item:hover {
   transition: 0.5s all ease;
-  background-color: #1e1e1e;
+  background-color: #f1f1f1;
 }
 
 h6 {
