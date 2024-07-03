@@ -2,9 +2,9 @@
   display: flex;
 }
 .content {
-  padding-left: 17%;
+  padding-left: 80px;
   padding-right: 30px;
-  width: 80%;
+  width: 60%;
 }
 #store-list {
   height: 584px;
