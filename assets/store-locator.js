@@ -441,13 +441,12 @@ function clearMarkers() {
 }
 
 function useCurrentLocation() {
-  alert("TEST")
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         console.log("Geolocation position:", position);
 
-        const pos = new google.maps.LatLng(37.09024, -95.712891);
+        let pos = new google.maps.LatLng(37.09024, -95.712891);
         console.log("Google Maps LatLng position:", pos);
 
         if (pos) {
