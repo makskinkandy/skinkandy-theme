@@ -3,6 +3,7 @@
 }
 .content {
   padding-left: 310px;
+  padding-right: 30px;
   width: 80%;
   height: 800px;
   overflow: hidden
