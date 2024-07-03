@@ -362,12 +362,10 @@ function initMap() {
       searchNearby(place.geometry.location);
   });
 
-  searchNearby(initialLocation)
+  searchNearby(initialLocation);
 }
 
-functi
-  
-searchNearby(location){
+function searchNearby(location) {
   const request = {
       location: location,
       radius: '500',
