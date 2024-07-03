@@ -7,18 +7,6 @@ let autocomplete;
 function initMap() {
   let initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
   
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      },
-      (error) => {
-        console.error("Geolocation error:", error);
-        handleLocationError(true, infowindow, map.getCenter());
-      }
-    );
-  }
-  
   const mapStyle = new google.maps.StyledMapType (
     [
       {
@@ -374,7 +362,19 @@ function initMap() {
       searchNearby(place.geometry.location);
   });
 
-  useCurrentLocation();
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      },
+      (error) => {
+        console.error("Geolocation error:", error);
+        handleLocationError(true, infowindow, map.getCenter());
+      }
+    );
+  }
+  searchNearby(initialLocation);
+
 }
 
 function searchNearby(location) {
