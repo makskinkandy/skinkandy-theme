@@ -1,10 +1,11 @@
  #container {
   display: flex;
 }
-#content {
+.content {
   padding-left: 80px;
   width: 100%;
   overflow-y: auto;
+  height: 700px;
 }
 #map {
   width: 100%;
