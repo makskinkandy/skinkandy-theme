@@ -361,9 +361,7 @@ function initMap() {
         searchNearby(place.geometry.location);
     });
 
-    map.addListener('bounds_changed', function() {
-      searchNearby(map.getBounds().getCenter());
-    });
+
 
 
     searchAllStores();
