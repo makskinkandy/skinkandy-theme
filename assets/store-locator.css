@@ -32,3 +32,7 @@ h1 {
   border: solid 1px #b3b0b7;
   border-radius: 5px;
 }
+
+.store-form input:focus {
+  border: solid 1px #eb008c;
+}
