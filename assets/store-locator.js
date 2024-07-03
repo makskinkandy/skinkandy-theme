@@ -392,7 +392,7 @@ function searchNearby(location) {
 function searchNearbyMyLocation(lat,lng) {
   let myLocation = new google.maps.LatLng(lat, lng);
   const request = {
-      location: ,
+      location: myLocation,
       radius: '50000',
       name: 'SkinKandy',
       bounds: map.getBounds()
@@ -402,6 +402,7 @@ function searchNearbyMyLocation(lat,lng) {
   service.nearbySearch(request, handleSearchResults);
 
   map.setCenter(myLocation);
+  map.setZoom(8);
 }
 
 function handleSearchResults(results, status) {
