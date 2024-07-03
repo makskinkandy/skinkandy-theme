@@ -4,12 +4,11 @@
 #store-list {
   padding-left: 80px;
   width: 100%;
-  height: 100vh;
   overflow-y: auto;
 }
 #map {
   width: 100%;
-  height: 600px;
+  height: 700px;
 }
 .closed {
   color: red;
