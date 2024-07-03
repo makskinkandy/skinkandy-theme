@@ -451,7 +451,7 @@ function useCurrentLocation() {
 
         const request = {
           location: pos,
-          radius: '50000',
+          radius: '5000',
           name: 'SkinKandy'
         };
 
