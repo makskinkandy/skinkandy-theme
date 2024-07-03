@@ -68,7 +68,7 @@
           const service = new google.maps.places.PlacesService(map);
           let getNextPage;
           service.textSearch(
-          { location: initialLocation, query: "SkinKandy" },
+          { query: "SkinKandy" },
           (results, status, pagination) => {
             if (status !== "OK" || !results) return;
       
