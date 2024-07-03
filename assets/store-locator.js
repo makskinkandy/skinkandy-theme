@@ -461,3 +461,7 @@ function useCurrentLocation() {
     alert('Geolocation is not supported by this browser.');
   }
 }
+
+window.onload = function name() {
+  useCurrentLocation();
+}
