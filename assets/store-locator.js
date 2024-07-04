@@ -481,3 +481,16 @@ function useCurrentLocation() {
     alert('Geolocation is not supported by this browser.');
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+            // Example usage of getUrlParam function
+            let firstName = getUrlParam('firstName');
+            if (firstName) {
+                alert(`First Name: ${firstName}`);
+            }
+
+            let lastName = getUrlParam('lastName');
+            if (lastName) {
+                alert(`Last Name: ${lastName}`);
+            }
+        });
