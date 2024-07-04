@@ -3,6 +3,8 @@ let service;
 let infowindow;
 let markers = [];
 let autocomplete;
+let userLocation;
+let searchCenter;
 let autocompleteMarker = null; // Variable to keep track of the autocomplete marker
 const initialLocation = { lat: -27.4698, lng: 153.0251 }; // Brisbane coordinates
 
