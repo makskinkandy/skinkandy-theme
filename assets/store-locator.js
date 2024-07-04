@@ -388,8 +388,10 @@ function handleSearchResults(results, status) {
       clearMarkers();
 
       for (let i = 0; i < results.length; i++) {
-          createMarker(results[i], i);
-          addToList(results[i], i);
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+              createMarker(place);
+              addToList(place, index);
+          }
       }
   }
 }
