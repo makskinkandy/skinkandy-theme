@@ -451,7 +451,9 @@ function createMapContent(place) {
   
   const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(searchCenter, place.geometry.location);
   const distanceInKm = (distanceInMeters / 1000).toFixed(2);
-  let content = `<h6>${place.name}</h6> <p>${place.vicinity}</p> <p>${iconImage} ${distanceInKm}km</p> <span class="status">${getOpenStatus(place)}</span> <a href="https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}" class="direction" target="_blank">Get Directions</a>`;
+  let content = `<h6>${place.name}</h6> <p>${place.vicinity}</p>`;
+  content += `<p>${iconImage} ${distanceInKm}km</p>`
+  content += `<span class="status">${getOpenStatus(place)}</span> <a href="https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}" class="direction" target="_blank">Get Directions</a>`
   
   if (place.website) {
     content += `<a href="${place.website}" class="website-link" target="_blank">Visit Website</a>`;
