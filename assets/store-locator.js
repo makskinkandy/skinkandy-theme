@@ -425,7 +425,7 @@ function createMarker(place, index) {
 }
 
 function createMarker(place, index) {
-    const marker = new google.maps.marker.AdvancedMarkerElement({
+    const marker = new google.maps.marker.AdvancedMarkerView({
         map: map,
         position: place.geometry.location,
         title: place.name
