@@ -454,6 +454,7 @@ function addToList(place, index) {
   });
   
   storeList.appendChild(listItem);
+  createMarker(place, index);
 }
 
 function getOpenStatus(place) {
