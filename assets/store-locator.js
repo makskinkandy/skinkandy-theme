@@ -395,9 +395,7 @@ function searchNearby(location) {
 
 function handleSearchResults(results, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
-        const storeList = document.getElementById('store-list');
-        storeList.innerHTML = '';
-
+        
         clearMarkers();
 
         let filteredResults = results.filter(result => result.name.indexOf("SkinKandy") !== -1);
@@ -413,6 +411,8 @@ function handleSearchResults(results, status) {
             getPlaceDetails(result.place_id, index);
         });
     } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+        const storeList = document.getElementById('store-list');
+        storeList.innerHTML = '';
         storeList.appendChild('<p>No Store found in this area</p>')
     } else {
         alert('Error fetching nearby stores: ' + status);
