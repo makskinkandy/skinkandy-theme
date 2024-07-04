@@ -424,9 +424,7 @@ function createMarker(place, index) {
     content: iconImage
   });
 
-
   markers.push(marker);
-  addToList(place, index);
   
   google.maps.event.addListener(marker, 'click', function() {
       infowindow.setContent(createMapContent(place));
