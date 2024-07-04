@@ -439,7 +439,7 @@ function addToList(place, index) {
   listItem.innerHTML = createMapContent(place);
   listItem.classList.add("list-item");
   listItem.addEventListener('click', () => {
-    map.setCenter(markers[index]);
+    map.setCenter(place.geometry.location);
     infowindow.setContent(createMapContent(place));
     infowindow.open(map, markers[index]);
     document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
@@ -448,6 +448,7 @@ function addToList(place, index) {
   storeList.appendChild(listItem);
   createMarker(place, index);
 
+  console.log(markers[index])
 }
 
 function getOpenStatus(place) {
