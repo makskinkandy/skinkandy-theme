@@ -421,7 +421,15 @@ function createMarker(place, index) {
       title: place.name
   });
 
-  markers[index] = place;
+  while (markers.length < index) {
+    markers.push(undefined); // or any default value you prefer
+  }
+  
+  // Insert the item at the specific index
+  markers.push(marker);
+  
+  // Move the newly pushed item to the correct index
+  markers.splice(index, 0, marker.pop());
 
   google.maps.event.addListener(marker, 'click', function() {
       infowindow.setContent(createMapContent(place));
