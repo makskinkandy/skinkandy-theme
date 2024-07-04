@@ -394,20 +394,6 @@ function handleSearchResults(results, status) {
   }
 }
 
-function getPlaceDetails(placeId, index) {
-    console.log(markers)
-    const request = {
-        placeId: placeId,
-        fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
-    };
-    
-    service.getDetails(request, (place, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          createMarker(place, index)
-        }
-    });
-}
-
 function createMarker(place, index) {
   
   const iconImage = document.createElement("img");
@@ -464,6 +450,19 @@ function getOpenStatus(place) {
   return !place.opening_hours.isOpen ? "<span class='close'>Close</span>" : "<span class='open'>Open</span>"
 }
 
+function getPlaceDetails(placeId, index) {
+    const request = {
+        placeId: placeId,
+        fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
+    };
+    
+    service.getDetails(request, (place, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          createMarker(place, index);
+          addToList(place, index);
+        }
+    });
+}
 
 function clearMarkers() {
   for (let i = 0; i < markers.length; i++) {
