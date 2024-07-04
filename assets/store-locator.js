@@ -521,9 +521,6 @@ function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const storeList = document.getElementById('store-list');
-        clearMarkers();
-        storeList.innerHTML = '';
         let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         searchNearby(pos);
         map.setCenter(pos);
