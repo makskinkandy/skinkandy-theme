@@ -520,10 +520,15 @@ function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        searchNearby(pos);
-        map.setCenter(pos);
-        $('.current-location').trigger('click');
+        if (!position.coords.latitude) {
+          const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
+          searchNearby(initialLocation);
+        } else {
+          let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          searchNearby(pos);
+          map.setCenter(pos);
+          $('.current-location').trigger('click');
+        }
       });
   } else {
     alert('Geolocation is not supported by this browser.');
