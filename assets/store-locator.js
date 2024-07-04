@@ -411,7 +411,7 @@ function handleSearchResults(results, status) {
             getPlaceDetails(result.place_id, index);
         });
     } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-        alert('No 7-Eleven stores found in this area.');
+        alert('No stores found in this area.');
     } else {
         alert('Error fetching nearby stores: ' + status);
     }
