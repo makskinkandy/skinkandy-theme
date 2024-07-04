@@ -352,16 +352,16 @@ function initMap() {
   autocomplete.bindTo('bounds', map);
 
   autocomplete.addListener('place_changed', function() {
-                const place = autocomplete.getPlace();
-                if (!place.geometry) {
-                    window.alert("No details available for input: '" + place.name + "'");
-                    return;
-                }
+      const place = autocomplete.getPlace();
+      if (!place.geometry) {
+          window.alert("No details available for input: '" + place.name + "'");
+          return;
+      }
 
-                searchCenter = place.geometry.location;
-                map.setCenter(place.geometry.location);
-                searchNearby(place.geometry.location);
-            });
+      searchCenter = place.geometry.location;
+      map.setCenter(place.geometry.location);
+      searchNearby(place.geometry.location);
+  });
   
   searchNearby(initialLocation);
 }
