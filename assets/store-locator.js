@@ -399,10 +399,10 @@ function getPlaceDetails(placeId, index) {
         placeId: placeId,
         fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
     };
-
+    console.log('index '. index);
     service.getDetails(request, (place, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-          console.log('index '. index);
+          
           addToList(place, index)
         }
     });
