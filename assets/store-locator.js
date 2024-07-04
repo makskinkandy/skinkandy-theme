@@ -480,6 +480,6 @@ function useCurrentLocation() {
 
 document.addEventListener('DOMContentLoaded', () => {
     $('.website-link').each( function () {
-      $(this).stopProgation();
+      $(this).stopPropagation();
     })
 });
