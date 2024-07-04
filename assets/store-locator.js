@@ -380,20 +380,6 @@ function searchNearby(location) {
 
 }
 
-function getPlaceDetails(placeId, index) {
-    const request = {
-        placeId: placeId,
-        fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
-    };
-
-    service.getDetails(request, (place, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            createMarker(place);
-            addToList(place, index);
-        }
-    });
-}
-
 function handleSearchResults(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
       const storeList = document.getElementById('store-list');
@@ -407,6 +393,20 @@ function handleSearchResults(results, status) {
           }
       });
   }
+}
+
+function getPlaceDetails(placeId, index) {
+    const request = {
+        placeId: placeId,
+        fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
+    };
+
+    service.getDetails(request, (place, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            createMarker(place);
+            addToList(place, index);
+        }
+    });
 }
 
 function createMarker(place, index) {
