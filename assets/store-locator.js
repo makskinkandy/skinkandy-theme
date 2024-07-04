@@ -443,6 +443,7 @@ function addToList(place, index) {
     infowindow.setContent(createMapContent(place));
     infowindow.open(map, markers[index]);
     document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+    map.setZoom(12);
   });
   
   storeList.appendChild(listItem);
