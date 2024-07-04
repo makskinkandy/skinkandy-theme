@@ -395,7 +395,7 @@ function handleSearchResults(results, status) {
 }
 
 function getPlaceDetails(placeId, index) {
-    console.log(index)
+    console.log(markers)
     const request = {
         placeId: placeId,
         fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
