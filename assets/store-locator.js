@@ -334,7 +334,13 @@ function initMap() {
           ]
       }
   ]
-  )
+  );
+
+  const userLocationCoords = useCurrentLocation();
+
+  if (userLocationCoords) {
+    
+  }
   
   map = new google.maps.Map(document.getElementById('map'), {
       center: initialLocation,
@@ -364,6 +370,7 @@ function initMap() {
       map.setCenter(place.geometry.location);
       searchNearby(place.geometry.location);
   });
+  
   
   useCurrentLocation();
 }
@@ -518,25 +525,10 @@ function clearMarkers() {
 
 function useCurrentLocation() {
   if (navigator.geolocation) {
-    navigator.permissions.query({ name: "geolocation" }).then((result) => {
-    if (result.state === "granted") {
-      navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.getCurrentPosition(
       (position) => {
-        let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                  searchNearby(pos);
-          map.setCenter(pos);
-          $('.current-location').trigger('click');
+        return new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       });
-    } else if (result.state === "denied") {
-      searchNearby(initialLocation);
-    }
-    result.addEventListener("change", () => {
-      report(result.state);
-    });
-  });
-    
-  } else {
-    alert('Geolocation is not supported by this browser.');
   }
 }
 
