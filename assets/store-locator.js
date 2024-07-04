@@ -452,7 +452,6 @@ function addToList(place, index) {
     document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
   });
   
-  listItem.marker = markers[index];
   storeList.appendChild(listItem);
 }
 
