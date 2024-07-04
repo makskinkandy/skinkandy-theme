@@ -401,7 +401,7 @@ function handleSearchResults(results, status) {
       clearMarkers();
 
       results.forEach((result, index) => {
-          if (result.name.indexOf("7-Eleven") !== -1) {
+          if (result.name.indexOf("SkinKandy") !== -1) {
               getPlaceDetails(result.place_id, index);
           }
       });
@@ -429,7 +429,7 @@ function createMapContent(place) {
   console.log(place)
   
   if (place.website) {
-    content += `<br><a href="${place.website}" target="_blank">Visit Website</a>`;
+    content += `<a href="${place.website}" class="website-link" target="_blank">Visit Website</a>`;
   }
   
   return content;
