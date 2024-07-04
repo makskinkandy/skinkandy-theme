@@ -354,6 +354,7 @@ function initMap() {
   autocomplete.addListener('place_changed', function() {
       const place = autocomplete.getPlace();
       map.setZoom(10);
+    
       if (!place.geometry) {
           window.alert("No details available for input: '" + place.name + "'");
           return;
@@ -412,7 +413,7 @@ function handleSearchResults(results, status) {
             getPlaceDetails(result.place_id, index);
         });
     } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-        alert('No stores found in this area.');
+        storeList.innerHTML = '';
     } else {
         alert('Error fetching nearby stores: ' + status);
     }
