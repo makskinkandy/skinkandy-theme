@@ -477,3 +477,9 @@ function useCurrentLocation() {
     alert('Geolocation is not supported by this browser.');
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    $('.website-link').each( function () {
+      $(this).stopProgation();
+    })
+});
