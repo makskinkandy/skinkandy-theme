@@ -524,6 +524,7 @@ function useCurrentLocation() {
         let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         searchNearby(pos);
         map.setCenter(pos);
+        $('.current-location').trigger('click');
       });
   } else {
     alert('Geolocation is not supported by this browser.');
