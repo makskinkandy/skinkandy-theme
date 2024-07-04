@@ -372,8 +372,7 @@ function searchNearby(location) {
       location: location,
       radius: '50000',
       name: 'SkinKandy',
-      bounds: map.getBounds(),
-      fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
+      bounds: map.getBounds()
   };
 
   service = new google.maps.places.PlacesService(map);
