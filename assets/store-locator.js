@@ -416,32 +416,30 @@ function handleSearchResults(results, status) {
         alert('Error fetching nearby stores: ' + status);
     }
 }
-
-function createMarker(place, index) {
+function createMarker(place) {
+    const iconImage = document.createElement("img");
   
-  const iconImage = document.createElement("img");
-
-  iconImage.src =
-  "https://cdn.shopify.com/s/files/1/0555/7508/5194/files/MapPin_1.png";
-
-  iconImage.width = 30;
+    iconImage.src =
+    "https://cdn.shopify.com/s/files/1/0555/7508/5194/files/MapPin_1.png";
   
-  const marker = new google.maps.marker.AdvancedMarkerElement({
-    map: map,
-    position: place.geometry.location,
-    title: place.name,
-    content: iconImage
-  });
+    iconImage.width = 30;
+    
+    const marker = new google.maps.marker.AdvancedMarkerElement({
+        map: map,
+        position: place.geometry.location,
+        title: place.name,
+        content: iconImage
+    });
 
-  markers.push(marker);
-  
-  google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(createMapContent(place));
-      infowindow.open(map, marker);
-  });
+    markers.push(marker);
 
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(createMapContent(place));
+        infowindow.open(map, marker);
+    });
+
+    return marker;
 }
-
 
 function createMapContent(place) {
   let content = `<h6>${place.name}</h6> <p>${place.vicinity}</p> <span class="status">${getOpenStatus(place)}</span> <a href="https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}" class="direction" target="_blank">Get Directions</a>`;
