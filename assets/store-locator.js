@@ -385,13 +385,18 @@ function handleSearchResults(results, status) {
       const storeList = document.getElementById('store-list');
       storeList.innerHTML = '';
       clearMarkers();
-      for (let i = 0; i < results.length; i++) {
-        if (results[i].name.indexOf("SkinKandy") !== -1) {
-            createMarker(results[i]);
-            addToList(results[i], i);
+      // for (let i = 0; i < results.length; i++) {
+      //   if (results[i].name.indexOf("SkinKandy") !== -1) {
+      //       createMarker(results[i]);
+      //       addToList(results[i], i);
+      //   } 
+      // }
+
+    results.forEach((result, index) => {
+        if (result.name.indexOf("7-Eleven") !== -1) {
+            getPlaceDetails(result.place_id, index);
         }
-          
-      }
+    });
   }
 }
 
