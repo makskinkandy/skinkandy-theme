@@ -359,6 +359,11 @@ function initMap() {
           window.alert("No details available for input: '" + place.name + "'");
           return;
       }
+
+      const marker = new google.maps.marker.AdvancedMarkerElement({
+          map: map,
+          position: place.geometry.location
+      });
       
       searchCenter = place.geometry.location;
       map.setCenter(place.geometry.location);
