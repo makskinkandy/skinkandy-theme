@@ -478,11 +478,11 @@ function getPlaceDetails(placeId, index) {
         placeId: placeId,
         fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
     };
-    
+
     service.getDetails(request, (place, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-          createMarker(place, index);
-          addToList(place, index);
+            const marker = createMarker(place);
+            addToList(place, marker);
         }
     });
 }
