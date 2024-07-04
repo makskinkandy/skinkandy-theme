@@ -412,9 +412,11 @@ function handleSearchResults(results, status) {
         });
     } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
         const storeList = document.getElementById('store-list');
+        clearMarkers();
         storeList.innerHTML = '';
         storeList.appendChild('<p>No Store found in this area</p>')
     } else {
+        clearMarkers();
         alert('Error fetching nearby stores: ' + status);
     }
 }
