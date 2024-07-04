@@ -382,16 +382,9 @@ function searchNearby(location) {
 
 function handleSearchResults(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
-      const storeList = document.getElementById('store-list');
-      storeList.innerHTML = '';
-      clearMarkers();
-      // for (let i = 0; i < results.length; i++) {
-      //   if (results[i].name.indexOf("SkinKandy") !== -1) {
-      //       createMarker(results[i]);
-      //       addToList(results[i], i);
-      //   } 
-      // }
-
+    const storeList = document.getElementById('store-list');
+    storeList.innerHTML = '';
+    clearMarkers();
     results.forEach((result, index) => {
         if (result.name.indexOf("SkinKandy") !== -1) {
             getPlaceDetails(result.place_id, index);
