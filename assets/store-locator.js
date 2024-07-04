@@ -398,7 +398,7 @@ function handleSearchResults(results, status) {
 
         clearMarkers();
 
-        let filteredResults = results.filter(result => result.name.indexOf("7-Eleven") !== -1);
+        let filteredResults = results.filter(result => result.name.indexOf("SkinKandy") !== -1);
 
         // Calculate the distance to each store and sort by distance
         filteredResults.forEach(result => {
