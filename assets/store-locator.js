@@ -385,11 +385,12 @@ function handleSearchResults(results, status) {
       const storeList = document.getElementById('store-list');
       storeList.innerHTML = '';
 
-      clearMarkers();
-
       for (let i = 0; i < results.length; i++) {
-          createMarker(results[i], i);
-          addToList(results[i], i);
+        if (result.name.indexOf("SkinKandy") !== -1) {
+            createMarker(results[i], i);
+            addToList(results[i], i);
+          }
+          
       }
   }
 }
