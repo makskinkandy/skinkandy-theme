@@ -527,6 +527,7 @@ function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
+        alert("TEST")
         const storeList = document.getElementById('store-list');
         clearMarkers();
         storeList.innerHTML = '';
