@@ -379,6 +379,20 @@ function searchNearby(location) {
   service.nearbySearch(request, handleSearchResults);
 }
 
+function getPlaceDetails(placeId, index) {
+    const request = {
+        placeId: placeId,
+        fields: ['name', 'geometry', 'opening_hours', 'website']
+    };
+
+    service.getDetails(request, (place, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            createMarker(place);
+            addToList(place, index);
+        }
+    });
+}
+
 function handleSearchResults(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
       const storeList = document.getElementById('store-list');
@@ -389,8 +403,7 @@ function handleSearchResults(results, status) {
       for (let i = 0; i < results.length; i++) {
 
           if (results[i].name.indexOf("SkinKandy") !== -1) {
-            createMarker(results[i], i);
-            addToList(results[i], i);
+            getPlaceDetails(result.place_id, index);
           }
           
       }
