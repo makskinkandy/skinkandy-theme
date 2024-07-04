@@ -518,17 +518,23 @@ function clearMarkers() {
 
 function useCurrentLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
+    navigator.permissions.query({ name: "geolocation" }).then((result) => {
+    if (result.state === "granted") {
+      navigator.geolocation.getCurrentPosition(
       (position) => {
         let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        if (pos) {
-          searchNearby(pos);
+                  searchNearby(pos);
           map.setCenter(pos);
           $('.current-location').trigger('click');
-        } else {
-          searchNearby(initialLocation);
-        }
       });
+    } else if (result.state === "denied") {
+      searchNearby(initialLocation);
+    }
+    result.addEventListener("change", () => {
+      report(result.state);
+    });
+  });
+    
   } else {
     alert('Geolocation is not supported by this browser.');
   }
