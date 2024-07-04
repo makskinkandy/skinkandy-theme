@@ -44,7 +44,7 @@ function initMap() {
         "elementType": "labels.text.fill",
         "stylers": [
             {
-                "color": "#ec078f"
+                "color": "#000"
             }
         ]
       },
