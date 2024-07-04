@@ -446,7 +446,7 @@ function createMapContent(place) {
 function addToList(place, index) {
   const storeList = document.getElementById('store-list');
   const listItem = document.createElement('div');
-  
+  console.log('index '. index);
   listItem.innerHTML = createMapContent(place);
   listItem.classList.add("list-item");
 
