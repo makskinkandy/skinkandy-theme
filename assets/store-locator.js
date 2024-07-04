@@ -386,11 +386,11 @@ function handleSearchResults(results, status) {
     const storeList = document.getElementById('store-list');
     storeList.innerHTML = '';
     clearMarkers();
-    results.forEach((result, index) => {
+    for (let i = 0; i < results.length; i++) {
         if (result.name.indexOf("SkinKandy") !== -1) {
-            getPlaceDetails(result.place_id, index);
+            getPlaceDetails(result.place_id, i);
         }
-    });
+    }
   }
 }
 
@@ -399,7 +399,7 @@ function getPlaceDetails(placeId, index) {
         placeId: placeId,
         fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
     };
-    console.log('index '. index);
+    
     service.getDetails(request, (place, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           
