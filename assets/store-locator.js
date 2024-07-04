@@ -383,7 +383,7 @@ function handleSearchResults(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
       const storeList = document.getElementById('store-list');
       storeList.innerHTML = '';
-
+      clearMarkers();
       for (let i = 0; i < results.length; i++) {
         if (results[i].name.indexOf("SkinKandy") !== -1) {
             createMarker(results[i]);
@@ -402,6 +402,11 @@ function createMarker(place, index) {
   });
 
   markers.push(marker);
+
+  google.maps.event.addListener(marker, 'click', function() {
+      infowindow.setContent(createMapContent(place));
+      infowindow.open(map, marker);
+  });
 }
 
 
@@ -421,6 +426,7 @@ function addToList(place, index) {
   listItem.innerHTML = createMapContent(place);
   listItem.classList.add("list-item");
   listItem.addEventListener('click', () => {
+    map.setCenter(place.geometry.location);
     infowindow.setContent(createMapContent(place));
     infowindow.open(map, markers[index]);
     document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
