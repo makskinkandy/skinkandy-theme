@@ -457,11 +457,10 @@ function addToList(place, index) {
   listItem.classList.add("list-item");
 
   listItem.addEventListener('click', () => {
-    infowindow.setContent(createMapContent(place));
-    infowindow.open(map, markers[index]);
-    document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
-    console.log(index);
-    map.setZoom(13);
+      map.setCenter(place.geometry.location);
+      infowindow.setContent(createMapContent(place));
+      infowindow.open(map, marker);
+      document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
   });
   
   storeList.appendChild(listItem);
