@@ -408,7 +408,6 @@ function getPlaceDetails(placeId, index) {
     service.getDetails(request, (place, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
             createMarker(place, index);
-            addToList(place, index);
         }
     });
 }
@@ -419,6 +418,8 @@ function createMarker(place, index) {
       position: place.geometry.location,
       title: place.name
   });
+
+  addToList(place, index);
 
   markers.push(marker);
 
