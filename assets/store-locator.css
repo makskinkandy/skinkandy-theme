@@ -64,7 +64,8 @@ h6 {
   margin-bottom: 5px;
   font-family: "Futura Medium 01", sans-serif;
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
+  align-items: center;
 }
 
 span.distance {
