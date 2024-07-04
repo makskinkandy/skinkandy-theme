@@ -402,6 +402,7 @@ function getPlaceDetails(placeId, index) {
 
     service.getDetails(request, (place, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
+          console.log('index '. index);
           addToList(place, index)
         }
     });
