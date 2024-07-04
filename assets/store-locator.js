@@ -460,7 +460,7 @@ function addToList(place, index) {
       console.log(index)
       map.setCenter(place.geometry.location);
       infowindow.setContent(createMapContent(place));
-      infowindow.open(map, markers[index]);
+      infowindow.open(map, index);
       document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
   });
   
