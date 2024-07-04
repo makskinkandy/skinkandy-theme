@@ -395,20 +395,6 @@ function handleSearchResults(results, status) {
   }
 }
 
-function getPlaceDetails(placeId, index) {
-    const request = {
-        placeId: placeId,
-        fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
-    };
-
-    service.getDetails(request, (place, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            createMarker(place);
-            addToList(place, index);
-        }
-    });
-}
-
 function createMarker(place, index) {
   const marker = new google.maps.marker.AdvancedMarkerElement({
       map: map,
