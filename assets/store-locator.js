@@ -371,7 +371,6 @@ function initMap() {
   });
   
   searchNearby(initialLocation);
-  useCurrentLocation();
   $('.current-location').trigger('click');
 }
 
