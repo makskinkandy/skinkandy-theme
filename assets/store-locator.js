@@ -335,8 +335,6 @@ function initMap() {
       }
   ]
   )
-
-  clearMarkers();
   
   map = new google.maps.Map(document.getElementById('map'), {
       center: initialLocation,
