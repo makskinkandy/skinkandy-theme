@@ -377,6 +377,7 @@ function searchNearby(location) {
 
   service = new google.maps.places.PlacesService(map);
   service.nearbySearch(request, handleSearchResults);
+  map.setZoom(10);
 }
 
 function getPlaceDetails(placeId, index) {
