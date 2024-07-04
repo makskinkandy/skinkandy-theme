@@ -365,7 +365,6 @@ function initMap() {
       searchNearby(place.geometry.location);
   });
   
-  searchNearby(initialLocation);
   useCurrentLocation();
 }
 
