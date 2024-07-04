@@ -408,18 +408,17 @@ function getPlaceDetails(placeId, index) {
 }
 
 function createMarker(place, index) {
-  const icon = {
-    url: "https://cdn.shopify.com/s/files/1/0555/7508/5194/files/MapPin_1.png", // url
-    scaledSize: new google.maps.Size(50, 50), // scaled size
-    origin: new google.maps.Point(0,0), // origin
-    anchor: new google.maps.Point(0, 0) // anchor
-  };
+  
+  const iconImage = document.createElement("img");
+
+  beachFlagImg.src =
+  "https://cdn.shopify.com/s/files/1/0555/7508/5194/files/MapPin_1.png";
   
   const marker = new google.maps.marker.AdvancedMarkerElement({
     map: map,
     position: place.geometry.location,
     title: place.name,
-    content: icon
+    content: iconImage
   });
 
 
