@@ -372,26 +372,13 @@ function searchNearby(location) {
       location: location,
       radius: '50000',
       name: 'SkinKandy',
-      bounds: map.getBounds()
+      bounds: map.getBounds(),
+      fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
   };
 
   service = new google.maps.places.PlacesService(map);
   service.nearbySearch(request, handleSearchResults);
 
-}
-
-function getPlaceDetails(placeId, index) {
-    const request = {
-        placeId: placeId,
-        fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
-    };
-
-    service.getDetails(request, (place, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            createMarker(place);
-            addToList(place, index);
-        }
-    });
 }
 
 function handleSearchResults(results, status) {
