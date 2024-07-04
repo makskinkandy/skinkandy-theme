@@ -427,6 +427,8 @@ function createMarker(place, index) {
       infowindow.setContent(createMapContent(place));
       infowindow.open(map, marker);
   });
+
+  console.log(markers)
 }
 
 
