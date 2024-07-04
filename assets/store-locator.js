@@ -413,7 +413,6 @@ function handleSearchResults(results, status) {
             getPlaceDetails(result.place_id, index);
         });
     } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-        storeList.innerHTML = '';
         storeList.append('<p>No Store found in this area</p>')
     } else {
         alert('Error fetching nearby stores: ' + status);
