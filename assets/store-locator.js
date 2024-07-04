@@ -339,7 +339,8 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
       center: initialLocation,
       zoom: 10,
-      mapId: "DEMO_MAP_ID"
+      mapId: "DEMO_MAP_ID",
+      
   });
 
   map.mapTypes.set("styled_map", mapStyle);
@@ -392,6 +393,20 @@ function handleSearchResults(results, status) {
           
       }
   }
+}
+
+function getPlaceDetails(placeId, index) {
+    const request = {
+        placeId: placeId,
+        fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
+    };
+
+    service.getDetails(request, (place, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            createMarker(place, index);
+            addToList(place, index);
+        }
+    });
 }
 
 function createMarker(place, index) {
