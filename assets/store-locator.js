@@ -536,7 +536,7 @@ function useCurrentLocation() {
         const marker = new google.maps.marker.AdvancedMarkerElement({
           map: map,
           position: pos
-      });
+        });
       });
   } else {
     alert('Geolocation is not supported by this browser.');
