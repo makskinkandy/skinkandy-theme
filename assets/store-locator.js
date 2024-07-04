@@ -419,8 +419,6 @@ function createMarker(place, index) {
       title: place.name
   });
 
-  addToList(place, index);
-
   markers.push(marker);
 
   google.maps.event.addListener(marker, 'click', function() {
