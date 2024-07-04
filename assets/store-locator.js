@@ -414,6 +414,13 @@ function createMarker(place, index) {
       title: place.name
   });
 
+  const icon = {
+    url: "../res/sit_marron.png", // url
+    scaledSize: new google.maps.Size(50, 50), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+  };
+
   markers.push(marker);
 
   google.maps.event.addListener(marker, 'click', function() {
