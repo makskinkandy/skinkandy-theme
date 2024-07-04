@@ -3,6 +3,8 @@ let service;
 let infowindow;
 let markers = [];
 let autocomplete;
+let autocompleteMarker = null; // Variable to keep track of the autocomplete marker
+const initialLocation = { lat: -27.4698, lng: 153.0251 }; // Brisbane coordinates
 
 function initMap() {
   const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
@@ -352,17 +354,29 @@ function initMap() {
   autocomplete.bindTo('bounds', map);
 
   autocomplete.addListener('place_changed', function() {
-      const place = autocomplete.getPlace();
-      map.setZoom(10);
+    const place = autocomplete.getPlace();
+    map.setZoom(10);
+  
+    if (!place.geometry) {
+        window.alert("No details available for input: '" + place.name + "'");
+        return;
+    }
     
-      if (!place.geometry) {
-          window.alert("No details available for input: '" + place.name + "'");
-          return;
-      }
-      
-      searchCenter = place.geometry.location;
-      map.setCenter(place.geometry.location);
-      searchNearby(place.geometry.location);
+    searchCenter = place.geometry.location;
+    map.setCenter(place.geometry.location);
+
+    // Remove the previous autocomplete marker
+    if (autocompleteMarker) {
+        autocompleteMarker.setMap(null);
+    }
+
+    // Add a new marker for the selected place
+    autocompleteMarker = new google.maps.Marker({
+      map: map,
+      position: place.geometry.location
+    });
+    
+    searchNearby(place.geometry.location);
   });
   
   useCurrentLocation();
@@ -519,19 +533,24 @@ function clearMarkers() {
 function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        if (!position.coords.latitude) {
-          const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
+        (position) => {
+          userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          console.log('User Location:', userLocation);
+          map.setCenter(userLocation);
+          searchNearby(userLocation);
+        },
+        (error) => {
+          console.error('Error occurred. Error code: ' + error.code);
+          // Fallback to initial location
+          map.setCenter(initialLocation);
           searchNearby(initialLocation);
-        } else {
-          let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          searchNearby(pos);
-          map.setCenter(pos);
-          $('.current-location').trigger('click');
         }
-      });
+    );
   } else {
+    // Fallback to initial location
     alert('Geolocation is not supported by this browser.');
+    map.setCenter(initialLocation);
+    searchNearby(initialLocation);
   }
 }
 
