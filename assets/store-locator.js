@@ -383,7 +383,9 @@ function handleSearchResults(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     const storeList = document.getElementById('store-list');
     storeList.innerHTML = '';
+    
     clearMarkers();
+    
     results.forEach((result, index) => {
         if (result.name.indexOf("SkinKandy") !== -1) {
             getPlaceDetails(result.place_id, index);
@@ -392,19 +394,19 @@ function handleSearchResults(results, status) {
   }
 }
 
-function createMarker(place, index) {
-  const marker = new google.maps.marker.AdvancedMarkerElement({
-      map: map,
-      position: place.geometry.location,
-      title: place.name
-  });
+function createMarker(place) {
+    const marker = new google.maps.marker.AdvancedMarkerView({
+        map: map,
+        position: place.geometry.location,
+        title: place.name
+    });
 
-  markers.push(marker);
+    markers.push(marker);
 
-  google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(createMapContent(place));
-      infowindow.open(map, marker);
-  });
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(getInfoWindowContent(place));
+        infowindow.open(map, marker);
+    });
 }
 
 function getPlaceDetails(placeId, index) {
