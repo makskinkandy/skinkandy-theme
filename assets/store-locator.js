@@ -365,7 +365,7 @@ function initMap() {
   searchNearby(initialLocation);
   useCurrentLocation();
   $('.current-location').click();
-
+  console.log(markers)
 }
 
 function searchNearby(location) {
