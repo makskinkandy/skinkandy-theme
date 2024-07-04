@@ -14,7 +14,7 @@ function initMap() {
         "elementType": "all",
         "stylers": [
             {
-                "hue": "#ff00e7"
+                "hue": "#000"
             },
             {
                 "saturation": 7
