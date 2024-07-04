@@ -414,6 +414,7 @@ function createMarker(place, index) {
 
 function createMapContent(place) {
   let content = `<h6>${place.name}</h6> <p>${place.vicinity}</p> <span class="status">${getOpenStatus(place)}</span> <a href="https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}" class="direction" target="_blank">Get Directions</a>`;
+
   
   if (place.website) {
     content += `<br><a href="${place.website}" target="_blank">Visit Website</a>`;
@@ -425,8 +426,6 @@ function createMapContent(place) {
 function addToList(place, index) {
   const storeList = document.getElementById('store-list');
   const listItem = document.createElement('div');
-
-  console.log(place)
   
   listItem.innerHTML = createMapContent(place);
   listItem.classList.add("list-item");
