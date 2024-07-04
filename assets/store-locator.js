@@ -414,7 +414,7 @@ function createMarker(place, index) {
   iconImage.src =
   "https://cdn.shopify.com/s/files/1/0555/7508/5194/files/MapPin_1.png";
 
-  iconImage.width = 24;
+  iconImage.width = 30;
   
   const marker = new google.maps.marker.AdvancedMarkerElement({
     map: map,
