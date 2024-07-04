@@ -366,7 +366,7 @@ function initMap() {
   });
   
   searchNearby(initialLocation);
-  $('.current-location').trigger('click');
+  $('.current-location').trigger('dblclick');
 }
 
 function searchNearby(location) {
