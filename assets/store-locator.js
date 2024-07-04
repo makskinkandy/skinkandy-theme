@@ -364,6 +364,7 @@ function initMap() {
   });
 
   searchNearby(initialLocation);
+  getAllTheList();
   useCurrentLocation();
   $('.current-location').click();
   
