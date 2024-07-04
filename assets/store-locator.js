@@ -382,7 +382,7 @@ function searchNearby(location) {
 function getPlaceDetails(placeId, index) {
     const request = {
         placeId: placeId,
-        fields: ['name', 'geometry', 'opening_hours', 'website']
+        fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
     };
 
     service.getDetails(request, (place, status) => {
