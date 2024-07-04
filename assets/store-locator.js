@@ -479,7 +479,7 @@ function addToList(place, index) {
   listItem.addEventListener('click', () => {
     map.setCenter(place.geometry.location);
     map.setZoom(13);
-    infowindow.setContent(createMapContent(place));
+    infowindow.setContent(createPinContent(place));
     infowindow.open(map, index);
     document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
   });
