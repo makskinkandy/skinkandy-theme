@@ -448,7 +448,7 @@ function addToList(place, index) {
   storeList.appendChild(listItem);
   createMarker(place, index);
 
-  console.log(place.geometry)
+  console.log(place.geometry.location)
 }
 
 function getOpenStatus(place) {
