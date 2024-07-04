@@ -419,7 +419,7 @@ function createMarker(place, index) {
     map: map,
     position: place.geometry.location,
     title: place.name,
-    icon: icon
+    content: icon
   });
 
 
