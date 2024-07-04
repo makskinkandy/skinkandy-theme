@@ -365,7 +365,6 @@ function initMap() {
       searchNearby(place.geometry.location);
   });
   
-  searchNearby(initialLocation);
   useCurrentLocation();
 }
 
@@ -522,9 +521,13 @@ function useCurrentLocation() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        searchNearby(pos);
-        map.setCenter(pos);
-        $('.current-location').trigger('click');
+        if (pos) {
+          searchNearby(pos);
+          map.setCenter(pos);
+          $('.current-location').trigger('click');
+        } else {
+          searchNearby(initialLocation);
+        }
       });
   } else {
     alert('Geolocation is not supported by this browser.');
