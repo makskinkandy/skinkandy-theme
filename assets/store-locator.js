@@ -427,7 +427,6 @@ function createMarker(place, index) {
       infowindow.open(map, marker);
   });
 
-  console.log(markers)
 }
 
 
@@ -455,6 +454,8 @@ function addToList(place, index) {
   
   storeList.appendChild(listItem);
   createMarker(place, index);
+
+  console.log(place.geometry.location)
 }
 
 function getOpenStatus(place) {
