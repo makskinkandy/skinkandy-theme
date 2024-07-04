@@ -449,6 +449,7 @@ function addToList(place, index) {
   
   listItem.innerHTML = createMapContent(place);
   listItem.classList.add("list-item");
+
   listItem.addEventListener('click', () => {
     infowindow.setContent(createMapContent(place));
     infowindow.open(map, markers[index]);
