@@ -440,8 +440,7 @@ function addToList(place, index) {
   listItem.innerHTML = createMapContent(place);
   listItem.classList.add("list-item");
   listItem.addEventListener('click', () => {
-    console.log(map.geometry)
-    map.setCenter(map.geometry.location);
+    console.log(map)
     infowindow.setContent(createMapContent(place));
     infowindow.open(map, markers[index]);
     document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
