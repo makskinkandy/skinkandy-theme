@@ -414,7 +414,9 @@ function handleSearchResults(results, status) {
         const storeList = document.getElementById('store-list');
         clearMarkers();
         storeList.innerHTML = '';
-        storeList.appendChild('<p>No Store found in this area</p>')
+        const listItem = document.createElement('div');
+        listItem.innerHTML = '<p>No Store found in this area</p>'
+        storeList.appendChild(listItem);
     } else {
         clearMarkers();
         alert('Error fetching nearby stores: ' + status);
