@@ -403,7 +403,7 @@ function getPlaceDetails(placeId, index) {
     
     service.getDetails(request, (place, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-          
+          createMarker(place, index)
           addToList(place, index)
         }
     });
