@@ -353,18 +353,12 @@ function initMap() {
 
   autocomplete.addListener('place_changed', function() {
       const place = autocomplete.getPlace();
-      let marker = '';
       map.setZoom(10);
     
       if (!place.geometry) {
           window.alert("No details available for input: '" + place.name + "'");
           return;
       }
-
-      marker = new google.maps.marker.AdvancedMarkerElement({
-          map: map,
-          position: place.geometry.location
-      });
       
       searchCenter = place.geometry.location;
       map.setCenter(place.geometry.location);
