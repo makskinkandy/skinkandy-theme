@@ -392,16 +392,29 @@ function searchNearby(location) {
 }
 
 function handleSearchResults(results, status) {
-  if (status === google.maps.places.PlacesServiceStatus.OK) {
-    const storeList = document.getElementById('store-list');
-    storeList.innerHTML = '';
-    clearMarkers();
-    results.forEach((result, index) => {
-        if (result.name.indexOf("SkinKandy") !== -1) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+        const storeList = document.getElementById('store-list');
+        storeList.innerHTML = '';
+
+        clearMarkers();
+
+        let filteredResults = results.filter(result => result.name.indexOf("7-Eleven") !== -1);
+
+        // Calculate the distance to each store and sort by distance
+        filteredResults.forEach(result => {
+            result.distance = google.maps.geometry.spherical.computeDistanceBetween(searchCenter, result.geometry.location);
+        });
+
+        filteredResults.sort((a, b) => a.distance - b.distance);
+
+        filteredResults.forEach((result, index) => {
             getPlaceDetails(result.place_id, index);
-        }
-    });
-  }
+        });
+    } else if (status === google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
+        alert('No 7-Eleven stores found in this area.');
+    } else {
+        alert('Error fetching nearby stores: ' + status);
+    }
 }
 
 function createMarker(place, index) {
