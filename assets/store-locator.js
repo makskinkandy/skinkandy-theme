@@ -386,10 +386,10 @@ function handleSearchResults(results, status) {
       storeList.innerHTML = '';
 
       for (let i = 0; i < results.length; i++) {
-        if (result.name.indexOf("SkinKandy") !== -1) {
-            createMarker(results[i], i);
+        if (results[i].name.indexOf("7-Eleven") !== -1) {
+            createMarker(results[i]);
             addToList(results[i], i);
-          }
+        }
           
       }
   }
