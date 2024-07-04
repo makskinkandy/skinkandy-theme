@@ -366,7 +366,6 @@ function initMap() {
   });
   
   searchNearby(initialLocation);
-  $('.current-location').trigger('dblclick');
 }
 
 function searchNearby(location) {
