@@ -393,7 +393,7 @@ function handleSearchResults(results, status) {
       // }
 
     results.forEach((result, index) => {
-        if (result.name.indexOf("7-Eleven") !== -1) {
+        if (result.name.indexOf("SkinKandy") !== -1) {
             getPlaceDetails(result.place_id, index);
         }
     });
