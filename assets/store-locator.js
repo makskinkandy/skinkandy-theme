@@ -415,6 +415,7 @@ function createMarker(place, index) {
 function createMapContent(place) {
   let content = `<h6>${place.name}</h6> <p>${place.vicinity}</p> <span class="status">${getOpenStatus(place)}</span> <a href="https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}" class="direction" target="_blank">Get Directions</a>`;
 
+  console.log(place)
   
   if (place.website) {
     content += `<br><a href="${place.website}" target="_blank">Visit Website</a>`;
