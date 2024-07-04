@@ -357,7 +357,7 @@ function initMap() {
           window.alert("No details available for input: '" + place.name + "'");
           return;
       }
-
+      map.setZoom(10);
       searchCenter = place.geometry.location;
       map.setCenter(place.geometry.location);
       searchNearby(place.geometry.location);
