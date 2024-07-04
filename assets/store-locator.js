@@ -380,6 +380,20 @@ function searchNearby(location) {
 
 }
 
+function getPlaceDetails(placeId, index) {
+    const request = {
+        placeId: placeId,
+        fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
+    };
+
+    service.getDetails(request, (place, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            createMarker(place);
+            addToList(place, index);
+        }
+    });
+}
+
 function handleSearchResults(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
       const storeList = document.getElementById('store-list');
@@ -387,12 +401,11 @@ function handleSearchResults(results, status) {
 
       clearMarkers();
 
-      for (let i = 0; i < results.length; i++) {
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
-              createMarker(place);
-              addToList(place, index);
+      results.forEach((result, index) => {
+          if (result.name.indexOf("SkinKandy") !== -1) {
+              getPlaceDetails(result.place_id, index);
           }
-      }
+      });
   }
 }
 
@@ -427,6 +440,7 @@ function addToList(place, index) {
   listItem.innerHTML = createMapContent(place);
   listItem.classList.add("list-item");
   listItem.addEventListener('click', () => {
+    map.setZoom(15);
     map.setCenter(place.geometry.location);
     infowindow.setContent(createMapContent(place));
     infowindow.open(map, markers[index]);
