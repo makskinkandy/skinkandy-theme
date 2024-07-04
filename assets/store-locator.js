@@ -395,7 +395,7 @@ function handleSearchResults(results, status) {
 }
 
 function createMarker(place) {
-    const marker = new google.maps.marker.AdvancedMarkerView({
+    const marker = new google.maps.marker.AdvancedMarkerElement({
         map: map,
         position: place.geometry.location,
         title: place.name
@@ -404,7 +404,7 @@ function createMarker(place) {
     markers.push(marker);
 
     google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(getInfoWindowContent(place));
+        infowindow.setContent(createMapContent(place));
         infowindow.open(map, marker);
     });
 }
