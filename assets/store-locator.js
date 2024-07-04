@@ -442,17 +442,11 @@ function createMarker(place) {
 }
 
 function createMapContent(place) {
-  const iconImage = document.createElement("img");
-  
-  iconImage.src =
-  "https://cdn.shopify.com/s/files/1/0555/7508/5194/files/MapPin_1.png";
-
-  iconImage.width = 30;
   
   const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(searchCenter, place.geometry.location);
   const distanceInKm = (distanceInMeters / 1000).toFixed(2);
   let content = `<h6>${place.name}</h6> <p>${place.vicinity}</p>`;
-  content += `<p>${iconImage} ${distanceInKm}km</p>`
+  content += `<p><img src="https://cdn.shopify.com/s/files/1/0555/7508/5194/files/MapPin_1.png" width="30"> ${distanceInKm}km</p>`
   content += `<span class="status">${getOpenStatus(place)}</span> <a href="https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}" class="direction" target="_blank">Get Directions</a>`
   
   if (place.website) {
