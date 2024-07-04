@@ -460,7 +460,7 @@ function createPinContent(place) {
   const distanceInMeters = google.maps.geometry.spherical.computeDistanceBetween(searchCenter, place.geometry.location);
   const distanceInKm = (distanceInMeters / 1000).toFixed(2);
   let content = `<h6>${place.name}</h6> <p>${place.vicinity}</p>`;
-  content += `<span class="distance"><img src="https://cdn.shopify.com/s/files/1/0555/7508/5194/files/MapPin_1.png" width="15"> ${distanceInKm}km</span>`
+  content += `<p class="distance"><img src="https://cdn.shopify.com/s/files/1/0555/7508/5194/files/MapPin_1.png" width="15"> ${distanceInKm}km</p>`
   content += `<span class="status">${getOpenStatus(place)}</span> <a href="https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}" class="direction" target="_blank">Get Directions</a>`
   
   if (place.website) {
