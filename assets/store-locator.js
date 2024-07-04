@@ -352,7 +352,7 @@ function initMap() {
   autocomplete.bindTo('bounds', map);
 
   autocomplete.addListener('place_changed', function() {
-  
+      clearMarkers();
       const place = autocomplete.getPlace();
       if (!place.geometry) {
           window.alert("No details available for input: '" + place.name + "'");
