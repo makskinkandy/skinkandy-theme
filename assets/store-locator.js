@@ -381,47 +381,34 @@ function searchNearby(location) {
 
 function handleSearchResults(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
-    const storeList = document.getElementById('store-list');
-    storeList.innerHTML = '';
-    
-    clearMarkers();
-    
-    results.forEach((result, index) => {
-        if (result.name.indexOf("SkinKandy") !== -1) {
-            getPlaceDetails(result.place_id, index);
+      const storeList = document.getElementById('store-list');
+      storeList.innerHTML = '';
+      clearMarkers();
+      for (let i = 0; i < results.length; i++) {
+        if (results[i].name.indexOf("SkinKandy") !== -1) {
+            createMarker(results[i]);
+            addToList(results[i], i);
         }
-    });
+          
+      }
   }
 }
 
-function createMarker(place) {
-    const marker = new google.maps.marker.AdvancedMarkerElement({
-        map: map,
-        position: place.geometry.location,
-        title: place.name
-    });
+function createMarker(place, index) {
+  const marker = new google.maps.marker.AdvancedMarkerElement({
+      map: map,
+      position: place.geometry.location,
+      title: place.name
+  });
 
-    markers.push(marker);
+  markers.push(marker);
 
-    google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(createMapContent(place));
-        infowindow.open(map, marker);
-    });
+  google.maps.event.addListener(marker, 'click', function() {
+      infowindow.setContent(createMapContent(place));
+      infowindow.open(map, marker);
+  });
 }
 
-function getPlaceDetails(placeId, index) {
-    const request = {
-        placeId: placeId,
-        fields: ['name', 'geometry', 'opening_hours', 'website', 'vicinity']
-    };
-
-    service.getDetails(request, (place, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            createMarker(place);
-            addToList(place, index);
-        }
-    });
-}
 
 function createMapContent(place) {
   let content = `<h6>${place.name}</h6> <p>${place.vicinity}</p> <span class="status">${getOpenStatus(place)}</span> <a href="https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}" class="direction" target="_blank">Get Directions</a>`;
