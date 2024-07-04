@@ -462,11 +462,11 @@ function addToList(place, index) {
   listItem.classList.add("list-item");
 
   listItem.addEventListener('click', () => {
-      console.log(index)
-      map.setCenter(place.geometry.location);
-      infowindow.setContent(createMapContent(place));
-      infowindow.open(map, index);
-      document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+    map.setCenter(place.geometry.location);
+    map.setZoom(13);
+    infowindow.setContent(createMapContent(place));
+    infowindow.open(map, index);
+    document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
   });
   
   storeList.appendChild(listItem);
