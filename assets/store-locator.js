@@ -5,7 +5,7 @@ let markers = [];
 let autocomplete;
 
 function initMap() {
-  const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
+  let initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
 
   const mapStyle = new google.maps.StyledMapType (
     [
@@ -339,7 +339,7 @@ function initMap() {
   const userLocationCoords = useCurrentLocation();
 
   if (userLocationCoords) {
-    
+      initialLocation = userLocationCoords;
   }
   
   map = new google.maps.Map(document.getElementById('map'), {
@@ -371,8 +371,9 @@ function initMap() {
       searchNearby(place.geometry.location);
   });
   
-  
-  useCurrentLocation();
+  searchNearby(initialLocation);
+  map.setCenter(initialLocation);
+  $('.current-location').trigger('click');
 }
 
 function searchNearby(location) {
