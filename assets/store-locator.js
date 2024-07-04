@@ -427,9 +427,6 @@ function createMarker(place, index) {
   
   // Insert the item at the specific index
   markers.push(marker);
-  
-  // Move the newly pushed item to the correct index
-  markers.splice(index, 0, marker.pop());
 
   google.maps.event.addListener(marker, 'click', function() {
       infowindow.setContent(createMapContent(place));
