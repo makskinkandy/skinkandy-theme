@@ -53,7 +53,7 @@ function initMap() {
         "elementType": "all",
         "stylers": [
             {
-                "hue": "#ff0097"
+                "hue": "#000"
             },
             {
                 "saturation": "-80"
