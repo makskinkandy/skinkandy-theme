@@ -353,6 +353,7 @@ function initMap() {
 
   autocomplete.addListener('place_changed', function() {
       const place = autocomplete.getPlace();
+      let marker = '';
       map.setZoom(10);
     
       if (!place.geometry) {
@@ -360,7 +361,7 @@ function initMap() {
           return;
       }
 
-      const marker = new google.maps.marker.AdvancedMarkerElement({
+      marker = new google.maps.marker.AdvancedMarkerElement({
           map: map,
           position: place.geometry.location
       });
