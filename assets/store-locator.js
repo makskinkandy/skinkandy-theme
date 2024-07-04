@@ -528,10 +528,12 @@ function useCurrentLocation() {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        
         searchNearby(pos);
         map.setCenter(pos);
-        
+        const marker = new google.maps.marker.AdvancedMarkerElement({
+          map: map,
+          position: pos
+      });
       });
   } else {
     alert('Geolocation is not supported by this browser.');
