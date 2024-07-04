@@ -371,8 +371,7 @@ function searchNearby(location) {
   const request = {
       location: location,
       radius: '50000',
-      name: 'SkinKandy',
-      bounds: map.getBounds()
+      name: 'SkinKandy'
   };
 
   service = new google.maps.places.PlacesService(map);
