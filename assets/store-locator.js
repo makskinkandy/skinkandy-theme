@@ -372,7 +372,7 @@ function initMap() {
   
   searchNearby(initialLocation);
   useCurrentLocation();
-  $('.current-location').click();
+  $('.current-location').trigger('click');
 }
 
 function searchNearby(location) {
