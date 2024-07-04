@@ -411,7 +411,7 @@ function createMarker(place, index) {
   
   const iconImage = document.createElement("img");
 
-  beachFlagImg.src =
+  iconImage.src =
   "https://cdn.shopify.com/s/files/1/0555/7508/5194/files/MapPin_1.png";
   
   const marker = new google.maps.marker.AdvancedMarkerElement({
