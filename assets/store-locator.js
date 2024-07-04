@@ -401,11 +401,10 @@ function handleSearchResults(results, status) {
 
       clearMarkers();
 
-      results.forEach((result, index) => {
-          if (result.name.indexOf("SkinKandy") !== -1) {
-              getPlaceDetails(result.place_id, index);
-          }
-      });
+      for (let i = 0; i < results.length; i++) {
+          createMarker(results[i], i);
+          addToList(results[i], i);
+      }
   }
 }
 
