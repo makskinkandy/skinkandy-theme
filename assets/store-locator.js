@@ -457,6 +457,7 @@ function addToList(place, index) {
   listItem.classList.add("list-item");
 
   listItem.addEventListener('click', () => {
+      console.log(index)
       map.setCenter(place.geometry.location);
       infowindow.setContent(createMapContent(place));
       infowindow.open(map, markers[index]);
