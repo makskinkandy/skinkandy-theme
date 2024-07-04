@@ -358,7 +358,6 @@ function initMap() {
           window.alert("No details available for input: '" + place.name + "'");
           return;
       }
-      map.setZoom(10);
       map.setCenter(place.geometry.location);
       searchNearby(place.geometry.location);
   });
