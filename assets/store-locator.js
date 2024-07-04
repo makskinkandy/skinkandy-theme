@@ -352,16 +352,16 @@ function initMap() {
   autocomplete.bindTo('bounds', map);
 
   autocomplete.addListener('place_changed', function() {
-      const place = autocomplete.getPlace();
-      if (!place.geometry) {
-          window.alert("No details available for input: '" + place.name + "'");
-          return;
-      }
+                const place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    window.alert("No details available for input: '" + place.name + "'");
+                    return;
+                }
 
-      searchCenter = place.geometry.location;
-      map.setCenter(place.geometry.location);
-      searchNearby(place.geometry.location);
-  });
+                searchCenter = place.geometry.location;
+                map.setCenter(place.geometry.location);
+                searchNearby(place.geometry.location);
+            });
   
   searchNearby(initialLocation);
 }
@@ -376,6 +376,19 @@ function searchNearby(location) {
   service = new google.maps.places.PlacesService(map);
   service.nearbySearch(request, handleSearchResults);
 
+}
+
+function searchNearby(location) {
+  const request = {
+      location: location,
+      radius: '50000',
+      name: 'SkinKandy'
+  };
+
+    searchCenter = location;
+
+    service = new google.maps.places.PlacesService(map);
+    service.nearbySearch(request, handleSearchResults);
 }
 
 function handleSearchResults(results, status) {
