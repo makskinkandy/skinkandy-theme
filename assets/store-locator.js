@@ -475,7 +475,3 @@ function useCurrentLocation() {
     alert('Geolocation is not supported by this browser.');
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  console.log(markers)
-});
