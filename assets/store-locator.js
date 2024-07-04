@@ -425,18 +425,18 @@ function createMarker(place, index) {
 }
 
 function createMarker(place, index) {
-    const marker = new google.maps.marker.AdvancedMarkerView({
-        map: map,
-        position: place.geometry.location,
-        title: place.name
-    });
+  const marker = new google.maps.marker.AdvancedMarkerView({
+      map: map,
+      position: place.geometry.location,
+      title: place.name
+  });
 
-    markers.push(marker);
+  markers.push(marker);
 
-    google.maps.event.addListener(marker, 'click', function() {
-        infowindow.setContent(place.name);
-        infowindow.open(map, marker);
-    });
+  google.maps.event.addListener(marker, 'click', function() {
+      infowindow.setContent(place.name);
+      infowindow.open(map, marker);
+  });
 }
 
 function createMapContent(place) {
