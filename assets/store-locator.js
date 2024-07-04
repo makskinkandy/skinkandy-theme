@@ -5,7 +5,7 @@ let markers = [];
 let autocomplete;
 
 function initMap() {
-  let initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
+  const initialLocation = new google.maps.LatLng(-27.4698, 153.0251);
 
   const mapStyle = new google.maps.StyledMapType (
     [
@@ -334,13 +334,7 @@ function initMap() {
           ]
       }
   ]
-  );
-
-  const userLocationCoords = useCurrentLocation();
-
-  if (userLocationCoords) {
-      initialLocation = userLocationCoords;
-  }
+  )
   
   map = new google.maps.Map(document.getElementById('map'), {
       center: initialLocation,
@@ -372,8 +366,7 @@ function initMap() {
   });
   
   searchNearby(initialLocation);
-  map.setCenter(initialLocation);
-  $('.current-location').trigger('click');
+  useCurrentLocation();
 }
 
 function searchNearby(location) {
@@ -528,8 +521,13 @@ function useCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        return new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        let pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        searchNearby(pos);
+        map.setCenter(pos);
+        $('.current-location').trigger('click');
       });
+  } else {
+    alert('Geolocation is not supported by this browser.');
   }
 }
 
