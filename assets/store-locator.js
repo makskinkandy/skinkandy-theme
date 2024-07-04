@@ -420,7 +420,7 @@ function createMarker(place, index) {
       title: place.name
   });
 
-  markers.push(marker);
+  markers[index] = place;
 
   google.maps.event.addListener(marker, 'click', function() {
       infowindow.setContent(createMapContent(place));
