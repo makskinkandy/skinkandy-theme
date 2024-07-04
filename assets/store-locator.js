@@ -409,6 +409,19 @@ function createMarker(place, index) {
   });
 }
 
+function getPlaceDetails(placeId, index) {
+    const request = {
+        placeId: placeId,
+        fields: ['name', 'geometry', 'opening_hours', 'website']
+    };
+
+    service.getDetails(request, (place, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+            createMarker(place);
+            addToList(place, index);
+        }
+    });
+}
 
 function createMapContent(place) {
   let content = `<h6>${place.name}</h6> <p>${place.vicinity}</p> <span class="status">${getOpenStatus(place)}</span> <a href="https://www.google.com/maps/search/?api=1&query=${place.geometry.location.lat()},${place.geometry.location.lng()}" class="direction" target="_blank">Get Directions</a>`;
