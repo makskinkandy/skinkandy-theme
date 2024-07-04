@@ -66,6 +66,11 @@ h6 {
   display: flex;
   justify-content: space-between
 }
+
+span.distance {
+    width: 110px;
+}
+
 .direction,
 .status {
   margin-top: 15px;
