@@ -387,7 +387,7 @@ function handleSearchResults(results, status) {
     storeList.innerHTML = '';
     clearMarkers();
     for (let i = 0; i < results.length; i++) {
-        if (result.name.indexOf("SkinKandy") !== -1) {
+        if (results[i].name.indexOf("SkinKandy") !== -1) {
             getPlaceDetails(results[i].place_id, i);
         }
     }
