@@ -380,6 +380,10 @@ function initMap() {
     
     searchNearby(place.geometry.location);
   });
+
+  map.addListener('dragend', function() {
+    searchNearby(map.getBounds().getCenter());
+  });
   
   useCurrentLocation();
 }
