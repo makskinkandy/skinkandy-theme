@@ -545,20 +545,12 @@ function useCurrentLocation() {
     navigator.geolocation.getCurrentPosition(
         (position) => {
           userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          // Remove the previous autocomplete marker
-          if (autocompleteMarker) {
-              autocompleteMarker.setMap(null);
-          }
-          
-          // Add a new marker for the selected place
-          autocompleteMarker = new google.maps.Marker({
-            map: map,
-            position: userLocation
-          });
+          autocompleteMarkerLoc(userLocation)
           map.setCenter(userLocation);
           searchNearby(userLocation);
         },
         (error) => {
+          autocompleteMarkerLoc(initialLocation)
           map.setCenter(initialLocation);
           searchNearby(initialLocation);
         }
