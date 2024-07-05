@@ -558,6 +558,7 @@ function useCurrentLocation() {
   } else {
     // Fallback to initial location
     alert('Geolocation is not supported by this browser.');
+    autocompleteMarkerLoc(initialLocation)
     map.setCenter(initialLocation);
     searchNearby(initialLocation);
   }
