@@ -550,8 +550,8 @@ function useCurrentLocation() {
           searchNearby(userLocation);
         },
         (error) => {
-          autocompleteMarkerLoc(initialLocation)
           map.setCenter(initialLocation);
+          autocompleteMarkerLoc(initialLocation)
           searchNearby(initialLocation);
         }
     );
