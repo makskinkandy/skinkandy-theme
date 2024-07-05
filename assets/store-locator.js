@@ -366,36 +366,30 @@ function initMap() {
     
     searchCenter = place.geometry.location;
     map.setCenter(place.geometry.location);
+    autocompleteMarkerLoc(place.geometry.location)
 
-    // Remove the previous autocomplete marker
-    if (autocompleteMarker) {
-        autocompleteMarker.setMap(null);
-    }
-
-    // Add a new marker for the selected place
-    autocompleteMarker = new google.maps.Marker({
-      map: map,
-      position: place.geometry.location
-    });
-    
     searchNearby(place.geometry.location);
   });
 
   map.addListener('dragend', function() {
     searchNearby(map.getBounds().getCenter());
-    map.setZoom(10);    
-    if (autocompleteMarker) {
-        autocompleteMarker.setMap(null);
-    }
-
-    // Add a new marker for the selected place
-    autocompleteMarker = new google.maps.Marker({
-      map: map,
-      position: map.getBounds().getCenter()
-    });
+    autocompleteMarkerLoc(map.getBounds().getCenter())
   });
   
   useCurrentLocation();
+}
+
+function autocompleteMarkerLoc(location) {
+  // Remove the previous autocomplete marker
+  if (autocompleteMarker) {
+      autocompleteMarker.setMap(null);
+  }
+
+  // Add a new marker for the selected place
+  autocompleteMarker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+  });
 }
 
 function searchNearby(location) {
