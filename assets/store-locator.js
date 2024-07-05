@@ -375,7 +375,7 @@ function initMap() {
    map.addListener('click', function(event) {
     const location = event.latLng;
     autocompleteMarkerLoc(location)
-
+    map.setCenter(location);
     searchCenter = location;
     searchNearby(location);
   });
