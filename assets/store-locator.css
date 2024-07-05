@@ -121,6 +121,10 @@ a.website-link {
   color: #FFF;
 }
 
+.text-help {
+  margin-bottom: 20px;
+}
+
 @media screen and (max-width: 1200px) {
   .content {
     padding-left: 40px;
