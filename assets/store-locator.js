@@ -388,7 +388,7 @@ function autocompleteMarkerLoc(location) {
   // Add a new marker for the selected place
   autocompleteMarker = new google.maps.Marker({
     map: map,
-    position: place.geometry.location
+    position: location
   });
 }
 
