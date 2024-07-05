@@ -383,7 +383,7 @@ function initMap() {
 
   map.addListener('dragend', function() {
     searchNearby(map.getBounds().getCenter());
-        // Remove the previous autocomplete marker
+    map.setZoom(10);    
     if (autocompleteMarker) {
         autocompleteMarker.setMap(null);
     }
