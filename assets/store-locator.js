@@ -375,6 +375,25 @@ function initMap() {
     searchNearby(map.getBounds().getCenter());
     autocompleteMarkerLoc(map.getBounds().getCenter())
   });
+
+   map.addListener('click', function(event) {
+    const location = event.latLng;
+
+    // Remove the previous drop pin marker
+    if (dropPinMarker) {
+        dropPinMarker.setMap(null);
+    }
+
+    // Add a new marker for the dropped pin
+    dropPinMarker = new google.maps.Marker({
+        map: map,
+        position: location
+    });
+
+    searchCenter = location;
+    searchNearby(location);
+  });
+
   
   useCurrentLocation();
 }
