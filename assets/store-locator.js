@@ -391,7 +391,7 @@ function initMap() {
     // Add a new marker for the selected place
     autocompleteMarker = new google.maps.Marker({
       map: map,
-      position: map.getBounds()
+      position: map.getBounds().getCenter()
     });
   });
   
