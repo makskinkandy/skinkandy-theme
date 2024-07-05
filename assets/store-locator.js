@@ -383,6 +383,16 @@ function initMap() {
 
   map.addListener('dragend', function() {
     searchNearby(map.getBounds().getCenter());
+        // Remove the previous autocomplete marker
+    if (autocompleteMarker) {
+        autocompleteMarker.setMap(null);
+    }
+
+    // Add a new marker for the selected place
+    autocompleteMarker = new google.maps.Marker({
+      map: map,
+      position: map.getBounds()
+    });
   });
   
   useCurrentLocation();
