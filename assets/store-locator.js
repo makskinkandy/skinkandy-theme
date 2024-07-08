@@ -10,6 +10,10 @@ let initialLocation = { lat: -27.4698, lng: 153.0251 }; // Brisbane coordinates
 
 function initMap() {
 
+  if (window.location.href.includes('en-nz')) {
+    initialLocation = { lat: -36.8485, lng: 174.7633 }; //Auckland
+  }
+
   const mapStyle = new google.maps.StyledMapType (
     [
       {
