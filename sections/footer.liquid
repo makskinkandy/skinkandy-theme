@@ -51,33 +51,8 @@
         $('.locale-selectors__selector option[value="'+country+'"]').prop('selected', true)  
         $(".locale-selectors__content form").submit()
       }
-      let alt_display_settings = {
-        /* DON'T EDIT ABOVE THIS LINE */
-        /* BEGIN GLOBAL CHANGES */
-        "global" : [
-          {
-                'do':               'hide_element',
-                'what':             'nz-banner',
-          },
-          
-        ],
-        /* END GLOBAL CHANGES */
-        /* BEGIN NEW ZEALAND */
-        "en-nz" : [
-            {
-                'do':               'show_element',
-                'what':             'nz-banner',
-            },
-            {
-                'do':               'hide_element',
-                'what':             'hide-nz',
-            }
-        ],
-        /* END NEW ZEALAND */
-        /* DONT EDIT BELOW THIS LINE */
-      };
+      let alt_display_settings = {};
     </script>
-    <script src="https://cdn.skinkandyonline.com.au/js/country-updater.js" async></script>
     {% #End Country Updater %}
     <div class="page-width footer-copyright">
       <p>Copyright {{ 'now' | date: '%Y' }} &copy; {{ shop.name }}. All Rights Reserved.{% if section.settings.privacy_link != blank %} <a href="{{ section.settings.privacy_link | escape}}">Privacy policy</a>{% endif%}</p>
@@ -95,6 +70,33 @@
 </style>
 
 </footer>
+
+{% if settings.popup_enable %}
+<div class="form-popup hidden">
+  <div class="form-popup__wrapper">
+    <a href="javascript.void(0)" class="popup-close"><img src="https://cdn.shopify.com/s/files/1/0555/7508/5194/files/close-icon.png?v=1720500071" alt="close icon"></a>
+    <div class="form-popup__left">
+      {% if settings.popup_left_image %}
+        <img src="{{ settings.popup_left_image | image_url }}" alt="{{ settings.popup_title }}">
+      {% endif %}
+    </div>
+    <div class="form-popup__right">
+      {% if settings.popup_title %}
+        <h3>{{ settings.popup_title }}</h3>
+      {% endif %}
+      {% if settings.popup_subtitle %}
+        <p class="subtitle">{{ settings.popup_subtitle }}</p>
+      {% endif %}
+      {% if settings.popup_embed_form %}
+        {{ settings.popup_embed_form }}
+      {%- endif %}
+      {% if settings.popup_form_note %}
+        <p class="form-note">{{ settings.popup_form_note }}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{%  endif %}
 
 {% schema %}
   {
