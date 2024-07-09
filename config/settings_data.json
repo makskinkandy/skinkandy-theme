@@ -138,7 +138,8 @@
           "c0903157-a773-474f-84be-01032fac0f7c": {
             "type": "logo",
             "settings": {
-              "logo": "shopify:\/\/shop_images\/SK_word_black_bg_2c070816-5d16-4957-9635-b4083c23e101.webp",
+              "logo": "shopify:\/\/shop_images\/SK_word_black_bg_2c070816-5d16-4957-9635-b4083c23e101.png",
+              "logo-inverted": "shopify:\/\/shop_images\/SK_word_black_bg_2c070816-5d16-4957-9635-b4083c23e101.png",
               "desktop_logo_width": 200,
               "mobile_logo_width": 140
             }
@@ -190,10 +191,10 @@
           "call_us_label_nz": "CALL US ON 0800 161 005",
           "about_link": "shopify:\/\/pages\/our-story",
           "about_label": "about",
-          "about_nav": "",
+          "about_nav": "about",
           "find_link": "shopify:\/\/pages\/store-locations",
           "find_label": "find a store",
-          "country": "",
+          "country": "country",
           "book_now_link": "https:\/\/skinkandy.com\/pages\/skinkandy-piercing-menu",
           "book_now_label": "book a piercing online"
         }
@@ -211,6 +212,7 @@
           "78518a5a-082a-42fc-94d3-bf3430935e5d": {
             "type": "logo_social",
             "settings": {
+              "logo": "shopify:\/\/shop_images\/Free-To-Be-Logo-White.png",
               "desktop_logo_height": 120
             }
           },
@@ -255,6 +257,7 @@
           "popup_seconds": 5,
           "popup_days": 30,
           "popup_title": "Join Kandy Club",
+          "popup_image": "shopify:\/\/shop_images\/SkinKandy-Kandy-Club.png",
           "popup_text": "<p><strong>Signup today and earn reward points with every purchase. <\/strong><\/p><p><strong>You can also see you balance when you sign in to your account.<\/strong><\/p>",
           "close_text": "",
           "enable_newsletter": false,
@@ -669,8 +672,8 @@
     "custom_css": [
       ".content.d-none,.btn_more.d-none,.btn_less.d-none {display: none;}",
       ".btn_more,.btn_less {background-color: unset; color: orange; text-decoration: underline; cursor: pointer;}",
-      "#__pf {overflow-x: unset !important;}",
-      "html,body {overflow-x: hidden !important;}"
+      "#__pf {overflow-x: unset ! important;}",
+      "html,body {overflow-x: hidden ! important;}"
     ]
   }
 }
