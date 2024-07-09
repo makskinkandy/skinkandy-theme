@@ -1,0 +1,18 @@
+document.addEventListener('DOMContentLoaded', (event) => {
+    let timeDelay = 2;
+    const POPUP = document.querySelector(".form-popup");
+    if ({{ settings.popup_delay }}) {
+      timeDelay = {{ settings.popup_delay }}
+    }
+                             
+    const totalDelay = timeDelay * 1000;
+                                  
+    setTimeout(() => {
+      POPUP.classList.remove("hidden")
+    }, totalDelay); 
+
+    document.querySelector(".popup-close").on("click", (e)=> {
+      e.preventDefault();
+      POPUP.classList.add("hidden");
+    });
+});
