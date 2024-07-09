@@ -1,0 +1,113 @@
+.form-popup {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  input {
+    &:not([type=submit]) {
+      font-size: 12px;
+      line-height: 16px;
+      padding: 12px;
+      background-color: #FFF;
+      border: 0;
+    }
+    &::placeholder {
+      color: #ec008c;
+    }
+    &[type=submit] {
+      width: 100%;
+      background-color: rgb(236, 0, 140);
+      border: 0px;
+      border-radius: 40px;
+      color: rgb(255, 255, 255);
+      font-family: "Open Sans", Helvetica, Arial, "Sans Serif", serif;
+      letter-spacing: 0px;
+      text-align: center;
+      transition: all 250ms ease 0s;
+      font-weight: 400;
+      margin-top: 15px;
+    }
+  }
+  form {
+    margin-bottom: 15px;
+  }
+  .form-field {
+    width: 100%;
+    input {
+      width: 100%;
+    }
+    &.half {
+      width: calc(50% - 7px);
+    }
+  }
+  .popup-close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 24px;
+    height: 24px;
+    background-color: #000;
+    border-radius: 50%;
+    opacity: 0.2;
+    img {
+      display: block;
+      filter: invert(1)
+    }
+  }
+  &.hidden {
+    display: none;
+  }
+}
+.form-popup__wrapper {
+  background-color: rgb(230, 230, 230);
+  border: none;
+  border-radius: 15px;
+  box-sizing: border-box;
+  width: 610px;
+  max-width: 100vw;
+  word-break: break-word;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  @media screen and (max-width: 640px) {
+    display: block;
+  }
+}
+.form-popup__wrapper img {
+  height: 100%;
+  object-fit: cover;
+  @media screen and (max-width: 640px) {
+    height: 240px;
+    width: 100%;
+  }
+}
+.form-popup__right {
+  padding: 24px 16px;
+  padding-top: 45px;
+}
+.form-popup__right h3 {
+  font-size: 32px;
+  font-family: "Futura Medium 01";
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.form-popup__right .subtitle,
+.form-popup__right .form-note {
+  font-size: 12px;
+  font-family: "Open Sans", Helvetica, Arial, "Sans Serif", serif;
+  color: #9b9b9b;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.first-row {
+  display:flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
