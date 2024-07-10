@@ -126,7 +126,7 @@ a.website-link {
 }
 
 .gm-style-iw-chr button {
-  display: none;
+  display: none !important;
 }
 
 @media screen and (max-width: 1200px) {
