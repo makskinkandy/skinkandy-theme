@@ -125,6 +125,10 @@ a.website-link {
   margin-bottom: 20px;
 }
 
+.gm-style-iw-chr button {
+  display: none;
+}
+
 @media screen and (max-width: 1200px) {
   .content {
     padding-left: 40px;
