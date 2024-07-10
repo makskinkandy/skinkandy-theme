@@ -397,6 +397,8 @@ function autocompleteMarkerLoc(location) {
     map: map,
     position: location
   });
+
+  infowindow.setContent("<p>Your Location</p>")
 }
 
 function searchNearby(location) {
