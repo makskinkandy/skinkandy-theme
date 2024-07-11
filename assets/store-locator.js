@@ -526,7 +526,7 @@ function addToList(place, index) {
 }
 
 function getOpenStatus(place) {
-  return place.opening_hours.isOpen(new Date()) ? "<span class='close'>Close</span>" : "<span class='open'>Open</span>"
+  return place.opening_hours.isOpen(new Date()) ? "<span class='open'>Open</span>" : "<span class='close'>Close</span>"
 }
 
 function getPlaceDetails(placeId, index) {
