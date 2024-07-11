@@ -539,17 +539,7 @@ function parseTime(timeString) {
     return { hours, minutes };
 }
 
-// Function to check if the current time is within the given range
-function isTimeInRange(startTime, endTime, currentHours, currentMinutes) {
-    let start = parseTime(startTime);
-    let end = parseTime(endTime);
 
-    let currentTotalMinutes = currentHours * 60 + currentMinutes;
-    let startTotalMinutes = start.hours * 60 + start.minutes;
-    let endTotalMinutes = end.hours * 60 + end.minutes;
-
-    return currentTotalMinutes >= startTotalMinutes && currentTotalMinutes <= endTotalMinutes;
-}
 
 function getOpenStatus(place) {
   const weekdayText = place.opening_hours.weekday_text;
@@ -566,10 +556,6 @@ function getOpenStatus(place) {
   let todayText = weekdayText[dayMapping[currentDay]];
 
   if (!todayText.includes('Closed')) {
-    let [day, hours] = todayText.split(': ');
-    let [startTime, endTime] = hours.split(' – ');
-    isOpen = isTimeInRange(startTime, endTime, currentHours, currentMinutes);
-
     return "<span class='open'>Open</span>";
   }
   
