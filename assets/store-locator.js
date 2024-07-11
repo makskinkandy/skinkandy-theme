@@ -558,11 +558,22 @@ function getOpenStatus(place) {
   let currentDay = currentDate.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
   let currentHours = currentDate.getHours();
   let currentMinutes = currentDate.getMinutes();
+  // Check if the place is open
+  let isOpen = false;
   
   // Map JavaScript's day index to the weekday_text array
   let dayMapping = [6, 0, 1, 2, 3, 4, 5]; // JavaScript's 0 (Sunday) -> 6 (Saturday), 1 (Monday) -> 0 (Monday), etc.
   let todayText = weekdayText[dayMapping[currentDay]];
-  return place.opening_hours.isOpen(new Date()) ? "<span class='open'>Open</span>" : "<span class='close'>Close</span>"
+
+  if (!todayText.includes('Closed')) {
+    let [day, hours] = todayText.split(': ');
+    let [startTime, endTime] = hours.split(' – ');
+    isOpen = isTimeInRange(startTime, endTime, currentHours, currentMinutes);
+
+    return "<span class='open'>Open</span>";
+  }
+  
+  return "<span class='close'>Close</span>"
 }
 
 function getPlaceDetails(placeId, index) {
