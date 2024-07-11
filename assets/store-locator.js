@@ -568,6 +568,7 @@ function getOpenStatus(place) {
   if (!todayText.includes('Closed')) {
     let [day, hours] = todayText.split(': ');
     let [startTime, endTime] = hours.split(' – ');
+    console.log(startTime)
     isOpen = isTimeInRange(startTime, endTime, currentHours, currentMinutes);
 
     return "<span class='open'>Open</span>";
