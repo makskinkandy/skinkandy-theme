@@ -570,7 +570,9 @@ function getOpenStatus(place) {
     let [startTime, endTime] = hours.split(' – ');
     console.log(hours)
     isOpen = isTimeInRange(startTime, endTime, currentHours, currentMinutes);
+  }
 
+  if (isOpen) {
     return "<span class='open'>Open</span>";
   }
   
