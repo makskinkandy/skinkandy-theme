@@ -525,8 +525,43 @@ function addToList(place, index) {
   storeList.appendChild(listItem);
 }
 
+// Function to parse time in 'HH:MM AM/PM' format
+function parseTime(timeString) {
+    let [time, modifier] = timeString.split(' ');
+    let [hours, minutes] = time.split(':').map(Number);
+
+    if (modifier === 'PM' && hours !== 12) {
+        hours += 12;
+    } else if (modifier === 'AM' && hours === 12) {
+        hours = 0;
+    }
+
+    return { hours, minutes };
+}
+
+// Function to check if the current time is within the given range
+function isTimeInRange(startTime, endTime, currentHours, currentMinutes) {
+    let start = parseTime(startTime);
+    let end = parseTime(endTime);
+
+    let currentTotalMinutes = currentHours * 60 + currentMinutes;
+    let startTotalMinutes = start.hours * 60 + start.minutes;
+    let endTotalMinutes = end.hours * 60 + end.minutes;
+
+    return currentTotalMinutes >= startTotalMinutes && currentTotalMinutes <= endTotalMinutes;
+}
+
 function getOpenStatus(place) {
-  console.log(place.opening_hours.weekday_text)
+  const weekdayText = place.opening_hours.weekday_text;
+  // Get the current day and time
+  let currentDate = new Date();
+  let currentDay = currentDate.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+  let currentHours = currentDate.getHours();
+  let currentMinutes = currentDate.getMinutes();
+  
+  // Map JavaScript's day index to the weekday_text array
+  let dayMapping = [6, 0, 1, 2, 3, 4, 5]; // JavaScript's 0 (Sunday) -> 6 (Saturday), 1 (Monday) -> 0 (Monday), etc.
+  let todayText = weekdayText[dayMapping[currentDay]];
   return place.opening_hours.isOpen(new Date()) ? "<span class='open'>Open</span>" : "<span class='close'>Close</span>"
 }
 
