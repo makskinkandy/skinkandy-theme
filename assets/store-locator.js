@@ -526,7 +526,7 @@ function addToList(place, index) {
 }
 
 function getOpenStatus(place) {
-  console.log(place.opening_hours.periods)
+  console.log(place.opening_hours.weekday_text)
   return place.opening_hours.isOpen(new Date()) ? "<span class='open'>Open</span>" : "<span class='close'>Close</span>"
 }
 
